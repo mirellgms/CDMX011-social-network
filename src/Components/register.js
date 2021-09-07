@@ -25,9 +25,9 @@ export const Register = () => {
   buttonRegister.id = 'buttonRegister';
   buttonLoginGoogle.textContent = 'Registrate con tu cuenta Google';
   buttonLoginGoogle.id = 'buttonLoginGoogle';
+  buttonLoginGoogle.setAttribute('src', './img/google-logo.png');
   buttonHome.textContent = 'Regresar al Home';
   buttonHome.id = 'buttonHome';
-
   buttonHome.addEventListener('click', () => onNavigate('/'));
 
   buttonRegister.addEventListener('click', (event) => {
