@@ -59,7 +59,10 @@ input{
     font-weight: bold;
     font-size: 94%;
 }
+#buttonLogout{
+    font-weight: bold;
+    font-size: 94%;
+}
 img {
-    width: 270px;
-    
+    width: 270px;   
 }
