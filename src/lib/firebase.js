@@ -10,7 +10,7 @@ export const registerUser = (email, password) => {
       // ...
     })
     .catch((error) => {
-      console.log('error', error.message);
+      alert('Introduce la información solicitada', error.message);
       // ..
     });
 };
