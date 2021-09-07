@@ -106,10 +106,6 @@ export const Register = () => {
       inputPassword.type = 'text';
     }
   });
-  
-  iconOpenEye.addEventListener('click', () => {
-    document.getElementById("iconCloseEye").style.display = "block"; 
-  });
 
   registerDiv.appendChild(logo);
   registerDiv.appendChild(h1Presentation);
