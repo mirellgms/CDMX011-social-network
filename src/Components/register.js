@@ -1,9 +1,12 @@
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
-import { registerUser, loginWithGoogle } from '../lib/firebase.js';
+import { registerUser, login, logout } from '../lib/firebase.js';
+import firebase from '../lib/secret.js';
 
 export const Register = () => {
   const registerDiv = document.createElement('div');
+  
+  const buttonLogout = document.createElement('button');
 
   const logo = document.createElement('img');
   logo.setAttribute('src', '../img/BeTheLight.png');
@@ -66,6 +69,8 @@ export const Register = () => {
   const buttonHome = document.createElement('button');
   buttonHome.textContent = 'Regresar al Home';
   buttonHome.id = 'buttonHome';
+  buttonLogout.textContent = 'Cerrar sesión';
+  buttonLogout.id = 'buttonLogout';
 
   buttonHome.addEventListener('click', () => onNavigate('/'));
 
@@ -75,17 +80,22 @@ export const Register = () => {
     event.preventDefault();
     registerUser(inputEmail, inputPassword);
   });
-
-  buttonLoginGoogle.addEventListener('click', () => {
-    loginWithGoogle();
-  });
-
-  iconOpenEye.addEventListener('click', () => {
-    if (inputPassword.type === 'text') {
-      inputPassword.type = 'password';
+  let currentUser;
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      currentUser = user;
+      console.log('Usuario logueado', currentUser.displayName);
     } else {
-      inputPassword.type = 'text';
+      console.log('No hay usuario logueado');
     }
+  });
+  buttonLoginGoogle.addEventListener('click', async (event) => {
+    try {
+      currentUser = await login();
+    } catch (error) {}
+  });
+  buttonLogout.addEventListener('click', (event) => {
+    logout();
   });
 
   registerDiv.appendChild(logo);
@@ -102,6 +112,7 @@ export const Register = () => {
   registerDiv.appendChild(buttonLoginGoogle);
   registerDiv.appendChild(iconGoogle);
   registerDiv.appendChild(buttonHome);
+  registerDiv.appendChild(buttonLogout);
 
   return registerDiv;
 };

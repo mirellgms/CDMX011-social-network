@@ -15,16 +15,22 @@ export const registerUser = (email, password) => {
     });
 };
 
-export const loginWithGoogle = () => {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  firebase.auth().signInWithRedirect(provider);
-  firebase.auth()
-    .getRedirectResult()
-    .then((result) => {
-      const credential = result.credential;
-      console.log(' Bienvenida ', credential);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-};
+console.log(firebase);
+
+const auth = firebase.auth();
+const provider = new firebase.auth.GoogleAuthProvider();
+auth.language = 'es';
+
+export async function login() {
+  try {
+    const response = await auth.signInWithRedirect(provider);
+    console.log(response);
+    return response.user;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export function logout() {
+  auth.signOut();
+}

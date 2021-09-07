@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
-import { loginWithGoogle } from '../lib/firebase.js';
+import { login, logout } from '../lib/firebase.js';
 
 export const Home = () => {
   const HomeDiv = document.createElement('div');
@@ -11,7 +11,10 @@ export const Home = () => {
   const buttonLogin = document.createElement('button');
   const buttonLoginGoogle = document.createElement('button');
   const buttonGoToRegister = document.createElement('button');
+  const buttonLogout = document.createElement('button');
   buttonGoToRegister.id = 'buttonGotoRegister';
+  buttonLogout.textContent = 'Cerrar sesión';
+  buttonLogout.id = 'buttonLogout';
 
   logo.setAttribute('src', '../img/BeTheLight.png');
   h1Presentation.textContent = 'Be the light te ayuda a comunicarte y compartir la luz que ha sido depositada en ti con las personas que forman parte de tu comunidad';
@@ -19,26 +22,30 @@ export const Home = () => {
   inputPassword.placeholder = 'Contraseña';
   inputPassword.type = 'password';
   buttonLogin.textContent = 'INGRESAR';
+  buttonLogin.id = 'buttonLogin';
   buttonLoginGoogle.textContent = 'Ingresa con tu cuenta de Google';
   buttonLoginGoogle.id = 'buttonLoginGoogle';
   buttonGoToRegister.textContent = '¿No tienes cuenta?  Registrate';
 
   buttonGoToRegister.addEventListener('click', () => onNavigate('/register'));
 
-  h1Presentation.classList.add('Presentacion');
-  inputEmail.classList.add('inputs');
-  inputPassword.classList.add('inputs');
-  buttonLogin.id = 'buttonLogin';
-  buttonLoginGoogle.classList.add('inputs');
+  let currentUser;
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      currentUser = user;
+      console.log('Usuario logueado', currentUser.displayName);
+    } else {
+      console.log('No hay usuario logueado');
+    }
+  });
+  buttonLoginGoogle.addEventListener('click', async (event) => {
+    try {
+      currentUser = await login();
+    } catch (error) {}
+  });
 
-  buttonLoginGoogle.addEventListener('click', () => {
-    loginWithGoogle().then((result) => {
-      const credential = result.credential;
-      console.log(' Bienvenida ', credential);
-    })
-      .catch((error) => {
-        console.error(error);
-      });
+  buttonLogout.addEventListener('click', (event) => {
+    logout();
   });
 
   HomeDiv.appendChild(logo);
@@ -48,6 +55,6 @@ export const Home = () => {
   HomeDiv.appendChild(buttonLogin);
   HomeDiv.appendChild(buttonLoginGoogle);
   HomeDiv.appendChild(buttonGoToRegister);
-
+  HomeDiv.appendChild(buttonLogout);
   return HomeDiv;
 };
