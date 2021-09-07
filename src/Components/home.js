@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
-import { login, logout } from '../lib/firebase.js';
+import { login } from '../lib/firebase.js';
 
 export const Home = () => {
   const HomeDiv = document.createElement('div');
@@ -11,10 +11,10 @@ export const Home = () => {
   const buttonLogin = document.createElement('button');
   const buttonLoginGoogle = document.createElement('button');
   const buttonGoToRegister = document.createElement('button');
-  const buttonLogout = document.createElement('button');
+  // const buttonLogout = document.createElement('button');
   buttonGoToRegister.id = 'buttonGotoRegister';
-  buttonLogout.textContent = 'Cerrar sesión';
-  buttonLogout.id = 'buttonLogout';
+  // buttonLogout.textContent = 'Cerrar sesión';
+  // buttonLogout.id = 'buttonLogout';
 
   logo.setAttribute('src', '../img/BeTheLight.png');
   h1Presentation.textContent = 'Be the light te ayuda a comunicarte y compartir la luz que ha sido depositada en ti con las personas que forman parte de tu comunidad';
@@ -41,12 +41,12 @@ export const Home = () => {
   buttonLoginGoogle.addEventListener('click', async (event) => {
     try {
       currentUser = await login();
-    } catch (error) {}
+    } catch (error) { }
   });
 
-  buttonLogout.addEventListener('click', (event) => {
-    logout();
-  });
+  // buttonLogout.addEventListener('click', (event) => {
+  //   logout();
+  // });
 
   HomeDiv.appendChild(logo);
   HomeDiv.appendChild(h1Presentation);
@@ -55,6 +55,6 @@ export const Home = () => {
   HomeDiv.appendChild(buttonLogin);
   HomeDiv.appendChild(buttonLoginGoogle);
   HomeDiv.appendChild(buttonGoToRegister);
-  HomeDiv.appendChild(buttonLogout);
+  // HomeDiv.appendChild(buttonLogout);
   return HomeDiv;
 };

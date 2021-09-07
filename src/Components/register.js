@@ -5,7 +5,7 @@ import firebase from '../lib/secret.js';
 
 export const Register = () => {
   const registerDiv = document.createElement('div');
-  
+
   const buttonLogout = document.createElement('button');
 
   const logo = document.createElement('img');
@@ -80,6 +80,7 @@ export const Register = () => {
     event.preventDefault();
     registerUser(inputEmail, inputPassword);
   });
+
   let currentUser;
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -96,6 +97,18 @@ export const Register = () => {
   });
   buttonLogout.addEventListener('click', (event) => {
     logout();
+  });
+
+  iconOpenEye.addEventListener('click', () => {
+    if (inputPassword.type === 'text') {
+      inputPassword.type = 'password';
+    } else {
+      inputPassword.type = 'text';
+    }
+  });
+  
+  iconOpenEye.addEventListener('click', () => {
+    document.getElementById("iconCloseEye").style.display = "block"; 
   });
 
   registerDiv.appendChild(logo);
