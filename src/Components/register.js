@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
-import { registerUser, login, logout } from '../lib/firebase.js';
+import { registerUser, login } from '../lib/firebase.js';
+import firebase from '../lib/secret.js';
 
 export const Register = () => {
   const registerDiv = document.createElement('div');
@@ -12,6 +13,7 @@ export const Register = () => {
   const buttonRegister = document.createElement('button');
   const buttonLoginGoogle = document.createElement('button');
   const buttonHome = document.createElement('button');
+  const buttonLogout = document.createElement('button');
 
   logo.setAttribute('src', '../img/BeTheLight.png');
   h1Presentation.textContent = 'Be the light te ayuda a comunicarte y compartir la luz que ha sido depositada en ti con las personas que forman parte de tu comunidad';
@@ -25,9 +27,11 @@ export const Register = () => {
   buttonRegister.id = 'buttonRegister';
   buttonLoginGoogle.textContent = 'Registrate con tu cuenta Google';
   buttonLoginGoogle.id = 'buttonLoginGoogle';
-  buttonLoginGoogle.setAttribute('src', './img/google-logo.png');
   buttonHome.textContent = 'Regresar al Home';
   buttonHome.id = 'buttonHome';
+  buttonLogout.textContent = 'Cerrar sesión';
+  buttonLogout.id = 'buttonLogout';
+
   buttonHome.addEventListener('click', () => onNavigate('/'));
 
   buttonRegister.addEventListener('click', (event) => {
@@ -36,11 +40,22 @@ export const Register = () => {
     event.preventDefault();
     registerUser(inputEmail, inputPassword);
   });
-
+  let currentUser;
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      currentUser = user;
+      console.log('Usuario logueado', currentUser.displayName);
+    } else {
+      console.log('No hay usuario logueado');
+    }
+  });
   buttonLoginGoogle.addEventListener('click', async (event) => {
     try {
-      await login();
+      currentUser = await login();
     } catch (error) {}
+  });
+  buttonLogout.addEventListener('click', (event) => {
+    logout();
   });
 
   registerDiv.appendChild(logo);
@@ -51,6 +66,7 @@ export const Register = () => {
   registerDiv.appendChild(buttonRegister);
   registerDiv.appendChild(buttonLoginGoogle);
   registerDiv.appendChild(buttonHome);
+  registerDiv.appendChild(buttonLogout);
 
   return registerDiv;
 };

@@ -30,6 +30,7 @@ export async function login() {
     throw new Error(error);
   }
 }
+
 export function logout() {
   auth.signOut();
 }
