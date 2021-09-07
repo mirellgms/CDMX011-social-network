@@ -1,5 +1,6 @@
 # Be The Light
-[BeTheLight](https://github.com/mirellgms/CDMX011-social-network/blob/prueba-registro-google/src/img/BeTheLight.png)
+
+![BeTheLight](https://github.com/mirellgms/CDMX011-social-network/blob/prueba-registro-google/src/img/BeTheLight.png)
 
 ## Índice
 
