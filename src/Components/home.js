@@ -22,6 +22,7 @@ export const Home = () => {
   inputPassword.placeholder = 'Contraseña';
   inputPassword.type = 'password';
   buttonLogin.textContent = 'INGRESAR';
+  buttonLogin.id = 'buttonLogin';
   buttonLoginGoogle.textContent = 'Ingresa con tu cuenta de Google';
   buttonLoginGoogle.id = 'buttonLoginGoogle';
   buttonGoToRegister.textContent = '¿No tienes cuenta?  Registrate';
