@@ -1,4 +1,5 @@
-# Creando una Red Social
+# Be The Light
+[BeTheLight](https://github.com/mirellgms/CDMX011-social-network/blob/prueba-registro-google/src/img/BeTheLight.png)
 
 ## Índice
 
@@ -13,20 +14,13 @@
 
 ## 1. Preámbulo
 
-Instagram, Snapchat, Twitter, Facebook, Twitch, Linkedin, etc. Las redes
-sociales han invadido nuestras vidas. Las amamos u odiamos, y muchos no podemos
-vivir sin ellas.
+Be the light te ayuda a comunicarte y compartir la luz que ha sido depositada en ti con las personas que forman parte de tu comunidad
 
-Hay redes sociales de todo tipo y para todo tipo de intereses. Por ejemplo,
-en una ronda de financiamiento con inversionistas, se presentó una red social
-para químicos en la que los usuarios podían publicar artículos sobre sus
-investigaciones, comentar en los artículos de sus colegas, y filtrar artículos
-de acuerdo a determinadas etiquetas o su popularidad, lo más reciente, o lo
-más comentado.
+
 
 ## 2. Resumen del proyecto
 
-En este proyecto construirás una Red Social sobre lo que decidan tú y tu equipo.
+En este proyecto se construyo una Red Social para poder unir a la comunidad cristiana y poder compartir 
 Podría ser, por ejemplo, sobre alimentación saludable, feminismo, educación,
 salud, energías renovables, amantes de las [Empanadas](https://es.wikipedia.org/wiki/Empanada)
 o de los [Tacos de Canasta](https://es.wikipedia.org/wiki/Taco), de la
@@ -39,6 +33,7 @@ El objetivo principal de aprendizaje de este proyecto es construir una
 [Single-page Application (SPA)](https://es.wikipedia.org/wiki/Single-page_application)
 [_responsive_](https://curriculum.laboratoria.la/es/topics/css/02-responsive) (con más de una vista / página)
 en la que podamos **leer y escribir datos**.
+
 
 ## 3. Objetivos de aprendizaje
 
