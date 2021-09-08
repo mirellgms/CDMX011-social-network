@@ -121,7 +121,7 @@ export const Register = () => {
   registerDiv.appendChild(buttonLoginGoogle);
   registerDiv.appendChild(iconGoogle);
   registerDiv.appendChild(buttonHome);
-  registerDiv.appendChild(buttonLogout);
+  //registerDiv.appendChild(buttonLogout);
 
   return registerDiv;
 };
