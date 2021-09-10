@@ -9,17 +9,17 @@ export const Feed = () => {
   const messageh1 = document.createElement('h1');
   messageh1.textContent = 'Este es el Feed';
 
-  const buttonLogout = document.createElement('button');
-  buttonLogout.textContent = 'Cerrar sesión';
+  // const buttonLogout = document.createElement('button');
+  // buttonLogout.textContent = 'Cerrar sesión';
 
-  buttonLogout.addEventListener('click', (event) => {
-    logout();
-    console.log('sesión cerrada');
-    onNavigate('/');
-  });
+  // buttonLogout.addEventListener('click', (event) => {
+  //  // logout();
+  //   console.log('sesión cerrada');
+  //   onNavigate('/');
+  // });
 
   feedDiv.appendChild(messageh1);
-  feedDiv.appendChild(buttonLogout);
+  // feedDiv.appendChild(buttonLogout);
 
   return feedDiv;
 };
