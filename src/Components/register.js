@@ -1,26 +1,19 @@
+/* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
-import { registerUser, login, logout } from '../lib/firebase.js';
+import { registerUser, login } from '../lib/firebase.js';
 import firebase from '../lib/secret.js';
 
 export const Register = () => {
   const registerDiv = document.createElement('div');
+  registerDiv.id = ('registerDiv');
 
   const buttonLogout = document.createElement('button');
-
-  const logo = document.createElement('img');
-  logo.setAttribute('src', '../img/BeTheLight.png');
-
-  const h1Presentation = document.createElement('h1');
-  h1Presentation.textContent = 'Be the light te ayuda a comunicarte y compartir la luz que ha sido depositada en ti con las personas que forman parte de tu comunidad';
 
   let inputName = document.createElement('input');
   inputName.placeholder = 'Nombre';
   inputName.setAttribute('required', 'required');
   inputName.id = 'inputName';
-
-  /* const iconName = document.createElement('div');
-  iconName.classList.add = 'iconName'; */
 
   const iconUser = document.createElement('img');
   iconUser.setAttribute('src', '../img/user.png');
@@ -75,6 +68,14 @@ export const Register = () => {
   iconGoogle.setAttribute('src', '../img/google-logo.png');
   iconGoogle.id = 'iconGoogle';
 
+  const line1 = document.createElement('div');
+  line1.id = ('line1');
+  const or = document.createElement('text');
+  or.textContent = 'O';
+  or.id = 'or';
+  const line2 = document.createElement('div');
+  line2.id = ('line2');
+
   const buttonHome = document.createElement('button');
   buttonHome.textContent = 'Regresar al Home';
   buttonHome.id = 'buttonHome';
@@ -89,9 +90,10 @@ export const Register = () => {
     inputPassword = document.getElementById('inputPassword').value;
     confirmPassword = document.getElementById('confirmPassword').value;
     event.preventDefault();
+    // eslint-disable-next-line max-len
     if (inputName.length === 0 || inputEmail.length === 0 || inputPassword.length === 0 || confirmPassword.length === 0) {
       alert('Completa los campos requeridos');
-    } if (inputPassword !== confirmPassword) {
+    } else if (inputPassword !== confirmPassword) {
       alert('La contraseña no coincide');
     } else {
       registerUser(inputEmail, inputPassword);
@@ -112,10 +114,14 @@ export const Register = () => {
       currentUser = await login();
     } catch (error) {}
   });
+<<<<<<< HEAD
 
   buttonLogout.addEventListener('click', (event) => {
     logout();
   });
+=======
+  
+>>>>>>> 097eef8595cb1892e30d7ec55d1974388284b2e1
 
   iconOpenEye.addEventListener('click', () => {
     if (inputPassword.type === 'text') {
@@ -125,9 +131,6 @@ export const Register = () => {
     }
   });
 
-  registerDiv.appendChild(logo);
-  registerDiv.appendChild(h1Presentation);
-  // registerDiv.appendChild(iconName);
   registerDiv.appendChild(inputName);
   registerDiv.appendChild(iconUser);
   registerDiv.appendChild(inputEmail);
@@ -138,6 +141,9 @@ export const Register = () => {
   registerDiv.appendChild(confirmPassword);
   registerDiv.appendChild(iconCloseEye);
   registerDiv.appendChild(buttonRegister);
+  registerDiv.appendChild(line1);
+  registerDiv.appendChild(or);
+  registerDiv.appendChild(line2);
   registerDiv.appendChild(buttonLoginGoogle);
   registerDiv.appendChild(iconGoogle);
   registerDiv.appendChild(buttonHome);

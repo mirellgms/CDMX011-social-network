@@ -11,11 +11,13 @@ div {
     
 }
 h1{
-    display: flex;
     max-width: 360px;
+    font-weight: 100;
     font-size: 15px;
     text-align: center;
     font-family: 'Poppins', sans-serif;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 button{
     background-color : #0976B2;
@@ -35,7 +37,7 @@ input{
 }
 
 #buttonGotoRegister{
-    margin-top: 100px;
+    margin-top: 40px;
     width: 100%;
     border-radius: 0px;
     font-size: 100%;
@@ -54,6 +56,7 @@ input{
     width: 309px;
     height: 43px;
     font-size: 92%;
+    margin-top: 2rem;
 }
 #buttonRegister{
     font-weight: bold;
@@ -72,7 +75,36 @@ img {
     
 }
 
+#homeDiv{
+    background-color: hsl(0deg 0% 0% / 2%);
+    border: 3px solid black;
+    padding: 21px;
+    border-radius: 10px;
+}
 
+#registerDiv{
+    background-color: hsl(0deg 0% 0% / 2%);
+    border: 3px solid black;
+    padding: 21px;
+    border-radius: 10px;
+}
+
+#or{
+    margin-top: -9px;
+}
+#line1{
+    width: 44%;
+    border-top: 2px solid #0976B2;
+    margin-left: 166px;
+    margin-top: 21px;
+}
+
+#line2{
+    width: 44%;
+    border-top: 2px solid #0976B2;
+    margin-right: 165px;
+    margin-top: -10px;
+}
 
 
 .icon {
@@ -90,10 +122,9 @@ img {
 }
   
 #iconGoogle {
-    width: 30px;
+   width: 30px; 
     border: 0px;
     position: relative;
     bottom: 35px;
-    right: 132px;
-    width: 27px;   
-}
+    right: 132px; 
+} 

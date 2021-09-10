@@ -1,4 +1,6 @@
+/* eslint-disable import/no-cycle */
 import firebase from './secret.js';
+import { onNavigate } from '../main.js';
 
 export const registerUser = (email, password) => {
   firebase
@@ -7,6 +9,7 @@ export const registerUser = (email, password) => {
     .then((userCredential) => {
       // Signed in
       console.log(userCredential.user);
+      onNavigate('/feed');
       // ...
     })
     .catch((error) => {
