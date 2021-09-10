@@ -67,7 +67,7 @@ export const Home = () => {
   buttonLoginGoogle.addEventListener('click', async (event) => {
     try {
       currentUser = await login();
-    } catch (error) { }
+    } catch (error) {}
   });
 
   // Ocultar/Mostrar contraseña
