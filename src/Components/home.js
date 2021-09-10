@@ -54,7 +54,7 @@ export const Home = () => {
 
   buttonGoToRegister.addEventListener('click', () => onNavigate('/register'));
 
-  //Login con Google
+  // Login con Google
   let currentUser;
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -64,6 +64,7 @@ export const Home = () => {
       console.log('No hay usuario logueado');
     }
   });
+
   buttonLoginGoogle.addEventListener('click', async (event) => {
     try {
       currentUser = await login();

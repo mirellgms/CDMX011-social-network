@@ -43,8 +43,8 @@ export const Register = () => {
   inputPassword.id = 'inputPassword';
   inputPassword.classList.add = 'inputs';
 
-  //const msgPassword = document.createElement('p1');
-  //msgPassword.textContent = 'Mínimo 6 caracteres';
+  // const msgPassword = document.createElement('p1');
+  // msgPassword.textContent = 'Mínimo 6 caracteres';
 
   // const confirmPassword = document.createElement('input');
 
@@ -53,14 +53,16 @@ export const Register = () => {
   iconOpenEye.classList.add('icon');
   iconOpenEye.id = 'openEye';
 
-  /* const iconCloseEye = document.createElement('img');
+  const iconCloseEye = document.createElement('img');
   iconCloseEye.setAttribute('src', '../img/closeEye.png');
   iconCloseEye.classList.add('icon');
-  iconCloseEye.id = 'closeEye'; */
+  iconCloseEye.id = 'closeEye';
 
-  const confirmPassword = document.createElement('input');
-  confirmPassword.placeholder = 'Contraseña';
+  let confirmPassword = document.createElement('input');
+  confirmPassword.placeholder = 'Confirmar contraseña';
   confirmPassword.type = 'password';
+  confirmPassword.id = 'confirmPassword';
+  confirmPassword.classList.add = 'inputs';
 
   const buttonRegister = document.createElement('button');
   buttonRegister.textContent = 'REGISTRATE';
@@ -86,11 +88,16 @@ export const Register = () => {
     inputName = document.getElementById('inputName').value;
     inputEmail = document.getElementById('inputEmail').value;
     inputPassword = document.getElementById('inputPassword').value;
+    confirmPassword = document.getElementById('confirmPassword').value;
     event.preventDefault();
-    if (inputName.length === 0 || inputEmail.length === 0 || inputPassword.length === 0) {
-      alert('Completa los campos requeridos');
+    if (inputPassword === confirmPassword) {
+      if (inputName.length === 0 || inputEmail.length === 0 || inputPassword.length === 0) {
+        alert('Completa los campos requeridos');
+      } else {
+        registerUser(inputEmail, inputPassword);
+      }
     } else {
-      registerUser(inputEmail, inputPassword);
+      alert('Las contraseñas no coinciden');
     }
   });
 
@@ -122,20 +129,15 @@ export const Register = () => {
 
   registerDiv.appendChild(logo);
   registerDiv.appendChild(h1Presentation);
-  // registerDiv.appendChild(iconName);
   registerDiv.appendChild(inputName);
   registerDiv.appendChild(iconUser);
   registerDiv.appendChild(inputEmail);
   registerDiv.appendChild(iconEmail);
   registerDiv.appendChild(inputPassword);
   registerDiv.appendChild(iconOpenEye);
-<<<<<<< HEAD
-  // registerDiv.appendChild(iconCloseEye);
+  // registerDiv.appendChild(msgPassword);
   registerDiv.appendChild(confirmPassword);
-=======
-  //registerDiv.appendChild(msgPassword);
   registerDiv.appendChild(iconCloseEye);
->>>>>>> 9ecd2c23b5daf1f7eb0e4536eed943cc354c739b
   registerDiv.appendChild(buttonRegister);
   registerDiv.appendChild(buttonLoginGoogle);
   registerDiv.appendChild(iconGoogle);
