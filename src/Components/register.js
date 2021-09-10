@@ -95,7 +95,6 @@ export const Register = () => {
       alert('La contraseña no coincide');
     } else {
       registerUser(inputEmail, inputPassword);
-      onNavigate('/feed');
     }
   });
 
@@ -113,6 +112,7 @@ export const Register = () => {
       currentUser = await login();
     } catch (error) {}
   });
+
   buttonLogout.addEventListener('click', (event) => {
     logout();
   });
