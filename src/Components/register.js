@@ -43,10 +43,15 @@ export const Register = () => {
   inputPassword.id = 'inputPassword';
   inputPassword.classList.add = 'inputs';
 
-  //const msgPassword = document.createElement('p1');
-  //msgPassword.textContent = 'Mínimo 6 caracteres';
+  // const msgPassword = document.createElement('p1');
+  // msgPassword.textContent = 'Mínimo 6 caracteres';
 
-  // const confirmPassword = document.createElement('input');
+  let confirmPassword = document.createElement('input');
+  confirmPassword.placeholder = 'Confirmar contraseña';
+  confirmPassword.type = 'password';
+  confirmPassword.id = 'inputConfirmPassword';
+  confirmPassword.classList.add = 'inputs';
+  confirmPassword.id = 'confirmPassword';
 
   const iconOpenEye = document.createElement('img');
   iconOpenEye.setAttribute('src', '../img/openEye.png');
@@ -82,11 +87,15 @@ export const Register = () => {
     inputName = document.getElementById('inputName').value;
     inputEmail = document.getElementById('inputEmail').value;
     inputPassword = document.getElementById('inputPassword').value;
+    confirmPassword = document.getElementById('confirmPassword').value;
     event.preventDefault();
-    if (inputName.length === 0 || inputEmail.length === 0 || inputPassword.length === 0) {
+    if (inputName.length === 0 || inputEmail.length === 0 || inputPassword.length === 0 || confirmPassword.length === 0) {
       alert('Completa los campos requeridos');
+    } if (inputPassword !== confirmPassword) {
+      alert('La contraseña no coincide');
     } else {
       registerUser(inputEmail, inputPassword);
+      onNavigate('/feed');
     }
   });
 
@@ -96,7 +105,7 @@ export const Register = () => {
       currentUser = user;
       console.log('Usuario logueado', currentUser.displayName);
     } else {
-      console.log('No hay usuario logueado');
+      return ('No hay usuario logueado');
     }
   });
   buttonLoginGoogle.addEventListener('click', async (event) => {
@@ -125,7 +134,8 @@ export const Register = () => {
   registerDiv.appendChild(iconEmail);
   registerDiv.appendChild(inputPassword);
   registerDiv.appendChild(iconOpenEye);
-  //registerDiv.appendChild(msgPassword);
+  // registerDiv.appendChild(msgPassword);
+  registerDiv.appendChild(confirmPassword);
   registerDiv.appendChild(iconCloseEye);
   registerDiv.appendChild(buttonRegister);
   registerDiv.appendChild(buttonLoginGoogle);
