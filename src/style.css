@@ -122,10 +122,9 @@ img {
 }
   
 #iconGoogle {
-    width: 30px;
+   width: 30px; 
     border: 0px;
     position: relative;
     bottom: 35px;
-    right: 132px;
-    width: 27px;   
-}
+    right: 132px; 
+} 

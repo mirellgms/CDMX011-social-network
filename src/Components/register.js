@@ -1,6 +1,7 @@
+/* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
-import { registerUser, login, logout } from '../lib/firebase.js';
+import { registerUser, login } from '../lib/firebase.js';
 import firebase from '../lib/secret.js';
 
 export const Register = () => {
@@ -89,13 +90,13 @@ export const Register = () => {
     inputPassword = document.getElementById('inputPassword').value;
     confirmPassword = document.getElementById('confirmPassword').value;
     event.preventDefault();
+    // eslint-disable-next-line max-len
     if (inputName.length === 0 || inputEmail.length === 0 || inputPassword.length === 0 || confirmPassword.length === 0) {
       alert('Completa los campos requeridos');
-    } if (inputPassword !== confirmPassword) {
+    } else if (inputPassword !== confirmPassword) {
       alert('La contraseña no coincide');
     } else {
       registerUser(inputEmail, inputPassword);
-      onNavigate('/feed');
     }
   });
 
@@ -113,9 +114,7 @@ export const Register = () => {
       currentUser = await login();
     } catch (error) {}
   });
-  buttonLogout.addEventListener('click', (event) => {
-    logout();
-  });
+  
 
   iconOpenEye.addEventListener('click', () => {
     if (inputPassword.type === 'text') {
