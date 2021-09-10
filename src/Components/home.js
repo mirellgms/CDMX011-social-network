@@ -4,33 +4,23 @@ import { login } from '../lib/firebase.js';
 
 export const Home = () => {
   const HomeDiv = document.createElement('div');
-
-  const logo = document.createElement('img');
-  logo.setAttribute('src', '../img/BeTheLight.png');
-
-  const h1Presentation = document.createElement('h1');
-  h1Presentation.textContent = 'Be the light te ayuda a comunicarte y compartir la luz que ha sido depositada en ti con las personas que forman parte de tu comunidad';
+  HomeDiv.id = ('homeDiv');
 
   const inputEmail = document.createElement('input');
-  inputEmail.placeholder = 'Correo';
+  inputEmail.placeholder = 'Correo Electrónico';
 
   const iconEmail = document.createElement('img');
   iconEmail.setAttribute('src', '../img/email.png');
   iconEmail.classList.add('icon');
 
   const inputPassword = document.createElement('input');
-  inputPassword.placeholder = 'Contraseña';
+  inputPassword.placeholder = 'Contraseña (mínimo 6 carácteres)';
   inputPassword.type = 'password';
 
   const iconOpenEye = document.createElement('img');
   iconOpenEye.setAttribute('src', '../img/openEye.png');
   iconOpenEye.classList.add('icon');
   iconOpenEye.id = 'openEye';
-
-  const iconCloseEye = document.createElement('img');
-  iconCloseEye.setAttribute('src', '../img/closeEye.png');
-  iconCloseEye.classList.add('icon');
-  iconCloseEye.id = 'closeEye';
 
   const buttonLogin = document.createElement('button');
   buttonLogin.textContent = 'Iniciar sesión';
@@ -39,6 +29,14 @@ export const Home = () => {
   const buttonLoginGoogle = document.createElement('button');
   buttonLoginGoogle.textContent = 'Ingresa con tu cuenta de Google';
   buttonLoginGoogle.id = 'buttonLoginGoogle';
+
+  const line1 = document.createElement('div');
+  line1.id = ('line1');
+  const or = document.createElement('text');
+  or.textContent = 'O';
+  or.id = 'or';
+  const line2 = document.createElement('div');
+  line2.id = ('line2');
 
   const iconGoogle = document.createElement('img');
   iconGoogle.setAttribute('src', '../img/google-logo.png');
@@ -54,7 +52,7 @@ export const Home = () => {
 
   buttonGoToRegister.addEventListener('click', () => onNavigate('/register'));
 
-  //Login con Google
+  // Login con Google
   let currentUser;
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -83,14 +81,15 @@ export const Home = () => {
   //   logout();
   // });
 
-  HomeDiv.appendChild(logo);
-  HomeDiv.appendChild(h1Presentation);
   HomeDiv.appendChild(inputEmail);
   HomeDiv.appendChild(iconEmail);
   HomeDiv.appendChild(inputPassword);
   HomeDiv.appendChild(iconOpenEye);
-  HomeDiv.appendChild(iconCloseEye);
+  //HomeDiv.appendChild(iconCloseEye);
   HomeDiv.appendChild(buttonLogin);
+  HomeDiv.appendChild(line1);
+  HomeDiv.appendChild(or);
+  HomeDiv.appendChild(line2);
   HomeDiv.appendChild(buttonLoginGoogle);
   HomeDiv.appendChild(iconGoogle);
   HomeDiv.appendChild(buttonGoToRegister);

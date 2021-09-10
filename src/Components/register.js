@@ -5,22 +5,14 @@ import firebase from '../lib/secret.js';
 
 export const Register = () => {
   const registerDiv = document.createElement('div');
+  registerDiv.id = ('registerDiv');
 
   const buttonLogout = document.createElement('button');
-
-  const logo = document.createElement('img');
-  logo.setAttribute('src', '../img/BeTheLight.png');
-
-  const h1Presentation = document.createElement('h1');
-  h1Presentation.textContent = 'Be the light te ayuda a comunicarte y compartir la luz que ha sido depositada en ti con las personas que forman parte de tu comunidad';
 
   let inputName = document.createElement('input');
   inputName.placeholder = 'Nombre';
   inputName.setAttribute('required', 'required');
   inputName.id = 'inputName';
-
-  /* const iconName = document.createElement('div');
-  iconName.classList.add = 'iconName'; */
 
   const iconUser = document.createElement('img');
   iconUser.setAttribute('src', '../img/user.png');
@@ -43,20 +35,10 @@ export const Register = () => {
   inputPassword.id = 'inputPassword';
   inputPassword.classList.add = 'inputs';
 
-  //const msgPassword = document.createElement('p1');
-  //msgPassword.textContent = 'Mínimo 6 caracteres';
-
-  // const confirmPassword = document.createElement('input');
-
   const iconOpenEye = document.createElement('img');
   iconOpenEye.setAttribute('src', '../img/openEye.png');
   iconOpenEye.classList.add('icon');
   iconOpenEye.id = 'openEye';
-
-  const iconCloseEye = document.createElement('img');
-  iconCloseEye.setAttribute('src', '../img/closeEye.png');
-  iconCloseEye.classList.add('icon');
-  iconCloseEye.id = 'closeEye';
 
   const buttonRegister = document.createElement('button');
   buttonRegister.textContent = 'REGISTRATE';
@@ -69,6 +51,14 @@ export const Register = () => {
   const iconGoogle = document.createElement('img');
   iconGoogle.setAttribute('src', '../img/google-logo.png');
   iconGoogle.id = 'iconGoogle';
+
+  const line1 = document.createElement('div');
+  line1.id = ('line1');
+  const or = document.createElement('text');
+  or.textContent = 'O';
+  or.id = 'or';
+  const line2 = document.createElement('div');
+  line2.id = ('line2');
 
   const buttonHome = document.createElement('button');
   buttonHome.textContent = 'Regresar al Home';
@@ -116,18 +106,16 @@ export const Register = () => {
     }
   });
 
-  registerDiv.appendChild(logo);
-  registerDiv.appendChild(h1Presentation);
-  // registerDiv.appendChild(iconName);
   registerDiv.appendChild(inputName);
   registerDiv.appendChild(iconUser);
   registerDiv.appendChild(inputEmail);
   registerDiv.appendChild(iconEmail);
   registerDiv.appendChild(inputPassword);
   registerDiv.appendChild(iconOpenEye);
-  //registerDiv.appendChild(msgPassword);
-  registerDiv.appendChild(iconCloseEye);
   registerDiv.appendChild(buttonRegister);
+  registerDiv.appendChild(line1);
+  registerDiv.appendChild(or);
+  registerDiv.appendChild(line2);
   registerDiv.appendChild(buttonLoginGoogle);
   registerDiv.appendChild(iconGoogle);
   registerDiv.appendChild(buttonHome);
