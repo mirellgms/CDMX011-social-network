@@ -114,14 +114,6 @@ export const Register = () => {
       currentUser = await login();
     } catch (error) {}
   });
-<<<<<<< HEAD
-
-  buttonLogout.addEventListener('click', (event) => {
-    logout();
-  });
-=======
-  
->>>>>>> 097eef8595cb1892e30d7ec55d1974388284b2e1
 
   iconOpenEye.addEventListener('click', () => {
     if (inputPassword.type === 'text') {
