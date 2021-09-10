@@ -89,7 +89,7 @@ export const Home = () => {
   HomeDiv.appendChild(iconEmail);
   HomeDiv.appendChild(inputPassword);
   HomeDiv.appendChild(iconOpenEye);
-  HomeDiv.appendChild(iconCloseEye);
+  // HomeDiv.appendChild(iconCloseEye);
   HomeDiv.appendChild(buttonLogin);
   HomeDiv.appendChild(buttonLoginGoogle);
   HomeDiv.appendChild(iconGoogle);
