@@ -13,7 +13,7 @@ export const Feed = () => {
   buttonLogout.textContent = 'Cerrar sesión';
 
   buttonLogout.addEventListener('click', (event) => {
-    logout();
+  // logout();
     console.log('sesión cerrada');
     onNavigate('/');
   });
