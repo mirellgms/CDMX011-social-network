@@ -46,7 +46,12 @@ export const Register = () => {
   // const msgPassword = document.createElement('p1');
   // msgPassword.textContent = 'Mínimo 6 caracteres';
 
-  // const confirmPassword = document.createElement('input');
+  let confirmPassword = document.createElement('input');
+  confirmPassword.placeholder = 'Confirmar contraseña';
+  confirmPassword.type = 'password';
+  confirmPassword.id = 'inputConfirmPassword';
+  confirmPassword.classList.add = 'inputs';
+  confirmPassword.id = 'confirmPassword';
 
   const iconOpenEye = document.createElement('img');
   iconOpenEye.setAttribute('src', '../img/openEye.png');
@@ -57,12 +62,6 @@ export const Register = () => {
   iconCloseEye.setAttribute('src', '../img/closeEye.png');
   iconCloseEye.classList.add('icon');
   iconCloseEye.id = 'closeEye';
-
-  let confirmPassword = document.createElement('input');
-  confirmPassword.placeholder = 'Confirmar contraseña';
-  confirmPassword.type = 'password';
-  confirmPassword.id = 'confirmPassword';
-  confirmPassword.classList.add = 'inputs';
 
   const buttonRegister = document.createElement('button');
   buttonRegister.textContent = 'REGISTRATE';
@@ -90,14 +89,13 @@ export const Register = () => {
     inputPassword = document.getElementById('inputPassword').value;
     confirmPassword = document.getElementById('confirmPassword').value;
     event.preventDefault();
-    if (inputPassword === confirmPassword) {
-      if (inputName.length === 0 || inputEmail.length === 0 || inputPassword.length === 0) {
-        alert('Completa los campos requeridos');
-      } else {
-        registerUser(inputEmail, inputPassword);
-      }
+    if (inputName.length === 0 || inputEmail.length === 0 || inputPassword.length === 0 || confirmPassword.length === 0) {
+      alert('Completa los campos requeridos');
+    } if (inputPassword !== confirmPassword) {
+      alert('La contraseña no coincide');
     } else {
-      alert('Las contraseñas no coinciden');
+      registerUser(inputEmail, inputPassword);
+      onNavigate('/feed');
     }
   });
 
@@ -107,7 +105,7 @@ export const Register = () => {
       currentUser = user;
       console.log('Usuario logueado', currentUser.displayName);
     } else {
-      console.log('No hay usuario logueado');
+      return ('No hay usuario logueado');
     }
   });
   buttonLoginGoogle.addEventListener('click', async (event) => {

@@ -45,7 +45,7 @@ export const Home = () => {
   iconGoogle.id = 'iconGoogle';
 
   const buttonGoToRegister = document.createElement('button');
-  buttonGoToRegister.textContent = '¿No tienes cuenta?  Registrate';
+  buttonGoToRegister.textContent = '¿No tienes cuenta? Registrate';
   buttonGoToRegister.id = 'buttonGotoRegister';
 
   // const buttonLogout = document.createElement('button');
@@ -82,8 +82,7 @@ export const Home = () => {
 
   // buttonLogout.addEventListener('click', (event) => {
   //   logout();
-  // });
-
+  // });  
   HomeDiv.appendChild(logo);
   HomeDiv.appendChild(h1Presentation);
   HomeDiv.appendChild(inputEmail);
