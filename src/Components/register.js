@@ -49,10 +49,14 @@ export const Register = () => {
   iconOpenEye.classList.add('icon');
   iconOpenEye.id = 'openEye';
 
-  const iconCloseEye = document.createElement('img');
+  /* const iconCloseEye = document.createElement('img');
   iconCloseEye.setAttribute('src', '../img/closeEye.png');
   iconCloseEye.classList.add('icon');
-  iconCloseEye.id = 'closeEye';
+  iconCloseEye.id = 'closeEye'; */
+
+  const confirmPassword = document.createElement('input');
+  confirmPassword.placeholder = 'Contraseña';
+  confirmPassword.type = 'password';
 
   const buttonRegister = document.createElement('button');
   buttonRegister.textContent = 'REGISTRATE';
@@ -115,8 +119,9 @@ export const Register = () => {
   registerDiv.appendChild(inputEmail);
   registerDiv.appendChild(iconEmail);
   registerDiv.appendChild(inputPassword);
-  // registerDiv.appendChild(iconOpenEye);
-  registerDiv.appendChild(iconCloseEye);
+  registerDiv.appendChild(iconOpenEye);
+  // registerDiv.appendChild(iconCloseEye);
+  registerDiv.appendChild(confirmPassword);
   registerDiv.appendChild(buttonRegister);
   registerDiv.appendChild(buttonLoginGoogle);
   registerDiv.appendChild(iconGoogle);
