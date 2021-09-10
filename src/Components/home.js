@@ -4,33 +4,25 @@ import { login } from '../lib/firebase.js';
 
 export const Home = () => {
   const HomeDiv = document.createElement('div');
+  HomeDiv.id = ('homeDiv');
 
-  const logo = document.createElement('img');
-  logo.setAttribute('src', '../img/BeTheLight.png');
-
-  const h1Presentation = document.createElement('h1');
-  h1Presentation.textContent = 'Be the light te ayuda a comunicarte y compartir la luz que ha sido depositada en ti con las personas que forman parte de tu comunidad';
-
-  const inputEmail = document.createElement('input');
-  inputEmail.placeholder = 'Correo';
+  let inputEmail = document.createElement('input');
+  inputEmail.placeholder = 'Correo Electrónico';
+  inputEmail.id = ('inputEmail');
 
   const iconEmail = document.createElement('img');
   iconEmail.setAttribute('src', '../img/email.png');
   iconEmail.classList.add('icon');
 
-  const inputPassword = document.createElement('input');
-  inputPassword.placeholder = 'Contraseña';
+  let inputPassword = document.createElement('input');
+  inputPassword.placeholder = 'Contraseña (mínimo 6 carácteres)';
   inputPassword.type = 'password';
+  inputPassword.id = ('inputPassword');
 
   const iconOpenEye = document.createElement('img');
   iconOpenEye.setAttribute('src', '../img/openEye.png');
   iconOpenEye.classList.add('icon');
   iconOpenEye.id = 'openEye';
-
-  const iconCloseEye = document.createElement('img');
-  iconCloseEye.setAttribute('src', '../img/closeEye.png');
-  iconCloseEye.classList.add('icon');
-  iconCloseEye.id = 'closeEye';
 
   const buttonLogin = document.createElement('button');
   buttonLogin.textContent = 'Iniciar sesión';
@@ -39,6 +31,14 @@ export const Home = () => {
   const buttonLoginGoogle = document.createElement('button');
   buttonLoginGoogle.textContent = 'Ingresa con tu cuenta de Google';
   buttonLoginGoogle.id = 'buttonLoginGoogle';
+
+  const line1 = document.createElement('div');
+  line1.id = ('line1');
+  const or = document.createElement('text');
+  or.textContent = 'O';
+  or.id = 'or';
+  const line2 = document.createElement('div');
+  line2.id = ('line2');
 
   const iconGoogle = document.createElement('img');
   iconGoogle.setAttribute('src', '../img/google-logo.png');
@@ -54,16 +54,28 @@ export const Home = () => {
 
   buttonGoToRegister.addEventListener('click', () => onNavigate('/register'));
 
-  // Login con Google
-  let currentUser;
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      currentUser = user;
-      console.log('Usuario logueado', currentUser.displayName);
+  buttonLogin.addEventListener('click', (event) => {
+    inputEmail = document.getElementById('inputEmail').value;
+    inputPassword = document.getElementById('inputPassword').value;
+    event.preventDefault();
+    if (inputEmail.length === 0 || inputPassword.length === 0) {
+      alert('Completa los campos requeridos');
     } else {
-      console.log('No hay usuario logueado');
+      let currentUser;
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          currentUser = user;
+          console.log('Usuario logueado', currentUser.displayName);
+          onNavigate('/feed');
+        } else {
+          alert('Su cuenta no está registrada');
+        }
+      });
     }
   });
+
+  // Login con Google
+
   buttonLoginGoogle.addEventListener('click', async (event) => {
     try {
       currentUser = await login();
@@ -81,15 +93,16 @@ export const Home = () => {
 
   // buttonLogout.addEventListener('click', (event) => {
   //   logout();
-  // });  
-  HomeDiv.appendChild(logo);
-  HomeDiv.appendChild(h1Presentation);
+  // });
+
   HomeDiv.appendChild(inputEmail);
   HomeDiv.appendChild(iconEmail);
   HomeDiv.appendChild(inputPassword);
   HomeDiv.appendChild(iconOpenEye);
-  HomeDiv.appendChild(iconCloseEye);
   HomeDiv.appendChild(buttonLogin);
+  HomeDiv.appendChild(line1);
+  HomeDiv.appendChild(or);
+  HomeDiv.appendChild(line2);
   HomeDiv.appendChild(buttonLoginGoogle);
   HomeDiv.appendChild(iconGoogle);
   HomeDiv.appendChild(buttonGoToRegister);
