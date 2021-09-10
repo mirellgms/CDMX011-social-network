@@ -14,9 +14,10 @@ export const Register = () => {
   const h1Presentation = document.createElement('h1');
   h1Presentation.textContent = 'Be the light te ayuda a comunicarte y compartir la luz que ha sido depositada en ti con las personas que forman parte de tu comunidad';
 
-  const inputName = document.createElement('input');
+  let inputName = document.createElement('input');
   inputName.placeholder = 'Nombre';
   inputName.setAttribute('required', 'required');
+  inputName.id = 'inputName';
 
   /* const iconName = document.createElement('div');
   iconName.classList.add = 'iconName'; */
@@ -36,13 +37,16 @@ export const Register = () => {
   iconEmail.setAttribute('src', '../img/email.png');
   iconEmail.classList.add('icon');
 
-  const passwordDiv = document.createElement('div');
-  passwordDiv.classList.add('inputsDiv');
   let inputPassword = document.createElement('input');
-  inputPassword.placeholder = 'Contraseña';
+  inputPassword.placeholder = 'Contraseña (mínimo 6 carácteres)';
   inputPassword.type = 'password';
   inputPassword.id = 'inputPassword';
   inputPassword.classList.add = 'inputs';
+
+  //const msgPassword = document.createElement('p1');
+  //msgPassword.textContent = 'Mínimo 6 caracteres';
+
+  // const confirmPassword = document.createElement('input');
 
   const iconOpenEye = document.createElement('img');
   iconOpenEye.setAttribute('src', '../img/openEye.png');
@@ -79,10 +83,15 @@ export const Register = () => {
   buttonHome.addEventListener('click', () => onNavigate('/'));
 
   buttonRegister.addEventListener('click', (event) => {
+    inputName = document.getElementById('inputName').value;
     inputEmail = document.getElementById('inputEmail').value;
     inputPassword = document.getElementById('inputPassword').value;
     event.preventDefault();
-    registerUser(inputEmail, inputPassword);
+    if (inputName.length === 0 || inputEmail.length === 0 || inputPassword.length === 0) {
+      alert('Completa los campos requeridos');
+    } else {
+      registerUser(inputEmail, inputPassword);
+    }
   });
 
   let currentUser;
@@ -120,8 +129,13 @@ export const Register = () => {
   registerDiv.appendChild(iconEmail);
   registerDiv.appendChild(inputPassword);
   registerDiv.appendChild(iconOpenEye);
+<<<<<<< HEAD
   // registerDiv.appendChild(iconCloseEye);
   registerDiv.appendChild(confirmPassword);
+=======
+  //registerDiv.appendChild(msgPassword);
+  registerDiv.appendChild(iconCloseEye);
+>>>>>>> 9ecd2c23b5daf1f7eb0e4536eed943cc354c739b
   registerDiv.appendChild(buttonRegister);
   registerDiv.appendChild(buttonLoginGoogle);
   registerDiv.appendChild(iconGoogle);

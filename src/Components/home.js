@@ -33,7 +33,7 @@ export const Home = () => {
   iconCloseEye.id = 'closeEye';
 
   const buttonLogin = document.createElement('button');
-  buttonLogin.textContent = 'INGRESAR';
+  buttonLogin.textContent = 'Iniciar sesión';
   buttonLogin.id = 'buttonLogin';
 
   const buttonLoginGoogle = document.createElement('button');
