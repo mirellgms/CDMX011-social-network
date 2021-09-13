@@ -1,24 +1,26 @@
 /* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-cycle
-import { onNavigate } from '../main.js';
+//import { onNavigate } from '../main.js';
 import { logout } from '../lib/firebase.js';
 
 export const Feed = () => {
   const feedDiv = document.createElement('div');
 
-  const messageh1 = document.createElement('h1');
-  messageh1.textContent = 'Este es el Feed';
-
-  const buttonLogout = document.createElement('button');
-  buttonLogout.textContent = 'Cerrar sesión';
-
-  buttonLogout.addEventListener('click', (event) => {
-  // logout();
-    console.log('sesión cerrada');
-    onNavigate('/');
+  let post = document.createElement('input');
+  const publish = document.createElement('button');
+  publish.textContent = 'Publicar';
+  publish.addEventListener('click', (event) => {
+    
   });
 
-  feedDiv.appendChild(messageh1);
+  const buttonLogout = document.createElement('button');
+  buttonLogout.textContent = 'Cerrar Sesión';
+  buttonLogout.addEventListener('click', () => {
+    logout();
+  });
+
+  feedDiv.appendChild(post);
+  feedDiv.appendChild(publish);
   feedDiv.appendChild(buttonLogout);
 
   return feedDiv;

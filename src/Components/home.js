@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
-import { login } from '../lib/firebase.js';
+import { login, loginUser } from '../lib/firebase.js';
 
 export const Home = () => {
   const HomeDiv = document.createElement('div');
@@ -61,16 +61,8 @@ export const Home = () => {
     if (inputEmail.length === 0 || inputPassword.length === 0) {
       alert('Completa los campos requeridos');
     } else {
-      let currentUser;
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          currentUser = user;
-          console.log('Usuario logueado', currentUser.displayName);
-          onNavigate('/feed');
-        } else {
-          alert('Su cuenta no está registrada');
-        }
-      });
+      // invocar funcion para login con correo y contraseñá
+      loginUser(inputEmail, inputPassword);
     }
   });
 
