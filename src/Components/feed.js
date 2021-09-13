@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-cycle
-import { onNavigate } from '../main.js';
-import { logout } from '../lib/firebase.js';
+// import { onNavigate } from '../main.js';
+// import { logout } from '../lib/firebase.js';
 
 export const Feed = () => {
   const feedDiv = document.createElement('div');
@@ -13,7 +13,7 @@ export const Feed = () => {
   // buttonLogout.textContent = 'Cerrar sesión';
 
   // buttonLogout.addEventListener('click', (event) => {
-  //  // logout();
+  // // logout();
   //   console.log('sesión cerrada');
   //   onNavigate('/');
   // });

@@ -36,9 +36,6 @@ export const Register = () => {
   inputPassword.id = 'inputPassword';
   inputPassword.classList.add = 'inputs';
 
-  // const msgPassword = document.createElement('p1');
-  // msgPassword.textContent = 'Mínimo 6 caracteres';
-
   let confirmPassword = document.createElement('input');
   confirmPassword.placeholder = 'Confirmar contraseña';
   confirmPassword.type = 'password';
@@ -51,10 +48,10 @@ export const Register = () => {
   iconOpenEye.classList.add('icon');
   iconOpenEye.id = 'openEye';
 
-  const iconCloseEye = document.createElement('img');
-  iconCloseEye.setAttribute('src', '../img/closeEye.png');
-  iconCloseEye.classList.add('icon');
-  iconCloseEye.id = 'closeEye';
+  const iconEye = document.createElement('img');
+  iconEye.setAttribute('src', '../img/openEye.png');
+  iconEye.classList.add('icon');
+  iconEye.id = 'Eye';
 
   const buttonRegister = document.createElement('button');
   buttonRegister.textContent = 'REGISTRATE';
@@ -100,26 +97,32 @@ export const Register = () => {
     }
   });
 
-  let currentUser;
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      currentUser = user;
-      console.log('Usuario logueado', currentUser.displayName);
-    } else {
-      return ('No hay usuario logueado');
-    }
-  });
+  // let currentUser;
+
   buttonLoginGoogle.addEventListener('click', async (event) => {
     try {
-      currentUser = await login();
-    } catch (error) {}
+      await login().then((result) => {
+        onNavigate('/feed');
+        console.log(result);
+      })
+        .catch((error) => { console.log(error); });
+    } catch (error) { console.log(error); }
   });
 
+  // Mostrar / Ocultar contraseña
   iconOpenEye.addEventListener('click', () => {
     if (inputPassword.type === 'text') {
       inputPassword.type = 'password';
     } else {
       inputPassword.type = 'text';
+    }
+  });
+
+  iconEye.addEventListener('click', () => {
+    if (confirmPassword.type === 'text') {
+      confirmPassword.type = 'password';
+    } else {
+      confirmPassword.type = 'text';
     }
   });
 
@@ -129,9 +132,8 @@ export const Register = () => {
   registerDiv.appendChild(iconEmail);
   registerDiv.appendChild(inputPassword);
   registerDiv.appendChild(iconOpenEye);
-  // registerDiv.appendChild(msgPassword);
   registerDiv.appendChild(confirmPassword);
-  registerDiv.appendChild(iconCloseEye);
+  registerDiv.appendChild(iconEye);
   registerDiv.appendChild(buttonRegister);
   registerDiv.appendChild(line1);
   registerDiv.appendChild(or);
