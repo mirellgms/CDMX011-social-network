@@ -7,7 +7,7 @@ import firebase from '../lib/secret.js';
 export const Register = () => {
   const registerDiv = document.createElement('div');
   registerDiv.id = ('registerDiv');
-
+  document.getElementById('header').style.display = 'block';
   const buttonLogout = document.createElement('button');
 
   let inputName = document.createElement('input');

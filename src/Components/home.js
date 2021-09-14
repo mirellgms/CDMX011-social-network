@@ -5,6 +5,7 @@ import { login, loginUser } from '../lib/firebase.js';
 export const Home = () => {
   const HomeDiv = document.createElement('div');
   HomeDiv.id = ('homeDiv');
+  document.getElementById('header').style.display = 'block';
 
   let inputEmail = document.createElement('input');
   inputEmail.placeholder = 'Correo Electrónico';
