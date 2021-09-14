@@ -74,6 +74,15 @@ export const Home = () => {
     }
   });
 
+  // buttonLoginGoogle.addEventListener('click', async (event) => {
+  //   try {
+  //     await login().then((result) => {
+  //       onNavigate('/feed');
+  //       console.log(result);
+  //     })
+  //       .catch((error) => { console.log(error); });
+  //   } catch (error) { console.log(error); }
+  // });
   // Login con Google
 
   buttonLoginGoogle.addEventListener('click', async (event) => {
