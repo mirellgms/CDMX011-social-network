@@ -4,6 +4,8 @@ import { Home } from './Components/home.js';
 import { Register } from './Components/register.js';
 import { Feed } from './Components/feed.js';
 // import { ProfilePost } from './Components/profile.js';
+import firebase from './lib/secret.js';
+
 const rootDiv = document.getElementById('root');
 
 const routes = {
@@ -31,3 +33,11 @@ window.onpopstate = () => {
 };
 
 rootDiv.appendChild(component());
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    onNavigate('/feed');
+  } else {
+    onNavigate('/');
+  }
+});

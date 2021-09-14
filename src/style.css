@@ -8,7 +8,7 @@ div {
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 5px;
     
 }
 h1{
@@ -129,3 +129,36 @@ img {
     bottom: 35px;
     right: 132px; 
 } 
+
+#title{
+    display: flex;
+    margin-right: 60px;
+    margin-left: 60px;
+    margin-top: 36px;
+    width: 189px;
+}
+#imgHeader{
+    margin-left: 76px;
+}
+#menu{
+    width: 23px;
+}
+#post{
+    font-weight: bold;
+    font-size: 94%;
+    border-radius: 25px;
+    text-align: center;
+}
+
+#publish{
+    font-size: 94%;
+    border-radius: 30px;
+    width: 75px;
+    background-color: white;
+    color: #0976B2;
+}
+
+#publish:hover{
+    background-color:#0976B2;
+    color: white;
+}

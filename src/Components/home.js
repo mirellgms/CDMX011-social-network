@@ -1,10 +1,11 @@
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
-import { login } from '../lib/firebase.js';
+import { login, loginUser } from '../lib/firebase.js';
 
 export const Home = () => {
   const HomeDiv = document.createElement('div');
   HomeDiv.id = ('homeDiv');
+  document.getElementById('header').style.display = 'block';
 
   let inputEmail = document.createElement('input');
   inputEmail.placeholder = 'Correo Electrónico';
@@ -61,29 +62,12 @@ export const Home = () => {
     if (inputEmail.length === 0 || inputPassword.length === 0) {
       alert('Completa los campos requeridos');
     } else {
-      let currentUser;
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          currentUser = user;
-          console.log('Usuario logueado', currentUser.displayName);
-          onNavigate('/feed');
-        } else {
-          alert('Su cuenta no está registrada');
-        }
-      });
+      // invocar funcion para login con correo y contraseñá
+      loginUser(inputEmail, inputPassword);
     }
   });
 
-  // buttonLoginGoogle.addEventListener('click', async (event) => {
-  //   try {
-  //     await login().then((result) => {
-  //       onNavigate('/feed');
-  //       console.log(result);
-  //     })
-  //       .catch((error) => { console.log(error); });
-  //   } catch (error) { console.log(error); }
-  // });
-  // Login con Google
+  //Login con Google
 
   buttonLoginGoogle.addEventListener('click', async (event) => {
     try {

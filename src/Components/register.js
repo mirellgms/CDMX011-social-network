@@ -7,7 +7,7 @@ import firebase from '../lib/secret.js';
 export const Register = () => {
   const registerDiv = document.createElement('div');
   registerDiv.id = ('registerDiv');
-
+  document.getElementById('header').style.display = 'block';
   const buttonLogout = document.createElement('button');
 
   let inputName = document.createElement('input');
@@ -97,16 +97,19 @@ export const Register = () => {
     }
   });
 
-  // let currentUser;
-
+  let currentUser;
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      currentUser = user;
+      console.log('Usuario logueado', currentUser.displayName);
+    } else {
+      return ('No hay usuario logueado');
+    }
+  });
   buttonLoginGoogle.addEventListener('click', async (event) => {
     try {
-      await login().then((result) => {
-        onNavigate('/feed');
-        console.log(result);
-      })
-        .catch((error) => { console.log(error); });
-    } catch (error) { console.log(error); }
+      currentUser = await login();
+    } catch (error) {}
   });
 
   // Mostrar / Ocultar contraseña
