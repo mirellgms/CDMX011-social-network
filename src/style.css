@@ -143,6 +143,12 @@ img {
 #menu{
     width: 23px;
 }
+#post{
+    font-weight: bold;
+    font-size: 94%;
+    border-radius: 25px;
+    text-align: center;
+}
 
 #barraDiv {
     display: flex;
@@ -188,3 +194,9 @@ select{
     color: white;
 }
 
+#containerPostDiv{
+    background-color: hsl(0deg 0% 0% / 2%);
+    border: 3px solid black;
+    padding: 90px;
+    border-radius: 10px;
+}
