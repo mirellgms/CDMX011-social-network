@@ -69,7 +69,7 @@ export const Feed = () => {
   const containerPostDiv = document.createElement('div');
   containerPostDiv.id = ('containerPostDiv');
   // // Leer documentos
-  db.collection('allPost').get().then((querySnapshot) => {
+  db.collection('allPost').onSnapshot((querySnapshot) => {
     containerPostDiv.innerHTML = '';
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
