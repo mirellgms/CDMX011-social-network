@@ -53,6 +53,7 @@ export async function login() {
   }
 }
 
+
 export function logout() {
   auth.signOut();
   onNavigate('/');

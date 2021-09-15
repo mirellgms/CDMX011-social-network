@@ -134,7 +134,7 @@ img {
     display: flex;
     margin-right: 60px;
     margin-left: 60px;
-    margin-top: 36px;
+   /* margin-top: 36px; */
     width: 189px;
 }
 #imgHeader{
@@ -150,12 +150,43 @@ img {
     text-align: center;
 }
 
+#barraDiv {
+    display: flex;
+  flex-flow: wrap;
+  gap: 30px;
+  align-items: baseline;
+  margin-top: 70px;
+  position: relative;
+  right: 130px;
+  
+} 
+
+select{
+        border-radius: 10xp;
+    }
+
+#post{
+    font-weight: bold;
+    font-size: 94%;
+    border-radius: 5px;
+/* text-align: center; */
+    padding-top: 10px;
+    margin-top: 10px;
+    width: 300px;
+    height: 70px;
+}
+
 #publish{
     font-size: 94%;
-    border-radius: 30px;
+    border-radius: 10px;
     width: 75px;
     background-color: white;
     color: #0976B2;
+    left: 200px;
+    margin-top: 5px;
+    position: relative;
+    left: 100px;
+    height: 30px;
 }
 
 #publish:hover{
