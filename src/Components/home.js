@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-cycle
 import { onNavigate } from '../main.js';
 import { login, loginUser } from '../lib/firebase.js';
@@ -5,6 +6,7 @@ import { login, loginUser } from '../lib/firebase.js';
 export const Home = () => {
   const HomeDiv = document.createElement('div');
   HomeDiv.id = ('homeDiv');
+  document.getElementById('header').style.display = 'block';
 
   let inputEmail = document.createElement('input');
   inputEmail.placeholder = 'Correo Electrónico';
@@ -66,7 +68,7 @@ export const Home = () => {
     }
   });
 
-  // Login con Google
+  //Login con Google
 
   buttonLoginGoogle.addEventListener('click', async (event) => {
     try {
