@@ -16,7 +16,7 @@ export const Feed = () => {
   barraDiv.id = 'barraDiv';
 
   const iconHome = document.createElement('img');
-  iconHome.setAttribute('src', '../img/user.png');
+  iconHome.setAttribute('src', '../img/iconHome.png');
   iconHome.id = 'iconHome';
   iconHome.classList.add('icon');
 
@@ -26,7 +26,7 @@ export const Feed = () => {
   iconLight.classList.add('icon');
 
   const iconProfile = document.createElement('img');
-  iconProfile.setAttribute('src', '../img/user.png');
+  iconProfile.setAttribute('src', '../img/iconUserBlack.png');
   iconProfile.id = 'iconProfile';
   iconProfile.classList.add('icon');
 
