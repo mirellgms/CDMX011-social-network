@@ -15,6 +15,10 @@ export const Feed = () => {
   const barraDiv = document.createElement('div');
   barraDiv.id = 'barraDiv';
 
+  // feedDiv.appendChild(title);
+  // const barraDiv = document.createElement('div');
+  // barraDiv.id = 'barraDiv';
+
   const iconHome = document.createElement('img');
   iconHome.setAttribute('src', '../img/iconHome.png');
   iconHome.id = 'iconHome';
@@ -30,43 +34,52 @@ export const Feed = () => {
   iconProfile.id = 'iconProfile';
   iconProfile.classList.add('icon');
 
+  const option = document.createElement('select');
 
-  let option = document.createElement('select');
-  option.id = 'select';
-
-  let category = document.createElement('option');
+  const category = document.createElement('option');
   category.setAttribute('value', 'Select');
-  let categoryText = document.createTextNode('Selecciona una categoría de tu post');
+  const categoryText = document.createTextNode('Selecciona una categoría');
   category.appendChild(categoryText);
 
-  let devocional = document.createElement('option');
+  const devocional = document.createElement('option');
   devocional.setAttribute('value', 'devocional');
-  let devocionalText = document.createTextNode('Devocional');
+  const devocionalText = document.createTextNode('Devocional');
   devocional.appendChild(devocionalText);
 
-  let estudioBiblico = document.createElement('option');
+  const estudioBiblico = document.createElement('option');
   estudioBiblico.setAttribute('value', 'estudioBiblico');
-  let estudioBiblicoText = document.createTextNode('Estudio Bíblico');
+  const estudioBiblicoText = document.createTextNode('Estudio Bíblico');
   estudioBiblico.appendChild(estudioBiblicoText);
 
-  let  musica= document.createElement('option');
+  const musica = document.createElement('option');
   musica.setAttribute('value', 'musica');
-  let musicaText = document.createTextNode('Música');
+  const musicaText = document.createTextNode('Música');
   musica.appendChild(musicaText);
 
-  let eventos = document.createElement('option');
+  const eventos = document.createElement('option');
   eventos.setAttribute('value', 'eventos');
-  let eventosText = document.createTextNode('Eventos');
+  const eventosText = document.createTextNode('Eventos');
   eventos.appendChild(eventosText);
 
-  const post = document.createElement('textArea');
+  const post = document.createElement('input');
   post.placeholder = '¿Qué estas pensando?';
-  post.id = 'post';
+  post.id = ('post');
   const publish = document.createElement('button');
   publish.textContent = 'Publicar';
   publish.id = 'publish';
-  publish.addEventListener('click', (event) => {
 
+  const db = firebase.firestore();
+  const containerPostDiv = document.createElement('div');
+  containerPostDiv.id = ('containerPostDiv');
+  // // Leer documentos
+
+  db.collection('allPost').onSnapshot((querySnapshot) => {
+    containerPostDiv.innerHTML = '';
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, ' => ', doc.data().first);
+      containerPostDiv.innerHTML += doc.data().first;
+    });
   });
 
   const buttonLogout = document.createElement('button');
@@ -89,6 +102,7 @@ export const Feed = () => {
   option.appendChild(eventos);
   feedDiv.appendChild(post);
   feedDiv.appendChild(publish);
+  feedDiv.appendChild(containerPostDiv);
   feedDiv.appendChild(buttonLogout);
 
   return feedDiv;
