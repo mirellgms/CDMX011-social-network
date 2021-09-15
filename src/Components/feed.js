@@ -61,18 +61,34 @@ export const Feed = () => {
   const eventosText = document.createTextNode('Eventos');
   eventos.appendChild(eventosText);
 
-  const post = document.createElement('input');
+  let post = document.createElement('textArea');
   post.placeholder = '¿Qué estas pensando?';
-  post.id = ('post');
+  post.id = 'post';
   const publish = document.createElement('button');
   publish.textContent = 'Publicar';
   publish.id = 'publish';
 
   const db = firebase.firestore();
+  publish.addEventListener('click', (event) => {
+    // Cloud Firestore
+    post = document.getElementById('post').value;
+    db.collection('allPost').add({
+      first: post,
+      // last: 'Lovelace',
+      // born: 1815,
+    })
+      .then((docRef) => {
+        console.log('Document written with ID: ', docRef.id);
+        document.getElementById('post').value = '';
+      })
+      .catch((error) => {
+        console.error('Error adding document: ', error);
+      });
+  });
+
   const containerPostDiv = document.createElement('div');
   containerPostDiv.id = ('containerPostDiv');
   // // Leer documentos
-
   db.collection('allPost').onSnapshot((querySnapshot) => {
     containerPostDiv.innerHTML = '';
     querySnapshot.forEach((doc) => {
@@ -104,6 +120,10 @@ export const Feed = () => {
   feedDiv.appendChild(publish);
   feedDiv.appendChild(containerPostDiv);
   feedDiv.appendChild(buttonLogout);
-
   return feedDiv;
 };
+// export const containerPost = () => {
+//   const containerPostDiv = document.createElement('div');
+//   containerPostDiv.id = ('containerPostDiv');
+//   return containerPost;
+// };
