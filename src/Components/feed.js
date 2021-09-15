@@ -20,7 +20,7 @@ export const Feed = () => {
   // barraDiv.id = 'barraDiv';
 
   const iconHome = document.createElement('img');
-  iconHome.setAttribute('src', '../img/user.png');
+  iconHome.setAttribute('src', '../img/iconHome.png');
   iconHome.id = 'iconHome';
   iconHome.classList.add('icon');
 
@@ -30,7 +30,7 @@ export const Feed = () => {
   iconLight.classList.add('icon');
 
   const iconProfile = document.createElement('img');
-  iconProfile.setAttribute('src', '../img/user.png');
+  iconProfile.setAttribute('src', '../img/iconUserBlack.png');
   iconProfile.id = 'iconProfile';
   iconProfile.classList.add('icon');
 
@@ -38,7 +38,7 @@ export const Feed = () => {
 
   const category = document.createElement('option');
   category.setAttribute('value', 'Select');
-  const categoryText = document.createTextNode('Selecciona una categoría de tu post');
+  const categoryText = document.createTextNode('Selecciona una categoría');
   category.appendChild(categoryText);
 
   const devocional = document.createElement('option');
@@ -88,66 +88,6 @@ export const Feed = () => {
   buttonLogout.addEventListener('click', () => {
     logout();
   });
-
-  // let option = document.createElement('select');
-  // option.id = 'select';
-
-  // let category = document.createElement('option');
-  // category.setAttribute('value', 'Select');
-  // let categoryText = document.createTextNode('Selecciona una categoría de tu post');
-  // category.appendChild(categoryText);
-
-  // let devocional = document.createElement('option');
-  // devocional.setAttribute('value', 'devocional');
-  // let devocionalText = document.createTextNode('Devocional');
-  // devocional.appendChild(devocionalText);
-
-  // let estudioBiblico = document.createElement('option');
-  // estudioBiblico.setAttribute('value', 'estudioBiblico');
-  // let estudioBiblicoText = document.createTextNode('Estudio Bíblico');
-  // estudioBiblico.appendChild(estudioBiblicoText);
-
-  // let  musica= document.createElement('option');
-  // musica.setAttribute('value', 'musica');
-  // let musicaText = document.createTextNode('Música');
-  // musica.appendChild(musicaText);
-
-  // let eventos = document.createElement('option');
-  // eventos.setAttribute('value', 'eventos');
-  // let eventosText = document.createTextNode('Eventos');
-  // eventos.appendChild(eventosText);
-
-  // let post = document.createElement('textArea');
-  // post.placeholder = '¿Qué estas pensando?';
-  // post.id = 'post';
-  // const publish = document.createElement('button');
-  // publish.textContent = 'Publicar';
-  // publish.id = 'publish';
-  // const db = firebase.firestore();
-
-  // publish.addEventListener('click', (event) => {
-  //   // Cloud Firestore
-  //   post = document.getElementById('post').value;
-  //   db.collection('allPost').add({
-  //     first: post,
-  //     // last: 'Lovelace',
-  //     // born: 1815,
-  //   })
-  //     .then((docRef) => {
-  //       console.log('Document written with ID: ', docRef.id);
-  //       document.getElementById('post').value = '';
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error adding document: ', error);
-  //     });
-  // });
-
-  // const buttonLogout = document.createElement('button');
-  // buttonLogout.textContent = 'Cerrar Sesión';
-  // buttonLogout.id = 'buttonLogout';
-  // buttonLogout.addEventListener('click', () => {
-  //   logout();
-  // });
 
   feedDiv.appendChild(title);
   feedDiv.appendChild(barraDiv);
