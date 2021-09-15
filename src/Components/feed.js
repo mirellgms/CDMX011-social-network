@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
-import { logout } from '../lib/firebase.js';
+import { logout, postFeed, db, getUserProfile} from '../lib/firebase.js';
 // import db from './secret.js';
 
 export const Feed = () => {
@@ -68,24 +68,17 @@ export const Feed = () => {
   publish.textContent = 'Publicar';
   publish.id = 'publish';
 
-  const db = firebase.firestore();
   publish.addEventListener('click', (event) => {
     // Cloud Firestore
     post = document.getElementById('post').value;
-    db.collection('allPost').add({
-      first: post,
-      // last: 'Lovelace',
-      // born: 1815,
-    })
-      .then((docRef) => {
-        console.log('Document written with ID: ', docRef.id);
-        document.getElementById('post').value = '';
-      })
-      .catch((error) => {
-        console.error('Error adding document: ', error);
-      });
+    if (post.length === 0) {
+      alert('Escribe un post');
+    } else {
+      postFeed(post);
+    }
   });
 
+  // Muestra el post en pantalla
   const containerPostDiv = document.createElement('div');
   containerPostDiv.id = ('containerPostDiv');
   // // Leer documentos

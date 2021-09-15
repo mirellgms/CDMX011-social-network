@@ -14,6 +14,7 @@ export const Register = () => {
   inputName.placeholder = 'Nombre';
   inputName.setAttribute('required', 'required');
   inputName.id = 'inputName';
+  
 
   const iconUser = document.createElement('img');
   iconUser.setAttribute('src', '../img/user.png');
