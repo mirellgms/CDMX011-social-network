@@ -162,3 +162,10 @@ img {
     background-color:#0976B2;
     color: white;
 }
+
+#containerPostDiv{
+    background-color: hsl(0deg 0% 0% / 2%);
+    border: 3px solid black;
+    padding: 90px;
+    border-radius: 10px;
+}

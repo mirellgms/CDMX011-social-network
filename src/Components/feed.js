@@ -64,17 +64,19 @@ export const Feed = () => {
         console.error('Error adding document: ', error);
       });
   });
-  // const containerPost = document.createElement('div');
-  // containerPost.id = ('containerPost');
-  // // // Leer documentos
-  // db.collection('allPost').get().then((querySnapshot) => {
-  //   containerPost.innerHTML = '';
-  //   querySnapshot.forEach((doc) => {
-  //     // doc.data() is never undefined for query doc snapshots
-  //     // console.log(doc.id, ' => ', doc.data());
-  //     // containerPost.innerHTML += doc.data()
-  //   });
-  // });
+
+
+  const containerPostDiv = document.createElement('div');
+  containerPostDiv.id = ('containerPostDiv');
+  // // Leer documentos
+  db.collection('allPost').get().then((querySnapshot) => {
+    containerPostDiv.innerHTML = '';
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, ' => ', doc.data().first);
+      containerPostDiv.innerHTML += doc.data().first;
+    });
+  });
 
   const buttonLogout = document.createElement('button');
   buttonLogout.textContent = 'Cerrar Sesión';
@@ -92,7 +94,14 @@ export const Feed = () => {
   option.appendChild(eventos);
   feedDiv.appendChild(post);
   feedDiv.appendChild(publish);
+  feedDiv.appendChild(containerPostDiv);
   feedDiv.appendChild(buttonLogout);
 
   return feedDiv;
 };
+
+// export const containerPost = () => {
+//   const containerPostDiv = document.createElement('div');
+//   containerPostDiv.id = ('containerPostDiv');
+//   return containerPost;
+// };
