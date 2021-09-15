@@ -12,7 +12,27 @@ export const Feed = () => {
   title.setAttribute('src', '../img/be-the-light.png');
   title.id = 'title';
 
+  const barraDiv = document.createElement('div');
+  barraDiv.id = 'barraDiv';
+
+  const iconHome = document.createElement('img');
+  iconHome.setAttribute('src', '../img/user.png');
+  iconHome.id = 'iconHome';
+  iconHome.classList.add('icon');
+
+  const iconLight = document.createElement('img');
+  iconLight.setAttribute('src', '../img/iconosinfondo.png');
+  iconLight.id = 'iconLight';
+  iconLight.classList.add('icon');
+
+  const iconProfile = document.createElement('img');
+  iconProfile.setAttribute('src', '../img/user.png');
+  iconProfile.id = 'iconProfile';
+  iconProfile.classList.add('icon');
+
+
   let option = document.createElement('select');
+  option.id = 'select';
 
   let category = document.createElement('option');
   category.setAttribute('value', 'Select');
@@ -39,7 +59,7 @@ export const Feed = () => {
   let eventosText = document.createTextNode('Eventos');
   eventos.appendChild(eventosText);
 
-  const post = document.createElement('input');
+  const post = document.createElement('textArea');
   post.placeholder = '¿Qué estas pensando?';
   post.id = 'post';
   const publish = document.createElement('button');
@@ -56,8 +76,11 @@ export const Feed = () => {
     logout();
   });
 
-
   feedDiv.appendChild(title);
+  feedDiv.appendChild(barraDiv);
+  barraDiv.appendChild(iconHome);
+  barraDiv.appendChild(iconLight);
+  barraDiv.appendChild(iconProfile);
   feedDiv.appendChild(option);
   option.appendChild(category);
   option.appendChild(devocional);
