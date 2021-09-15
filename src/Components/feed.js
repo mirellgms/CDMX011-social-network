@@ -3,39 +3,71 @@
 // import { onNavigate } from '../main.js';
 import { logout } from '../lib/firebase.js';
 // import db from './secret.js';
+
 export const Feed = () => {
   const feedDiv = document.createElement('div');
   document.getElementById('header').style.display = 'none';
+
   const title = document.createElement('img');
   title.setAttribute('src', '../img/be-the-light.png');
   title.id = 'title';
+
+  const barraDiv = document.createElement('div');
+  barraDiv.id = 'barraDiv';
+
+  // feedDiv.appendChild(title);
+  // const barraDiv = document.createElement('div');
+  // barraDiv.id = 'barraDiv';
+
+  const iconHome = document.createElement('img');
+  iconHome.setAttribute('src', '../img/iconHome.png');
+  iconHome.id = 'iconHome';
+  iconHome.classList.add('icon');
+
+  const iconLight = document.createElement('img');
+  iconLight.setAttribute('src', '../img/iconosinfondo.png');
+  iconLight.id = 'iconLight';
+  iconLight.classList.add('icon');
+
+  const iconProfile = document.createElement('img');
+  iconProfile.setAttribute('src', '../img/iconUserBlack.png');
+  iconProfile.id = 'iconProfile';
+  iconProfile.classList.add('icon');
+
   const option = document.createElement('select');
+
   const category = document.createElement('option');
   category.setAttribute('value', 'Select');
-  const categoryText = document.createTextNode('Selecciona una categoría de tu post');
+  const categoryText = document.createTextNode('Selecciona una categoría');
   category.appendChild(categoryText);
+
   const devocional = document.createElement('option');
   devocional.setAttribute('value', 'devocional');
   const devocionalText = document.createTextNode('Devocional');
   devocional.appendChild(devocionalText);
+
   const estudioBiblico = document.createElement('option');
   estudioBiblico.setAttribute('value', 'estudioBiblico');
   const estudioBiblicoText = document.createTextNode('Estudio Bíblico');
   estudioBiblico.appendChild(estudioBiblicoText);
+
   const musica = document.createElement('option');
   musica.setAttribute('value', 'musica');
   const musicaText = document.createTextNode('Música');
   musica.appendChild(musicaText);
+
   const eventos = document.createElement('option');
   eventos.setAttribute('value', 'eventos');
   const eventosText = document.createTextNode('Eventos');
   eventos.appendChild(eventosText);
-  let post = document.createElement('input');
+
+  let post = document.createElement('textArea');
   post.placeholder = '¿Qué estas pensando?';
-  post.id = ('post');
+  post.id = 'post';
   const publish = document.createElement('button');
   publish.textContent = 'Publicar';
   publish.id = 'publish';
+
   const db = firebase.firestore();
   publish.addEventListener('click', (event) => {
     // Cloud Firestore
@@ -53,6 +85,7 @@ export const Feed = () => {
         console.error('Error adding document: ', error);
       });
   });
+
   const containerPostDiv = document.createElement('div');
   containerPostDiv.id = ('containerPostDiv');
   // // Leer documentos
@@ -64,13 +97,19 @@ export const Feed = () => {
       containerPostDiv.innerHTML += doc.data().first;
     });
   });
+
   const buttonLogout = document.createElement('button');
   buttonLogout.textContent = 'Cerrar Sesión';
   buttonLogout.id = 'buttonLogout';
   buttonLogout.addEventListener('click', () => {
     logout();
   });
+
   feedDiv.appendChild(title);
+  feedDiv.appendChild(barraDiv);
+  barraDiv.appendChild(iconHome);
+  barraDiv.appendChild(iconLight);
+  barraDiv.appendChild(iconProfile);
   feedDiv.appendChild(option);
   option.appendChild(category);
   option.appendChild(devocional);
