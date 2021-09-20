@@ -1,5 +1,6 @@
 body {
     background-color: white;
+    
 }
 
 div {
@@ -7,15 +8,17 @@ div {
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 5px;
     
 }
 h1{
-    display: flex;
     max-width: 360px;
+    font-weight: 100;
     font-size: 15px;
     text-align: center;
     font-family: 'Poppins', sans-serif;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 button{
     background-color : #0976B2;
@@ -35,14 +38,17 @@ input{
 }
 
 #buttonGotoRegister{
-    margin-top: 100px;
+    margin-top: 40px;
     width: 100%;
     border-radius: 0px;
     font-size: 100%;
+    background-color :#42b72a;    ;
+    font-weight: bold;
+    border-radius: 5px;
 }
 #buttonLogin{
     font-weight: bold;
-    font-size: 94%;
+    font-size: 109%;
 }
 #buttonLoginGoogle{
     background-color:rgba(9, 118,178, 10%);
@@ -51,6 +57,7 @@ input{
     width: 309px;
     height: 43px;
     font-size: 92%;
+    margin-top: 2rem;
 }
 #buttonRegister{
     font-weight: bold;
@@ -65,11 +72,40 @@ input{
     font-size: 94%;
 }
 img {
-    width: 270px;
+    width: 175px;
     
 }
 
+#homeDiv{
+    background-color: hsl(0deg 0% 0% / 2%);
+    border: 3px solid black;
+    padding: 21px;
+    border-radius: 10px;
+}
 
+#registerDiv{
+    background-color: hsl(0deg 0% 0% / 2%);
+    border: 3px solid black;
+    padding: 21px;
+    border-radius: 10px;
+}
+
+#or{
+    margin-top: -9px;
+}
+#line1{
+    width: 44%;
+    border-top: 2px solid #0976B2;
+    margin-left: 166px;
+    margin-top: 21px;
+}
+
+#line2{
+    width: 44%;
+    border-top: 2px solid #0976B2;
+    margin-right: 165px;
+    margin-top: -10px;
+}
 
 
 .icon {
@@ -87,10 +123,80 @@ img {
 }
   
 #iconGoogle {
-    width: 30px;
+   width: 30px; 
     border: 0px;
     position: relative;
     bottom: 35px;
-    right: 132px;
-    width: 27px;   
+    right: 132px; 
+} 
+
+#title{
+    display: flex;
+    margin-right: 60px;
+    margin-left: 60px;
+   /* margin-top: 36px; */
+    width: 189px;
+}
+#imgHeader{
+    margin-left: 76px;
+}
+#menu{
+    width: 23px;
+}
+#post{
+    font-weight: bold;
+    font-size: 94%;
+    border-radius: 25px;
+    text-align: center;
+}
+
+#barraDiv {
+    display: flex;
+  flex-flow: wrap;
+  gap: 30px;
+  align-items: baseline;
+  margin-top: 70px;
+  position: relative;
+  right: 130px;
+  
+} 
+
+/* select{
+        border-radius: 10px;
+    } */
+
+#post{
+    font-weight: bold;
+    font-size: 94%;
+    border-radius: 5px;
+/* text-align: center; */
+    padding-top: 10px;
+    margin-top: 10px;
+    width: 300px;
+    height: 70px;
+}
+
+#publish{
+    font-size: 94%;
+    border-radius: 10px;
+    width: 75px;
+    background-color: white;
+    color: #0976B2;
+    left: 200px;
+    margin-top: 5px;
+    position: relative;
+    left: 100px;
+    height: 30px;
+}
+
+#publish:hover{
+    background-color:#0976B2;
+    color: white;
+}
+
+#containerPostDiv{
+    background-color: hsl(0deg 0% 0% / 2%);
+    border: 3px solid black;
+    padding: 90px;
+    border-radius: 10px;
 }
