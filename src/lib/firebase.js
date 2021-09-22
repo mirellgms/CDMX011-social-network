@@ -8,7 +8,7 @@ export const registerUser = (email, password) => {
     .createUserWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in
-      console.log(userCredential.user);
+      console.log('prueba usuario', userCredential.user);
       onNavigate('/feed');
       // ...
     })
@@ -23,6 +23,16 @@ console.log(firebase);
 const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
 auth.language = 'es';
+
+export async function login() {
+  try {
+    const response = await auth.signInWithRedirect(provider);
+    console.log(response);
+    return response.user;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
 
 // Login
 export const loginUser = (email, password) => {
@@ -43,18 +53,67 @@ export const loginUser = (email, password) => {
     });
 };
 
-export async function login() {
-  try {
-    const response = await auth.signInWithRedirect(provider);
-    console.log(response);
-    return response.user;
-  } catch (error) {
-    throw new Error(error);
-  }
-}
-
-
 export function logout() {
   auth.signOut();
   onNavigate('/');
 }
+
+// POST
+export const db = firebase.firestore();
+
+export function postFeed(post) {
+  db.collection('allPost').add({
+    first: post,
+  })
+    .then((docRef) => {
+      const containerPostDiv = document.createElement('div');
+      containerPostDiv.id = ('containerPostDiv');
+      console.log('Document written with ID: ', docRef.id);
+      document.getElementById('post').value = '';
+      // // Leer documentos
+      db.collection('allPost').onSnapshot((querySnapshot) => {
+        containerPostDiv.innerHTML = '';
+        querySnapshot.forEach((doc) => {
+          // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, ' => ', doc.data().first);
+          containerPostDiv.innerHTML += doc.data().first;
+        });
+      });
+    })
+    .catch((error) => {
+      console.error('Error adding document: ', error);
+    });
+}
+
+// // Nombre del usuario
+// //Obtener usuario con sesion activa
+// firebase.auth().onAuthStateChanged((user) => {
+//   if (user) {
+//     // User is signed in, see docs for a list of available properties
+//     // https://firebase.google.com/docs/reference/js/firebase.User
+//     const uid = user.uid;
+//     // ...
+//   } else {
+//     // User is signed out
+//     // ...
+//   }
+// });
+
+// export function getUserProfile() {
+//   // [START auth_get_user_profile]
+//   const user = firebase.auth().currentUser;
+//   if (user !== null) {
+//     // The user object has basic properties such as display name, email, etc.
+//     const displayName = user.displayName;
+//     const email = user.email;
+//     const photoURL = user.photoURL;
+//     const emailVerified = user.emailVerified;
+
+//     // The user's ID, unique to the Firebase project. Do NOT use
+//     // this value to authenticate with your backend server, if
+//     // you have one. Use User.getToken() instead.
+//     const uid = user.uid;
+//     console.log(uid);
+//   }
+// }
+// console.log(getUserProfile);
