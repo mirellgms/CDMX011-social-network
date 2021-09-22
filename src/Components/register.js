@@ -14,7 +14,6 @@ export const Register = () => {
   inputName.placeholder = 'Nombre';
   inputName.setAttribute('required', 'required');
   inputName.id = 'inputName';
-
   const iconUser = document.createElement('img');
   iconUser.setAttribute('src', '../img/user.png');
   iconUser.classList.add('icon');
@@ -80,6 +79,17 @@ export const Register = () => {
   buttonLogout.id = 'buttonLogout';
 
   buttonHome.addEventListener('click', () => onNavigate('/'));
+  let currentUser;
+  const usuarioLogueado = (user) => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        currentUser = user;
+        console.log('Usuario logueado', currentUser.displayName);
+      } else {
+        return ('No hay usuario logueado');
+      }
+    });
+  };
 
   buttonRegister.addEventListener('click', (event) => {
     inputEmail = document.getElementById('inputEmail').value;

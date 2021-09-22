@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
-import { logout } from '../lib/firebase.js';
+import { logout, postFeed, db } from '../lib/firebase.js';
 // import db from './secret.js';
 
 export const Feed = () => {
@@ -36,7 +36,7 @@ export const Feed = () => {
 
   const option = document.createElement('select');
 
-  let category = document.createElement('option');
+  const category = document.createElement('option');
   category.setAttribute('value', 'Select');
   category.id = 'category';
   const categoryText = document.createTextNode('Selecciona una categoría');
@@ -73,39 +73,33 @@ export const Feed = () => {
   publish.textContent = 'Publicar';
   publish.id = 'publish';
 
-  const db = firebase.firestore();
   publish.addEventListener('click', (event) => {
+    const containerPostDiv = document.createElement('div');
+    // containerPostDiv.id = ('containerPostDiv');
+    feedDiv.appendChild(containerPostDiv);
+
     // Cloud Firestore
     post = document.getElementById('post').value;
-    category = document.getElementById('category').value;
-    // devocional = document.getElementById('devocional');
-    // estudioBiblico = document.getElementById('estudioBiblico');
-    // musica = document.getElementById('musica');
-    // eventos = document.getElementById('eventos');
-    db.collection('allPost').add({
-      // categoryPost: option,
-      Post: post,
-      // born: 1815,
-    })
-      .then((docRef) => {
-        console.log('Document written with ID: ', docRef.id);
-        document.getElementById('post').value = '';
-      })
-      .catch((error) => {
-        console.error('Error adding document: ', error);
+    if (post.length === 0) {
+      alert('Escribe un post');
+    } else {
+      postFeed(post);
+      // // Leer documentos
+      db.collection('allPost').onSnapshot((querySnapshot) => {
+        containerPostDiv.innerHTML = '';
+
+        querySnapshot.forEach((doc) => {
+          const post = `<div class= containerPostDiv>${doc.data().first}</div>`;
+          containerPostDiv.innerHTML += post;
+          // doc.data() is never undefined for query doc snapshots
+          console.log(`${doc.id}  => ${doc.data().first}`);
+          // containerPostDiv.innerHTML += doc.data().first;
+        });
       });
+    }
   });
 
-  const containerPostDiv = document.createElement('div');
-  containerPostDiv.id = ('containerPostDiv');
-  // // Leer documentos
-  db.collection('allPost').onSnapshot((querySnapshot) => {
-    containerPostDiv.innerHTML = '';
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, ' => ', doc.data().Post);
-      containerPostDiv.innerHTML += doc.data().Post;
-    });
-  });
+  // Muestra el post en pantalla
 
   const buttonLogout = document.createElement('button');
   buttonLogout.textContent = 'Cerrar Sesión';
@@ -127,7 +121,7 @@ export const Feed = () => {
   option.appendChild(eventos);
   feedDiv.appendChild(post);
   feedDiv.appendChild(publish);
-  feedDiv.appendChild(containerPostDiv);
+
   feedDiv.appendChild(buttonLogout);
   return feedDiv;
 };
