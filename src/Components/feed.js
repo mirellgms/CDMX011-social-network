@@ -36,28 +36,33 @@ export const Feed = () => {
 
   const option = document.createElement('select');
 
-  const category = document.createElement('option');
+  let category = document.createElement('option');
   category.setAttribute('value', 'Select');
+  category.id = 'category';
   const categoryText = document.createTextNode('Selecciona una categoría');
   category.appendChild(categoryText);
 
   const devocional = document.createElement('option');
   devocional.setAttribute('value', 'devocional');
+  devocional.id = 'devocional';
   const devocionalText = document.createTextNode('Devocional');
   devocional.appendChild(devocionalText);
 
   const estudioBiblico = document.createElement('option');
   estudioBiblico.setAttribute('value', 'estudioBiblico');
+  estudioBiblico.id = 'estudioBiblico';
   const estudioBiblicoText = document.createTextNode('Estudio Bíblico');
   estudioBiblico.appendChild(estudioBiblicoText);
 
   const musica = document.createElement('option');
   musica.setAttribute('value', 'musica');
+  musica.id = 'musica';
   const musicaText = document.createTextNode('Música');
   musica.appendChild(musicaText);
 
   const eventos = document.createElement('option');
   eventos.setAttribute('value', 'eventos');
+  eventos.id = 'eventos';
   const eventosText = document.createTextNode('Eventos');
   eventos.appendChild(eventosText);
 
@@ -72,9 +77,14 @@ export const Feed = () => {
   publish.addEventListener('click', (event) => {
     // Cloud Firestore
     post = document.getElementById('post').value;
+    category = document.getElementById('category').value;
+    // devocional = document.getElementById('devocional');
+    // estudioBiblico = document.getElementById('estudioBiblico');
+    // musica = document.getElementById('musica');
+    // eventos = document.getElementById('eventos');
     db.collection('allPost').add({
-      first: post,
-      // last: 'Lovelace',
+      // categoryPost: option,
+      Post: post,
       // born: 1815,
     })
       .then((docRef) => {
@@ -92,9 +102,8 @@ export const Feed = () => {
   db.collection('allPost').onSnapshot((querySnapshot) => {
     containerPostDiv.innerHTML = '';
     querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, ' => ', doc.data().first);
-      containerPostDiv.innerHTML += doc.data().first;
+      console.log(doc.id, ' => ', doc.data().Post);
+      containerPostDiv.innerHTML += doc.data().Post;
     });
   });
 

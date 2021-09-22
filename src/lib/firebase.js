@@ -10,7 +10,6 @@ export const registerUser = (email, password) => {
       // Signed in
       console.log(userCredential.user);
       onNavigate('/feed');
-      // ...
     })
     .catch((error) => {
       alert('Usuario ya registrado', error.message);
@@ -52,7 +51,6 @@ export async function login() {
     throw new Error(error);
   }
 }
-
 
 export function logout() {
   auth.signOut();
