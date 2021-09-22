@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
-import { logout, postFeed, db, getUserProfile} from '../lib/firebase.js';
+import { logout, postFeed, db } from '../lib/firebase.js';
 // import db from './secret.js';
 
 export const Feed = () => {
@@ -69,27 +69,32 @@ export const Feed = () => {
   publish.id = 'publish';
 
   publish.addEventListener('click', (event) => {
+    const containerPostDiv = document.createElement('div');
+    //containerPostDiv.id = ('containerPostDiv');
+    feedDiv.appendChild(containerPostDiv);
+
     // Cloud Firestore
     post = document.getElementById('post').value;
     if (post.length === 0) {
       alert('Escribe un post');
     } else {
       postFeed(post);
+      // // Leer documentos
+      db.collection('allPost').onSnapshot((querySnapshot) => {
+        containerPostDiv.innerHTML = '';
+        
+        querySnapshot.forEach((doc) => {
+          const post = `<div class= containerPostDiv>${doc.data().first}</div>`
+          containerPostDiv.innerHTML += post
+          // doc.data() is never undefined for query doc snapshots
+          console.log(`${doc.id}  => ${doc.data().first}`);
+          //containerPostDiv.innerHTML += doc.data().first;
+        });
+      });
     }
   });
 
   // Muestra el post en pantalla
-  const containerPostDiv = document.createElement('div');
-  containerPostDiv.id = ('containerPostDiv');
-  // // Leer documentos
-  db.collection('allPost').onSnapshot((querySnapshot) => {
-    containerPostDiv.innerHTML = '';
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, ' => ', doc.data().first);
-      containerPostDiv.innerHTML += doc.data().first;
-    });
-  });
 
   const buttonLogout = document.createElement('button');
   buttonLogout.textContent = 'Cerrar Sesión';
@@ -111,7 +116,7 @@ export const Feed = () => {
   option.appendChild(eventos);
   feedDiv.appendChild(post);
   feedDiv.appendChild(publish);
-  feedDiv.appendChild(containerPostDiv);
+
   feedDiv.appendChild(buttonLogout);
   return feedDiv;
 };
