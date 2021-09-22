@@ -14,8 +14,6 @@ export const Register = () => {
   inputName.placeholder = 'Nombre';
   inputName.setAttribute('required', 'required');
   inputName.id = 'inputName';
-  
-
   const iconUser = document.createElement('img');
   iconUser.setAttribute('src', '../img/user.png');
   iconUser.classList.add('icon');
@@ -81,6 +79,17 @@ export const Register = () => {
   buttonLogout.id = 'buttonLogout';
 
   buttonHome.addEventListener('click', () => onNavigate('/'));
+  let currentUser;
+  const usuarioLogueado = (user) => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        currentUser = user;
+        console.log('Usuario logueado', currentUser.displayName);
+      } else {
+        return ('No hay usuario logueado');
+      }
+    });
+  };
 
   buttonRegister.addEventListener('click', (event) => {
     inputName = document.getElementById('inputName').value;
@@ -94,19 +103,23 @@ export const Register = () => {
     } else if (inputPassword !== confirmPassword) {
       alert('La contraseña no coincide');
     } else {
-      registerUser(inputEmail, inputPassword);
+      registerUser(inputEmail, inputPassword)
+        .then((userCredential) => {
+        // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          userCredential.user.updateProfile({ displayName: document.getElementById('inputName').value });
+          alert('Registro exitoso');
+          onNavigate('/feed');
+        // ...
+        })
+        .catch((error) => {
+          alert('Usuario ya registrado', error.message);
+        // ..
+        });
     }
   });
 
-  let currentUser;
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      currentUser = user;
-      console.log('Usuario logueado', currentUser.displayName);
-    } else {
-      return ('No hay usuario logueado');
-    }
-  });
   buttonLoginGoogle.addEventListener('click', async (event) => {
     try {
       currentUser = await login();

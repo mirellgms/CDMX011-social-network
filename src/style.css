@@ -194,7 +194,7 @@ select{
     color: white;
 }
 
-#containerPostDiv{
+.containerPostDiv{
     background-color: hsl(0deg 0% 0% / 2%);
     border: 3px solid black;
     padding: 90px;
