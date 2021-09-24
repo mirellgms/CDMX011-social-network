@@ -10,7 +10,6 @@ export const registerUser = (email, password) => {
       // Signed in
       console.log('prueba usuario', userCredential.user);
       onNavigate('/feed');
-      // ...
     })
     .catch((error) => {
       alert('Usuario ya registrado', error.message);

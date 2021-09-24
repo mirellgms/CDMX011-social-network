@@ -10,7 +10,7 @@ export const Register = () => {
   document.getElementById('header').style.display = 'block';
   const buttonLogout = document.createElement('button');
 
-  let inputName = document.createElement('input');
+  const inputName = document.createElement('input');
   inputName.placeholder = 'Nombre';
   inputName.setAttribute('required', 'required');
   inputName.id = 'inputName';
@@ -92,7 +92,6 @@ export const Register = () => {
   };
 
   buttonRegister.addEventListener('click', (event) => {
-    inputName = document.getElementById('inputName').value;
     inputEmail = document.getElementById('inputEmail').value;
     inputPassword = document.getElementById('inputPassword').value;
     confirmPassword = document.getElementById('confirmPassword').value;
@@ -103,22 +102,32 @@ export const Register = () => {
     } else if (inputPassword !== confirmPassword) {
       alert('La contraseña no coincide');
     } else {
-      registerUser(inputEmail, inputPassword)
-        .then((userCredential) => {
-        // Signed in
-          const user = userCredential.user;
-          console.log(user);
-          userCredential.user.updateProfile({ displayName: document.getElementById('inputName').value });
-          alert('Registro exitoso');
-          onNavigate('/feed');
-        // ...
-        })
-        .catch((error) => {
-          alert('Usuario ya registrado', error.message);
-        // ..
-        });
+      registerUser(inputEmail, inputPassword);
+      // .then((userCredential) => {
+      // // Signed in
+      //   console.log('¿se ejecuta eso?');
+      //   console.log(userCredential.user);
+      //   userCredential.user.updateProfile(
+      //     { displayName: document.getElementById('inputName').value },
+      //   );
+      //   onNavigate('/feed');
+      // })
+      // .catch((error) => {
+      //   alert('Usuario ya registrado', error.message);
+      // // ..
+      // });
     }
   });
+
+  // let currentUser;
+  // firebase.auth().onAuthStateChanged((user) => {
+  //   if (user) {
+  //     currentUser = user;
+  //     console.log('Usuario logueado', currentUser.displayName);
+  //   } else {
+  //     return ('No hay usuario logueado');
+  //   }
+  // });
 
   buttonLoginGoogle.addEventListener('click', async (event) => {
     try {

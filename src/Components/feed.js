@@ -38,26 +38,31 @@ export const Feed = () => {
 
   const category = document.createElement('option');
   category.setAttribute('value', 'Select');
+  category.id = 'category';
   const categoryText = document.createTextNode('Selecciona una categoría');
   category.appendChild(categoryText);
 
   const devocional = document.createElement('option');
   devocional.setAttribute('value', 'devocional');
+  devocional.id = 'devocional';
   const devocionalText = document.createTextNode('Devocional');
   devocional.appendChild(devocionalText);
 
   const estudioBiblico = document.createElement('option');
   estudioBiblico.setAttribute('value', 'estudioBiblico');
+  estudioBiblico.id = 'estudioBiblico';
   const estudioBiblicoText = document.createTextNode('Estudio Bíblico');
   estudioBiblico.appendChild(estudioBiblicoText);
 
   const musica = document.createElement('option');
   musica.setAttribute('value', 'musica');
+  musica.id = 'musica';
   const musicaText = document.createTextNode('Música');
   musica.appendChild(musicaText);
 
   const eventos = document.createElement('option');
   eventos.setAttribute('value', 'eventos');
+  eventos.id = 'eventos';
   const eventosText = document.createTextNode('Eventos');
   eventos.appendChild(eventosText);
 
@@ -69,29 +74,24 @@ export const Feed = () => {
   publish.id = 'publish';
 
   publish.addEventListener('click', (event) => {
-    const containerPostDiv = document.createElement('div');
-    //containerPostDiv.id = ('containerPostDiv');
-    feedDiv.appendChild(containerPostDiv);
-
     // Cloud Firestore
     post = document.getElementById('post').value;
-    if (post.length === 0) {
+    if (post.length === 0 || post === " ") {
       alert('Escribe un post');
     } else {
       postFeed(post);
-      // // Leer documentos
-      db.collection('allPost').onSnapshot((querySnapshot) => {
-        containerPostDiv.innerHTML = '';
-        
-        querySnapshot.forEach((doc) => {
-          const post = `<div class= containerPostDiv>${doc.data().first}</div>`
-          containerPostDiv.innerHTML += post
-          // doc.data() is never undefined for query doc snapshots
-          console.log(`${doc.id}  => ${doc.data().first}`);
-          //containerPostDiv.innerHTML += doc.data().first;
-        });
-      });
     }
+  });
+
+  // Leer documentos
+  const containerPostDiv = document.createElement('div');
+  db.collection('allPost').onSnapshot((querySnapshot) => {
+    containerPostDiv.innerHTML = '';
+    querySnapshot.forEach((doc) => {
+      const post = `<div class= containerPostDiv>${doc.data().first}</div>`;
+      containerPostDiv.innerHTML += post;
+      console.log(`${doc.id}  => ${doc.data().first}`);
+    });
   });
 
   // Muestra el post en pantalla
@@ -116,6 +116,7 @@ export const Feed = () => {
   option.appendChild(eventos);
   feedDiv.appendChild(post);
   feedDiv.appendChild(publish);
+  feedDiv.appendChild(containerPostDiv);
 
   feedDiv.appendChild(buttonLogout);
   return feedDiv;
