@@ -119,15 +119,15 @@ export const Register = () => {
     }
   });
 
-  let currentUser;
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      currentUser = user;
-      console.log('Usuario logueado', currentUser.displayName);
-    } else {
-      return ('No hay usuario logueado');
-    }
-  });
+  // let currentUser;
+  // firebase.auth().onAuthStateChanged((user) => {
+  //   if (user) {
+  //     currentUser = user;
+  //     console.log('Usuario logueado', currentUser.displayName);
+  //   } else {
+  //     return ('No hay usuario logueado');
+  //   }
+  // });
 
   buttonLoginGoogle.addEventListener('click', async (event) => {
     try {
