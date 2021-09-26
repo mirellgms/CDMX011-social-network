@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
-import { logout } from '../lib/firebase.js';
+import { logout, postFeed, db } from '../lib/firebase.js';
 // import db from './secret.js';
 
 export const Feed = () => {
@@ -15,8 +15,12 @@ export const Feed = () => {
   const barraDiv = document.createElement('div');
   barraDiv.id = 'barraDiv';
 
+  // feedDiv.appendChild(title);
+  // const barraDiv = document.createElement('div');
+  // barraDiv.id = 'barraDiv';
+
   const iconHome = document.createElement('img');
-  iconHome.setAttribute('src', '../img/user.png');
+  iconHome.setAttribute('src', '../img/iconHome.png');
   iconHome.id = 'iconHome';
   iconHome.classList.add('icon');
 
@@ -26,48 +30,71 @@ export const Feed = () => {
   iconLight.classList.add('icon');
 
   const iconProfile = document.createElement('img');
-  iconProfile.setAttribute('src', '../img/user.png');
+  iconProfile.setAttribute('src', '../img/iconUserBlack.png');
   iconProfile.id = 'iconProfile';
   iconProfile.classList.add('icon');
 
+  const option = document.createElement('select');
 
-  let option = document.createElement('select');
-  option.id = 'select';
-
-  let category = document.createElement('option');
+  const category = document.createElement('option');
   category.setAttribute('value', 'Select');
-  let categoryText = document.createTextNode('Selecciona una categoría de tu post');
+  category.id = 'category';
+  const categoryText = document.createTextNode('Selecciona una categoría');
   category.appendChild(categoryText);
 
-  let devocional = document.createElement('option');
+  const devocional = document.createElement('option');
   devocional.setAttribute('value', 'devocional');
-  let devocionalText = document.createTextNode('Devocional');
+  devocional.id = 'devocional';
+  const devocionalText = document.createTextNode('Devocional 🙏');
   devocional.appendChild(devocionalText);
 
-  let estudioBiblico = document.createElement('option');
+  const estudioBiblico = document.createElement('option');
   estudioBiblico.setAttribute('value', 'estudioBiblico');
-  let estudioBiblicoText = document.createTextNode('Estudio Bíblico');
+  estudioBiblico.id = 'estudioBiblico';
+  const estudioBiblicoText = document.createTextNode('Estudio Bíblico 📖');
   estudioBiblico.appendChild(estudioBiblicoText);
 
-  let  musica= document.createElement('option');
+  const musica = document.createElement('option');
   musica.setAttribute('value', 'musica');
-  let musicaText = document.createTextNode('Música');
+  musica.id = 'musica';
+  const musicaText = document.createTextNode('Música 🎵');
   musica.appendChild(musicaText);
 
-  let eventos = document.createElement('option');
+  const eventos = document.createElement('option');
   eventos.setAttribute('value', 'eventos');
-  let eventosText = document.createTextNode('Eventos');
+  eventos.id = 'eventos';
+  const eventosText = document.createTextNode('Eventos 🎤🔥');
   eventos.appendChild(eventosText);
 
-  const post = document.createElement('textArea');
+  let post = document.createElement('textArea');
   post.placeholder = '¿Qué estas pensando?';
   post.id = 'post';
   const publish = document.createElement('button');
   publish.textContent = 'Publicar';
   publish.id = 'publish';
-  publish.addEventListener('click', (event) => {
 
+  publish.addEventListener('click', (event) => {
+    // Cloud Firestore
+    post = document.getElementById('post').value;
+    if (post.length === 0 || post === " ") {
+      alert('Escribe un post');
+    } else {
+      postFeed(post);
+    }
   });
+
+  // Leer documentos
+  const containerPostDiv = document.createElement('div');
+  db.collection('allPost').onSnapshot((querySnapshot) => {
+    containerPostDiv.innerHTML = '';
+    querySnapshot.forEach((doc) => {
+      const post = `<div class= containerPostDiv>${doc.data().first}</div>`;
+      containerPostDiv.innerHTML += post;
+      console.log(`${doc.id}  => ${doc.data().first}`);
+    });
+  });
+
+  // Muestra el post en pantalla
 
   const buttonLogout = document.createElement('button');
   buttonLogout.textContent = 'Cerrar Sesión';
@@ -89,7 +116,13 @@ export const Feed = () => {
   option.appendChild(eventos);
   feedDiv.appendChild(post);
   feedDiv.appendChild(publish);
-  feedDiv.appendChild(buttonLogout);
+  feedDiv.appendChild(containerPostDiv);
 
+  feedDiv.appendChild(buttonLogout);
   return feedDiv;
 };
+// export const containerPost = () => {
+//   const containerPostDiv = document.createElement('div');
+//   containerPostDiv.id = ('containerPostDiv');
+//   return containerPost;
+// };
