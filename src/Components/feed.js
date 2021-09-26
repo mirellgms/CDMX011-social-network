@@ -45,25 +45,25 @@ export const Feed = () => {
   const devocional = document.createElement('option');
   devocional.setAttribute('value', 'devocional');
   devocional.id = 'devocional';
-  const devocionalText = document.createTextNode('Devocional');
+  const devocionalText = document.createTextNode('Devocional 🙏');
   devocional.appendChild(devocionalText);
 
   const estudioBiblico = document.createElement('option');
   estudioBiblico.setAttribute('value', 'estudioBiblico');
   estudioBiblico.id = 'estudioBiblico';
-  const estudioBiblicoText = document.createTextNode('Estudio Bíblico');
+  const estudioBiblicoText = document.createTextNode('Estudio Bíblico 📖');
   estudioBiblico.appendChild(estudioBiblicoText);
 
   const musica = document.createElement('option');
   musica.setAttribute('value', 'musica');
   musica.id = 'musica';
-  const musicaText = document.createTextNode('Música');
+  const musicaText = document.createTextNode('Música 🎵');
   musica.appendChild(musicaText);
 
   const eventos = document.createElement('option');
   eventos.setAttribute('value', 'eventos');
   eventos.id = 'eventos';
-  const eventosText = document.createTextNode('Eventos');
+  const eventosText = document.createTextNode('Eventos 🎤🔥');
   eventos.appendChild(eventosText);
 
   let post = document.createElement('textArea');
