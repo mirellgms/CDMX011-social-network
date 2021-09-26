@@ -138,8 +138,22 @@ img {
     width: 189px;
 }
 #imgHeader{
-    margin-left: 76px;
+    margin-left: 122px;
 }
+#header {
+    margin-left: 385px;
+}
+@media only screen and (max-width: 600px) {
+    div#header {
+        margin-left: 15px;
+    }
+    #imgHeader{
+        margin-left: 65px;
+    }
+    #homeDiv{
+        margin-top: 5px;
+    }
+  }
 #menu{
     width: 23px;
 }
