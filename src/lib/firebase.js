@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import firebase from './secret.js';
-import { onNavigate } from '../main.js';
+
 
 export const registerUser = (email, password) => {
   firebase
@@ -9,7 +9,6 @@ export const registerUser = (email, password) => {
     .then((userCredential) => {
       // Signed in
       console.log('prueba usuario', userCredential.user);
-      onNavigate('/feed');
     })
     .catch((error) => {
       alert('Usuario ya registrado', error.message);
@@ -54,7 +53,7 @@ export const loginUser = (email, password) => {
 
 export function logout() {
   auth.signOut();
-  onNavigate('/');
+  console.log("sesión cerrada");
 }
 
 // POST
@@ -65,19 +64,7 @@ export function postFeed(post) {
     first: post,
   })
     .then((docRef) => {
-      const containerPostDiv = document.createElement('div');
-      containerPostDiv.id = ('containerPostDiv');
-      console.log('Document written with ID: ', docRef.id);
       document.getElementById('post').value = '';
-      // // Leer documentos
-      db.collection('allPost').onSnapshot((querySnapshot) => {
-        containerPostDiv.innerHTML = '';
-        querySnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
-          console.log(doc.id, ' => ', doc.data().first);
-          containerPostDiv.innerHTML += doc.data().first;
-        });
-      });
     })
     .catch((error) => {
       console.error('Error adding document: ', error);

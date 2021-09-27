@@ -88,8 +88,8 @@ export const Feed = () => {
   db.collection('allPost').onSnapshot((querySnapshot) => {
     containerPostDiv.innerHTML = '';
     querySnapshot.forEach((doc) => {
-      const post = `<div class= containerPostDiv>${doc.data().first}</div>`;
-      containerPostDiv.innerHTML += post;
+      const printPost = `<div class= containerPostDiv>${doc.data().first}</div>`;
+      containerPostDiv.innerHTML += printPost;
       console.log(`${doc.id}  => ${doc.data().first}`);
     });
   });
