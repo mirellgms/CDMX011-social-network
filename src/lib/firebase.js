@@ -1,6 +1,5 @@
 /* eslint-disable import/no-cycle */
 import firebase from './secret.js';
-import { onNavigate } from '../main.js';
 
 export const registerUser = (email, password) => {
   firebase
@@ -9,7 +8,9 @@ export const registerUser = (email, password) => {
     .then((userCredential) => {
       // Signed in
       console.log('prueba usuario', userCredential.user);
-      onNavigate('/feed');
+      userCredential.user.updateProfile(
+        { displayName: document.getElementById('inputName').value },
+      );
     })
     .catch((error) => {
       alert('Usuario ya registrado', error.message);
@@ -54,30 +55,24 @@ export const loginUser = (email, password) => {
 
 export function logout() {
   auth.signOut();
-  onNavigate('/');
 }
 
 // POST
 export const db = firebase.firestore();
 
 export function postFeed(post) {
+  const user = firebase.auth().currentUser;
+  const date = new Date();
+  const datePost = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+
   db.collection('allPost').add({
+  // displayName:
+    useremail: user.email,
     first: post,
+    dateP: datePost,
   })
     .then((docRef) => {
-      const containerPostDiv = document.createElement('div');
-      containerPostDiv.id = ('containerPostDiv');
-      console.log('Document written with ID: ', docRef.id);
       document.getElementById('post').value = '';
-      // // Leer documentos
-      db.collection('allPost').onSnapshot((querySnapshot) => {
-        containerPostDiv.innerHTML = '';
-        querySnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
-          console.log(doc.id, ' => ', doc.data().first);
-          containerPostDiv.innerHTML += doc.data().first;
-        });
-      });
     })
     .catch((error) => {
       console.error('Error adding document: ', error);
@@ -105,14 +100,14 @@ export function postFeed(post) {
 //     // The user object has basic properties such as display name, email, etc.
 //     const displayName = user.displayName;
 //     const email = user.email;
-//     const photoURL = user.photoURL;
-//     const emailVerified = user.emailVerified;
+//     // const photoURL = user.photoURL;
+//     // const emailVerified = user.emailVerified;
 
 //     // The user's ID, unique to the Firebase project. Do NOT use
 //     // this value to authenticate with your backend server, if
 //     // you have one. Use User.getToken() instead.
 //     const uid = user.uid;
-//     console.log(uid);
+//     console.log(displayName);
 //   }
 // }
 // console.log(getUserProfile);
