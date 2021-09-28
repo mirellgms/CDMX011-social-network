@@ -72,11 +72,10 @@ export const Feed = () => {
   const publish = document.createElement('button');
   publish.textContent = 'Publicar';
   publish.id = 'publish';
-
   publish.addEventListener('click', (event) => {
     // Cloud Firestore
     post = document.getElementById('post').value;
-    if (post.length === 0 || post === " ") {
+    if (post.length === 0 || post === ' ') {
       alert('Escribe un post');
     } else {
       postFeed(post);
@@ -91,6 +90,7 @@ export const Feed = () => {
       const printPost = `<div class= containerPostDiv>${doc.data().first}</div>`;
       containerPostDiv.innerHTML += printPost;
       console.log(`${doc.id}  => ${doc.data().first}`);
+      // db.collection('allPost').orderBy('dateP');
     });
   });
 

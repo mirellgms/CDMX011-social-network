@@ -10,7 +10,7 @@ export const Register = () => {
   document.getElementById('header').style.display = 'block';
   const buttonLogout = document.createElement('button');
 
-  const inputName = document.createElement('input');
+  let inputName = document.createElement('input');
   inputName.placeholder = 'Nombre';
   inputName.setAttribute('required', 'required');
   inputName.id = 'inputName';
@@ -92,6 +92,7 @@ export const Register = () => {
   };
 
   buttonRegister.addEventListener('click', (event) => {
+    inputName = document.getElementById('inputName').value;
     inputEmail = document.getElementById('inputEmail').value;
     inputPassword = document.getElementById('inputPassword').value;
     confirmPassword = document.getElementById('confirmPassword').value;
