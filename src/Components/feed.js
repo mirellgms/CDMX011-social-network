@@ -84,17 +84,17 @@ export const Feed = () => {
 
   // Leer documentos
   const containerPostDiv = document.createElement('div');
-  db.collection('allPost').onSnapshot((querySnapshot) => {
+  db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
     containerPostDiv.innerHTML = '';
     querySnapshot.forEach((doc) => {
-      const printPost = `<div class= containerPostDiv>${doc.data().first}</div>`;
+      const printPost = `<div class= containerPostDiv>
+      <p id=userName>${doc.data().useremail}</p>
+      ${doc.data().first}</div>`;
+
       containerPostDiv.innerHTML += printPost;
       console.log(`${doc.id}  => ${doc.data().first}`);
-      // db.collection('allPost').orderBy('dateP');
     });
   });
-
-  // Muestra el post en pantalla
 
   const buttonLogout = document.createElement('button');
   buttonLogout.textContent = 'Cerrar Sesión';

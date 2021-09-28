@@ -70,6 +70,7 @@ export function postFeed(post) {
     useremail: user.email,
     first: post,
     dateP: datePost,
+    dateHour: date,
   })
     .then((docRef) => {
       document.getElementById('post').value = '';
