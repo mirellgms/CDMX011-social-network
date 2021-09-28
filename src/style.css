@@ -179,6 +179,10 @@ select{
         border-radius: 10px;
     }
 
+#userName {
+    text-align: left;
+    font-weight: bold;
+}
 
 #post{
     font-weight: bold;
