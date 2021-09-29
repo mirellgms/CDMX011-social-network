@@ -204,6 +204,7 @@ select{
     border: 3px solid black;
     padding: 15px;
     border-radius: 10px;
+    /* background-color: white; */
     /* width: 300px;
     height: 70px;
     align-items: center; */
@@ -214,6 +215,7 @@ select{
 .actions{
     flex-direction: row;
    margin-left: auto;
+   
 }
     
  
@@ -221,19 +223,34 @@ select{
 #btn_delete{
     width: 48px;
     height: 41px;
-    background-color: cornflowerblue;
+    background-color: hsl(0deg 0% 0% / 0%);
+    border: white;
     font-size: 25px;
+    cursor: pointer;
 }
+
 #btn_edit{
-    width: 48px;
-    height: 41px;
-    background-color: cornflowerblue;
-    font-size: 25px;
+    width: 37px;
+    height: 31px;
+    background-color: hsl(0deg 0% 0% / 0%);
+    border: white;
+    border-radius: -4px;
+    font-size: 20px;
+    margin-top: -211px;
+    margin-left: 148px;
+    margin-right: -50px;
+    cursor: pointer;
 }
 #btn_like{
     width: 48px;
     height: 41px;
-    background-color: cornflowerblue;
+    background-color: hsl(0deg 0% 0% / 0%);
+    border: white;
     font-size: 25px;
+    cursor: pointer;
+}
+
+#btn_like:hover{
+    background-color:#B5DEFF;
 }
 
