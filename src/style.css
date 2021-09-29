@@ -198,35 +198,58 @@ select{
     color: white;
 }
 
-.containerPostDiv{
+.post_history, .containerPostDiv{
     background-color: hsl(0deg 0% 0% / 2%);
     border: 3px solid black;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;;
-   /* border-top: 10px; */
-    border-radius: 15px;
-    width: 300px;
+    padding: 15px;
+    border-radius: 10px;
+    /* background-color: white; */
+    /* width: 300px;
     height: 70px;
-    align-items: center;
+    align-items: center; */
+    flex-direction: column;
+   
 }
 
-/* #categoryOption{
-    background-color:rgba(67, 175, 218, 0.5);
-    flex-direction: column;
-    flex-flow: column wrap;
-    width: 300px;
-    border: 3px solid black;
-    padding-top: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
-    border-bottom: 10px;
-
+.actions{
+    flex-direction: row;
+   margin-left: auto;
+   
+}
     
-    
-} */
+ 
 
-.actions {
-    margin-left: auto;
+#btn_delete{
+    width: 48px;
+    height: 41px;
+    background-color: hsl(0deg 0% 0% / 0%);
+    border: white;
+    font-size: 25px;
     cursor: pointer;
 }
+
+#btn_edit{
+    width: 37px;
+    height: 31px;
+    background-color: hsl(0deg 0% 0% / 0%);
+    border: white;
+    border-radius: -4px;
+    font-size: 20px;
+    margin-top: -211px;
+    margin-left: 148px;
+    margin-right: -50px;
+    cursor: pointer;
+}
+#btn_like{
+    width: 48px;
+    height: 41px;
+    background-color: hsl(0deg 0% 0% / 0%);
+    border: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+#btn_like:hover{
+    background-color:#B5DEFF;
+}
+
