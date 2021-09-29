@@ -199,13 +199,41 @@ select{
     color: white;
 }
 
-.containerPostDiv{
+.post_history, .containerPostDiv{
     background-color: hsl(0deg 0% 0% / 2%);
     border: 3px solid black;
     padding: 15px;
     border-radius: 10px;
-    width: 300px;
+    /* width: 300px;
     height: 70px;
-    align-items: center;
+    align-items: center; */
+    flex-direction: column;
    
 }
+
+.actions{
+    flex-direction: row;
+   margin-left: auto;
+}
+    
+ 
+
+#btn_delete{
+    width: 48px;
+    height: 41px;
+    background-color: cornflowerblue;
+    font-size: 25px;
+}
+#btn_edit{
+    width: 48px;
+    height: 41px;
+    background-color: cornflowerblue;
+    font-size: 25px;
+}
+#btn_like{
+    width: 48px;
+    height: 41px;
+    background-color: cornflowerblue;
+    font-size: 25px;
+}
+

@@ -87,15 +87,35 @@ export const Feed = () => {
   db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
     containerPostDiv.innerHTML = '';
     querySnapshot.forEach((doc) => {
-      const printPost = `<div class= containerPostDiv>
-      <p id=userName>${doc.data().useremail}</p>
-      ${doc.data().first}</div>`;
-
+      const printPost = `<div class= 'post_history' data-postid='${doc.id}'>
+      <h1 id=userName>${doc.data().useremail}</h1> 
+      <p class='p_texts'> ${doc.data().first}</p> 
+      <div class= actions> 
+      <button id = "btn_like" class= "btn_like">   ❤️ </button>
+      <button id = "btn_edit" class= "btn_edit"> 📝</button>
+      <button id = "btn_delete" class= "btn_delete"> 🗑️ </button> 
+      </div></div>`;
       containerPostDiv.innerHTML += printPost;
       console.log(`${doc.id}  => ${doc.data().first}`);
     });
-  });
 
+    function deletePost(postid) {
+      alert('¿Estas seguro?');
+      db.collection('allPost').doc(postid).delete().then(() => {
+        console.log('Document successfully deleted!');
+      })
+        .catch((error) => {
+          console.error('Error removing document: ', error);
+        });
+    }
+    containerPostDiv.querySelectorAll('.btn_delete').forEach((button) => {
+      button.addEventListener('click', (e) => {
+        const currElem = e.target; // referencia a un objeto que lanzo el evento
+        const postId = currElem.closest('.post_history').dataset.postid; //
+        deletePost(postId);
+      });
+    });
+  });
   const buttonLogout = document.createElement('button');
   buttonLogout.textContent = 'Cerrar Sesión';
   buttonLogout.id = 'buttonLogout';
