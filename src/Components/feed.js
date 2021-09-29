@@ -34,7 +34,9 @@ export const Feed = () => {
   iconProfile.id = 'iconProfile';
   iconProfile.classList.add('icon');
 
-  const option = document.createElement('select');
+  const selectOption = document.createElement('select');
+  selectOption.id = 'selectOption';
+  // const categoryOption = document.getElementById('selectOption').value;
 
   const category = document.createElement('option');
   category.setAttribute('value', 'Select');
@@ -45,25 +47,25 @@ export const Feed = () => {
   const devocional = document.createElement('option');
   devocional.setAttribute('value', 'devocional');
   devocional.id = 'devocional';
-  const devocionalText = document.createTextNode('Devocional');
+  const devocionalText = document.createTextNode('Devocional 🙏'); 
   devocional.appendChild(devocionalText);
 
   const estudioBiblico = document.createElement('option');
   estudioBiblico.setAttribute('value', 'estudioBiblico');
   estudioBiblico.id = 'estudioBiblico';
-  const estudioBiblicoText = document.createTextNode('Estudio Bíblico');
+  const estudioBiblicoText = document.createTextNode('Estudio Bíblico 📖');
   estudioBiblico.appendChild(estudioBiblicoText);
 
   const musica = document.createElement('option');
   musica.setAttribute('value', 'musica');
   musica.id = 'musica';
-  const musicaText = document.createTextNode('Música');
+  const musicaText = document.createTextNode('Música 🎵');
   musica.appendChild(musicaText);
 
   const eventos = document.createElement('option');
   eventos.setAttribute('value', 'eventos');
   eventos.id = 'eventos';
-  const eventosText = document.createTextNode('Eventos');
+  const eventosText = document.createTextNode('Eventos 🎤🔥');
   eventos.appendChild(eventosText);
 
   let post = document.createElement('textArea');
@@ -82,14 +84,19 @@ export const Feed = () => {
     }
   });
 
-  // Leer documentos
+  // Leer documentos <div id=categoryOption> Categoria del Post </div>
   const containerPostDiv = document.createElement('div');
+  // const topic = formPost['topic-post'].value;
   db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
     containerPostDiv.innerHTML = '';
     querySnapshot.forEach((doc) => {
       const printPost = `<div class= containerPostDiv>
       <p id=userName>${doc.data().useremail}</p>
-      ${doc.data().first}</div>`;
+      ${doc.data().first}<div class=actions>
+      <div id= heart> ❤️ </div>
+      <div id= edit>📝  </div>
+      <div id= trash>🗑️  </div>
+      </div></div>`;
 
       containerPostDiv.innerHTML += printPost;
       console.log(`${doc.id}  => ${doc.data().first}`);
@@ -108,12 +115,12 @@ export const Feed = () => {
   barraDiv.appendChild(iconHome);
   barraDiv.appendChild(iconLight);
   barraDiv.appendChild(iconProfile);
-  feedDiv.appendChild(option);
-  option.appendChild(category);
-  option.appendChild(devocional);
-  option.appendChild(estudioBiblico);
-  option.appendChild(musica);
-  option.appendChild(eventos);
+  feedDiv.appendChild(selectOption);
+  selectOption.appendChild(category);
+  selectOption.appendChild(devocional);
+  selectOption.appendChild(estudioBiblico);
+  selectOption.appendChild(musica);
+  selectOption.appendChild(eventos);
   feedDiv.appendChild(post);
   feedDiv.appendChild(publish);
   feedDiv.appendChild(containerPostDiv);

@@ -66,7 +66,6 @@ export function postFeed(post) {
   const datePost = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 
   db.collection('allPost').add({
-  // displayName:
     useremail: user.email,
     first: post,
     dateP: datePost,
