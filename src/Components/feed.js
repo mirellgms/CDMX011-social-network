@@ -45,25 +45,25 @@ export const Feed = () => {
   const devocional = document.createElement('option');
   devocional.setAttribute('value', 'devocional');
   devocional.id = 'devocional';
-  const devocionalText = document.createTextNode('Devocional');
+  const devocionalText = document.createTextNode('Devocional 🙏');
   devocional.appendChild(devocionalText);
 
   const estudioBiblico = document.createElement('option');
   estudioBiblico.setAttribute('value', 'estudioBiblico');
   estudioBiblico.id = 'estudioBiblico';
-  const estudioBiblicoText = document.createTextNode('Estudio Bíblico');
+  const estudioBiblicoText = document.createTextNode('Estudio Bíblico 📖');
   estudioBiblico.appendChild(estudioBiblicoText);
 
   const musica = document.createElement('option');
   musica.setAttribute('value', 'musica');
   musica.id = 'musica';
-  const musicaText = document.createTextNode('Música');
+  const musicaText = document.createTextNode('Música 🎵');
   musica.appendChild(musicaText);
 
   const eventos = document.createElement('option');
   eventos.setAttribute('value', 'eventos');
   eventos.id = 'eventos';
-  const eventosText = document.createTextNode('Eventos');
+  const eventosText = document.createTextNode('Eventos 🎤🔥');
   eventos.appendChild(eventosText);
 
   let post = document.createElement('textArea');
@@ -87,15 +87,35 @@ export const Feed = () => {
   db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
     containerPostDiv.innerHTML = '';
     querySnapshot.forEach((doc) => {
-      const printPost = `<div class= containerPostDiv>
-      <p id=userName>${doc.data().useremail}</p>
-      ${doc.data().first}</div>`;
-
+      const printPost = `<div class= 'post_history' data-postid='${doc.id}'>
+      <h1 id=userName>${doc.data().useremail}</h1> 
+      <p class='p_texts'> ${doc.data().first}</p> 
+      <div class= actions> 
+      <button id = "btn_like" class= "btn_like" title = "Me gusta">   ❤️ </button>
+      <button id = "btn_edit" class= "btn_edit" title = "Editar"> 📝</button>
+      <button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️ </button> 
+      </div></div>`;
       containerPostDiv.innerHTML += printPost;
       console.log(`${doc.id}  => ${doc.data().first}`);
     });
-  });
 
+    function deletePost(postid) {
+      db.collection('allPost').doc(postid).delete().then(() => {
+        console.log('Document successfully deleted!');
+      })
+        .catch((error) => {
+          console.error('Error removing document: ', error);
+        });
+    }
+    containerPostDiv.querySelectorAll('.btn_delete').forEach((button) => {
+      button.addEventListener('click', (e) => {
+        alert('¿Eliminar publicación?');
+        const currElem = e.target; // referencia a un objeto que lanzo el evento
+        const postId = currElem.closest('.post_history').dataset.postid; //
+        deletePost(postId);
+      });
+    });
+  });
   const buttonLogout = document.createElement('button');
   buttonLogout.textContent = 'Cerrar Sesión';
   buttonLogout.id = 'buttonLogout';
