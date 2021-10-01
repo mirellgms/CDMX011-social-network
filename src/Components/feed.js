@@ -82,8 +82,14 @@ export const Feed = () => {
     }
   });
 
+  // const uid = firebase.auth().onAuthStateChanged(user);
+  
+  
+  firebase.auth().onAuthStateChanged((user) => {
+      const uid = user.uid;
   // Leer documentos
   const containerPostDiv = document.createElement('div');
+  feedDiv.appendChild(containerPostDiv);
   db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
     containerPostDiv.innerHTML = '';
     querySnapshot.forEach((doc) => {
@@ -93,12 +99,13 @@ export const Feed = () => {
       <div id='lineReactions'</div> 
       <div class= actions> 
       <button id = "btn_like" class= "btn_like" title = "Me gusta">❤️ Like</button> 
-      <button id = "btn_edit" class= "btn_edit" title = "Editar">🖊️ Editar</button>
-      <button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️Borrar </button> 
+      ${doc.data().idUser === uid ? '<button id = "btn_edit" class= "btn_edit" title = "Editar"> 🖊️ Editar </button>' : '<p></p>'}
+      ${doc.data().idUser === uid ? '<button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️Borrar </button>' : '<p></p>'}
       </div></div>`;
       containerPostDiv.innerHTML += printPost;
-      console.log(`${doc.id}  => ${doc.data().first}`);
+      console.log(`${doc.id}  =>  ${doc.data().first}`);
     });
+  });
 
     function deletePost(postid) {
       db.collection('allPost').doc(postid).delete().then(() => {
@@ -137,8 +144,7 @@ export const Feed = () => {
   option.appendChild(eventos);
   feedDiv.appendChild(post);
   feedDiv.appendChild(publish);
-  feedDiv.appendChild(containerPostDiv);
-
+  
   feedDiv.appendChild(buttonLogout);
   return feedDiv;
 };

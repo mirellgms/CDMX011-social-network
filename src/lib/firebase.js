@@ -64,13 +64,16 @@ export function postFeed(post) {
   const user = firebase.auth().currentUser;
   const date = new Date();
   const datePost = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+  const uid = user.uid;
 
   db.collection('allPost').add({
   // displayName:
+  // user: user,
     useremail: user.email,
     first: post,
     dateP: datePost,
     dateHour: date,
+    idUser: uid,
   })
     .then((docRef) => {
       document.getElementById('post').value = '';
