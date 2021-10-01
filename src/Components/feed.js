@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
-import { logout, postFeed, db } from '../lib/firebase.js';
+import { logout, postFeed, db, deletePost } from '../lib/firebase.js';
 // import db from './secret.js';
 
 export const Feed = () => {
@@ -82,40 +82,37 @@ export const Feed = () => {
     }
   });
 
-  // Leer documentos
   const containerPostDiv = document.createElement('div');
-  db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
-    containerPostDiv.innerHTML = '';
-    querySnapshot.forEach((doc) => {
-      const printPost = `<div class= 'post_history' data-postid='${doc.id}'>
+  firebase.auth().onAuthStateChanged((user) => {
+    const uid = user.uid;
+    // Leer documentos
+    db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
+      containerPostDiv.innerHTML = '';
+      querySnapshot.forEach((doc) => {
+        const printPost = `<div class= 'post_history' data-postid='${doc.id}'>
       <h1 id=userName>${doc.data().useremail}</h1> 
-      <p class='p_texts'> ${doc.data().first}</p> 
+      <p class='p_texts'> ${doc.data().first}</p>  
       <div class= actions> 
-      <button id = "btn_like" class= "btn_like" title = "Me gusta">   ❤️ </button>
-      <button id = "btn_edit" class= "btn_edit" title = "Editar"> 📝</button>
-      <button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️ </button> 
-      </div></div>`;
-      containerPostDiv.innerHTML += printPost;
-      console.log(`${doc.id}  => ${doc.data().first}`);
-    });
+      <button id = "btn_like" class= "btn_like" title = "Me gusta">❤️Like</button> 
+      ${doc.data().idUser === uid ? '<button id = "btn_edit" class= "btn_edit" title = "Editar"> 🖊️Editar </button>' : '<p></p>'}
+      ${doc.data().idUser === uid ? '<button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️Borrar</button>' : '<p></p>'}
+      <br>
+      </div></div> `;
+        containerPostDiv.innerHTML += printPost;
+        console.log(`${doc.id}  =>  ${doc.data().first}`);
+      });
 
-    function deletePost(postid) {
-      db.collection('allPost').doc(postid).delete().then(() => {
-        console.log('Document successfully deleted!');
-      })
-        .catch((error) => {
-          console.error('Error removing document: ', error);
+      containerPostDiv.querySelectorAll('.btn_delete').forEach((button) => {
+        button.addEventListener('click', (e) => {
+          alert('¿Eliminar publicación?');
+          const currElem = e.target; // referencia a un objeto que lanzo el evento
+          const postId = currElem.closest('.post_history').dataset.postid; //
+          deletePost(postId);
         });
-    }
-    containerPostDiv.querySelectorAll('.btn_delete').forEach((button) => {
-      button.addEventListener('click', (e) => {
-        alert('¿Eliminar publicación?');
-        const currElem = e.target; // referencia a un objeto que lanzo el evento
-        const postId = currElem.closest('.post_history').dataset.postid; //
-        deletePost(postId);
       });
     });
   });
+
   const buttonLogout = document.createElement('button');
   buttonLogout.textContent = 'Cerrar Sesión';
   buttonLogout.id = 'buttonLogout';
@@ -137,7 +134,6 @@ export const Feed = () => {
   feedDiv.appendChild(post);
   feedDiv.appendChild(publish);
   feedDiv.appendChild(containerPostDiv);
-
   feedDiv.appendChild(buttonLogout);
   return feedDiv;
 };
