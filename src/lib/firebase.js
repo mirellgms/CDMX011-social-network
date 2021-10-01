@@ -83,35 +83,29 @@ export function postFeed(post) {
     });
 }
 
-// // Nombre del usuario
-// //Obtener usuario con sesion activa
-// firebase.auth().onAuthStateChanged((user) => {
-//   if (user) {
-//     // User is signed in, see docs for a list of available properties
-//     // https://firebase.google.com/docs/reference/js/firebase.User
-//     const uid = user.uid;
-//     // ...
-//   } else {
-//     // User is signed out
-//     // ...
-//   }
+// Eliminar Post
+export function deletePost(postid) {
+  db.collection('allPost').doc(postid).delete().then(() => {
+    console.log('Document successfully deleted!');
+  })
+    .catch((error) => {
+      console.error('Error removing document: ', error);
+    });
+}
+
+// Editar Post
+// var washingtonRef = db.collection("cities").doc("DC");
+
+// // Set the "capital" field of the city 'DC'
+// return washingtonRef.update({
+//     capital: true
+// })
+// .then(() => {
+//     console.log("Document successfully updated!");
+// })
+// .catch((error) => {
+//     // The document probably doesn't exist.
+//     console.error("Error updating document: ", error);
 // });
 
-// export function getUserProfile() {
-//   // [START auth_get_user_profile]
-//   const user = firebase.auth().currentUser;
-//   if (user !== null) {
-//     // The user object has basic properties such as display name, email, etc.
-//     const displayName = user.displayName;
-//     const email = user.email;
-//     // const photoURL = user.photoURL;
-//     // const emailVerified = user.emailVerified;
-
-//     // The user's ID, unique to the Firebase project. Do NOT use
-//     // this value to authenticate with your backend server, if
-//     // you have one. Use User.getToken() instead.
-//     const uid = user.uid;
-//     console.log(displayName);
-//   }
-// }
-// console.log(getUserProfile);
+// https://firebase.google.com/docs/firestore/manage-data/add-data?hl=es

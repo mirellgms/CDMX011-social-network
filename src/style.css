@@ -1,6 +1,6 @@
 body {
     background-color: white;
-    
+
 }
 
 div {
@@ -9,7 +9,7 @@ div {
     justify-content: center;
     align-items: center;
     margin-top: 5px;
-    
+
 }
 h1{
     max-width: 360px;
@@ -29,7 +29,7 @@ button{
     width: 200px;
     height: 50px;
     margin-top: 20px;
-} 
+}
 
 input{
     margin-top: 20px;
@@ -73,7 +73,7 @@ input{
 }
 img {
     width: 175px;
-    
+
 }
 
 #homeDiv{
@@ -114,21 +114,21 @@ img {
     position: relative;
     bottom: 40px;
     left: 130px;
-    
-    
-} 
+
+
+}
 
 #openEye, #closeEye {
     cursor: pointer;
 }
-  
+
 #iconGoogle {
-   width: 30px; 
+   width: 30px;
     border: 0px;
     position: relative;
     bottom: 35px;
-    right: 132px; 
-} 
+    right: 132px;
+}
 
 #title{
     display: flex;
@@ -172,8 +172,8 @@ img {
   margin-top: 70px;
   position: relative;
   right: 130px;
-  
-} 
+
+}
 
 select{
         border-radius: 10px;
@@ -208,10 +208,19 @@ select{
     height: 30px;
 }
 
+#linea{
+    width: 300px;
+    /* border-top: 2px solid #3c3d3d50; */
+    margin-top: 21px;
+   height: 30px;
+   background-color: rgb(209, 181, 181);
+
+}
+
 #publish:hover{
     background-color:#0976B2;
     color: white;
-    
+
 }
 
 .post_history, .containerPostDiv{
@@ -224,16 +233,16 @@ select{
     align-items: center; */
     width: 300px;
     flex-direction: column;
-   
+
 }
 
 .actions{
     flex-direction: row;
    margin-left: auto;
-   
+
 }
-    
- 
+
+
 
 #btn_delete{
     width: 48px;
@@ -259,7 +268,10 @@ select{
     margin-top: -14px;
     cursor: pointer;
     position: absolute;
-    right: 47%;
+    right: 43%;
+    margin-top: -5%;
+    
+    
 }
 #btn_like{
     width: 48px;
@@ -271,8 +283,8 @@ select{
     cursor: pointer;
     position: absolute;
     left: 16%;
-    margin-top: -8px;
-    
+    margin-top: -15px;
+
 }
 
 
