@@ -211,6 +211,7 @@ select{
 #publish:hover{
     background-color:#0976B2;
     color: white;
+    
 }
 
 .post_history, .containerPostDiv{
@@ -242,6 +243,9 @@ select{
     font-size: 14px;
     color: black;
     cursor: pointer;
+    position: absolute;
+    left: 71%;
+    margin-top: -2%;
 }
 
 #btn_edit{
@@ -252,10 +256,10 @@ select{
     border-radius: -4px;
     font-size: 14px;
     color: black;
-    margin-top: -211px;
-    margin-left: 148px;
-    margin-right: -50px;
+    margin-top: -14px;
     cursor: pointer;
+    position: absolute;
+    right: 47%;
 }
 #btn_like{
     width: 48px;
@@ -265,6 +269,9 @@ select{
     font-size: 14px;
     color: black;
     cursor: pointer;
+    position: absolute;
+    left: 16%;
+    margin-top: -8px;
     
 }
 
