@@ -122,7 +122,7 @@ export const Feed = () => {
     });
   });
 });
-  
+
   const buttonLogout = document.createElement('button');
   buttonLogout.textContent = 'Cerrar Sesión';
   buttonLogout.id = 'buttonLogout';
