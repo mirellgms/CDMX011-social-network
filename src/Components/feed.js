@@ -82,30 +82,26 @@ export const Feed = () => {
     }
   });
 
-  // const uid = firebase.auth().onAuthStateChanged(user);
-  
-  
-  firebase.auth().onAuthStateChanged((user) => {
-      const uid = user.uid;
-  // Leer documentos
   const containerPostDiv = document.createElement('div');
-  feedDiv.appendChild(containerPostDiv);
+  firebase.auth().onAuthStateChanged((user) => {
+    const uid = user.uid;
+  // Leer documentos
   db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
     containerPostDiv.innerHTML = '';
     querySnapshot.forEach((doc) => {
       const printPost = `<div class= 'post_history' data-postid='${doc.id}'>
       <h1 id=userName>${doc.data().useremail}</h1> 
-      <p class='p_texts'> ${doc.data().first}</p>
-      <div id='lineReactions'</div> 
+      <p class='p_texts'> ${doc.data().first}</p>  <br>
       <div class= actions> 
       <button id = "btn_like" class= "btn_like" title = "Me gusta">❤️ Like</button> 
       ${doc.data().idUser === uid ? '<button id = "btn_edit" class= "btn_edit" title = "Editar"> 🖊️ Editar </button>' : '<p></p>'}
       ${doc.data().idUser === uid ? '<button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️Borrar </button>' : '<p></p>'}
+     <br>
       </div></div>`;
       containerPostDiv.innerHTML += printPost;
       console.log(`${doc.id}  =>  ${doc.data().first}`);
     });
-  });
+  
 
     function deletePost(postid) {
       db.collection('allPost').doc(postid).delete().then(() => {
@@ -115,6 +111,7 @@ export const Feed = () => {
           console.error('Error removing document: ', error);
         });
     }
+
     containerPostDiv.querySelectorAll('.btn_delete').forEach((button) => {
       button.addEventListener('click', (e) => {
         alert('¿Eliminar publicación?');
@@ -124,6 +121,8 @@ export const Feed = () => {
       });
     });
   });
+});
+  
   const buttonLogout = document.createElement('button');
   buttonLogout.textContent = 'Cerrar Sesión';
   buttonLogout.id = 'buttonLogout';
@@ -144,7 +143,7 @@ export const Feed = () => {
   option.appendChild(eventos);
   feedDiv.appendChild(post);
   feedDiv.appendChild(publish);
-  
+  feedDiv.appendChild(containerPostDiv);
   feedDiv.appendChild(buttonLogout);
   return feedDiv;
 };

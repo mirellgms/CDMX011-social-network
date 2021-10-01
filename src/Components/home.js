@@ -27,7 +27,7 @@ export const Home = () => {
   iconOpenEye.id = 'openEye';
 
   const buttonLogin = document.createElement('button');
-  buttonLogin.textContent = 'Iniciar sesión 😇';
+  buttonLogin.textContent = 'Iniciar sesión';
   buttonLogin.id = 'buttonLogin';
 
   const buttonLoginGoogle = document.createElement('button');
