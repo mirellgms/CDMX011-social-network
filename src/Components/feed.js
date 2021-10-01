@@ -89,11 +89,12 @@ export const Feed = () => {
     querySnapshot.forEach((doc) => {
       const printPost = `<div class= 'post_history' data-postid='${doc.id}'>
       <h1 id=userName>${doc.data().useremail}</h1> 
-      <p class='p_texts'> ${doc.data().first}</p> 
+      <p class='p_texts'> ${doc.data().first}</p>
+      <div id='lineReactions'</div> 
       <div class= actions> 
-      <button id = "btn_like" class= "btn_like" title = "Me gusta">   ❤️ </button>
-      <button id = "btn_edit" class= "btn_edit" title = "Editar"> 📝</button>
-      <button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️ </button> 
+      <button id = "btn_like" class= "btn_like" title = "Me gusta">❤️ Like</button> 
+      <button id = "btn_edit" class= "btn_edit" title = "Editar">🖊️ Editar</button>
+      <button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️Borrar </button> 
       </div></div>`;
       containerPostDiv.innerHTML += printPost;
       console.log(`${doc.id}  => ${doc.data().first}`);

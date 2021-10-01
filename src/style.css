@@ -191,8 +191,8 @@ select{
 /* text-align: center; */
     padding-top: 10px;
     margin-top: 10px;
-    width: 300px;
-    height: 70px;
+    width: 260px;
+    height: 34px;
 }
 
 #publish{
@@ -215,7 +215,7 @@ select{
 
 .post_history, .containerPostDiv{
     background-color: hsl(0deg 0% 0% / 2%);
-    border: 3px solid black;
+    border: 1px solid black;
     padding: 15px;
     border-radius: 10px;
     /* background-color: white; */
@@ -239,7 +239,8 @@ select{
     height: 41px;
     background-color: hsl(0deg 0% 0% / 0%);
     border: white;
-    font-size: 25px;
+    font-size: 14px;
+    color: black;
     cursor: pointer;
 }
 
@@ -249,7 +250,8 @@ select{
     background-color: hsl(0deg 0% 0% / 0%);
     border: white;
     border-radius: -4px;
-    font-size: 20px;
+    font-size: 14px;
+    color: black;
     margin-top: -211px;
     margin-left: 148px;
     margin-right: -50px;
@@ -260,11 +262,28 @@ select{
     height: 41px;
     background-color: hsl(0deg 0% 0% / 0%);
     border: white;
-    font-size: 25px;
+    font-size: 14px;
+    color: black;
     cursor: pointer;
+    
 }
 
+
 #btn_like:hover{
+    background-color:#B5DEFF;
+}
+#btn_edit:hover{
+    background-color:#B5DEFF;
+}
+#btn_delete:hover{
+    background-color:#B5DEFF;
+}
+
+
+#btn_like.screen-reader-text:hover{
+    background-color:#B5DEFF;
+}
+#btn_delete.screen-reader-text:hover{
     background-color:#B5DEFF;
 }
 
