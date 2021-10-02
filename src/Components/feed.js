@@ -1,7 +1,9 @@
 /* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
-import { logout, postFeed, db, deletePost } from '../lib/firebase.js';
+import {
+  logout, postFeed, db, deletePost, editPost,
+} from '../lib/firebase.js';
 // import db from './secret.js';
 
 export const Feed = () => {
@@ -91,7 +93,7 @@ export const Feed = () => {
       querySnapshot.forEach((doc) => {
         const printPost = `<div class= 'post_history' data-postid='${doc.id}'>
       <h1 id=userName>${doc.data().useremail}</h1> 
-      <p class='p_texts'> ${doc.data().first}</p>  
+      <div id='p_texts'> ${doc.data().first}</div>  
       <div class= actions> 
       <button id = "btn_like" class= "btn_like" title = "Me gusta">❤️Like</button> 
       ${doc.data().idUser === uid ? '<button id = "btn_edit" class= "btn_edit" title = "Editar"> 🖊️Editar </button>' : '<p></p>'}
@@ -108,6 +110,15 @@ export const Feed = () => {
           const currElem = e.target; // referencia a un objeto que lanzo el evento
           const postId = currElem.closest('.post_history').dataset.postid; //
           deletePost(postId);
+        });
+      });
+      containerPostDiv.querySelectorAll('.btn_edit').forEach((button) => {
+        button.addEventListener('click', (e) => {
+          alert('¿Editar publicación?');
+          const currElem = e.target; // referencia a un objeto que lanzo el evento
+          const postId = currElem.closest('.post_history').dataset.postid; //
+          const rewritePost = currElem.closest('.post_history').dataset.p_texts;
+          editPost(postId, rewritePost);
         });
       });
     });
@@ -137,8 +148,3 @@ export const Feed = () => {
   feedDiv.appendChild(buttonLogout);
   return feedDiv;
 };
-// export const containerPost = () => {
-//   const containerPostDiv = document.createElement('div');
-//   containerPostDiv.id = ('containerPostDiv');
-//   return containerPost;
-// };

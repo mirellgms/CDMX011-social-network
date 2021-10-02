@@ -94,18 +94,21 @@ export function deletePost(postid) {
 }
 
 // Editar Post
-// var washingtonRef = db.collection("cities").doc("DC");
+export function editPost(postid, rewritePost) {
+  document.getElementById('post').value = rewritePost;
 
-// // Set the "capital" field of the city 'DC'
-// return washingtonRef.update({
-//     capital: true
-// })
-// .then(() => {
-//     console.log("Document successfully updated!");
-// })
-// .catch((error) => {
-//     // The document probably doesn't exist.
-//     console.error("Error updating document: ", error);
-// });
+  const edition = db.collection('allPost').doc(postid);
+  const editText = document.getElementById('post').value;
 
-// https://firebase.google.com/docs/firestore/manage-data/add-data?hl=es
+  // Set the "capital" field of the city 'DC'
+  return edition.update({
+    first: editText,
+  })
+    .then(() => {
+      console.log('Document successfully updated!');
+    })
+    .catch((error) => {
+    // The document probably doesn't exist.
+      console.error('Error updating document: ', error);
+    });
+}
