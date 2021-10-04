@@ -1,7 +1,9 @@
 /* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
-import { logout, postFeed, db } from '../lib/firebase.js';
+import {
+  logout, postFeed, db, deletePost, editPost,
+} from '../lib/firebase.js';
 // import db from './secret.js';
 
 export const Feed = () => {
@@ -47,11 +49,8 @@ export const Feed = () => {
   const devocional = document.createElement('option');
   devocional.setAttribute('value', 'devocional');
   devocional.id = 'devocional';
-<<<<<<< HEAD
-  const devocionalText = document.createTextNode('Devocional 🙏'); 
-=======
+
   const devocionalText = document.createTextNode('Devocional 🙏');
->>>>>>> 51303afc1f72e27def2166ffb8ddf3e84c87f3e7
   devocional.appendChild(devocionalText);
 
   const estudioBiblico = document.createElement('option');
@@ -78,6 +77,7 @@ export const Feed = () => {
   const publish = document.createElement('button');
   publish.textContent = 'Publicar';
   publish.id = 'publish';
+
   publish.addEventListener('click', (event) => {
     // Cloud Firestore
     post = document.getElementById('post').value;
@@ -88,41 +88,73 @@ export const Feed = () => {
     }
   });
 
-  // Leer documentos <div id=categoryOption> Categoria del Post </div>
-  const containerPostDiv = document.createElement('div');
-  // const topic = formPost['topic-post'].value;
-  db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
-    containerPostDiv.innerHTML = '';
-    querySnapshot.forEach((doc) => {
-      const printPost = `<div class= 'post_history' data-postid='${doc.id}'>
-      <h1 id=userName>${doc.data().useremail}</h1> 
-      <p class='p_texts'> ${doc.data().first}</p> 
-      <div class= actions> 
-      <button id = "btn_like" class= "btn_like" title = "Me gusta">   ❤️ </button>
-      <button id = "btn_edit" class= "btn_edit" title = "Editar"> 📝</button>
-      <button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️ </button> 
-      </div></div>`;
-      containerPostDiv.innerHTML += printPost;
-      console.log(`${doc.id}  => ${doc.data().first}`);
-    });
 
-    function deletePost(postid) {
-      db.collection('allPost').doc(postid).delete().then(() => {
-        console.log('Document successfully deleted!');
-      })
-        .catch((error) => {
-          console.error('Error removing document: ', error);
+  const containerPostDiv = document.createElement('div');
+
+  const modalDiv = document.createElement('div');
+  modalDiv.classList.add('modalContainer');
+  modalDiv.id = 'Modal';
+  // alert('¿Editar publicación?');
+  const printModal = `<div class= 'modalContent'>
+<h2 class = 'close'> Edita tu post </h2>
+<div id= "changePost"><textArea id = 'changePost'></textArea></div>
+<button id = 'save' class = 'savePost'> Guardar </button>
+</div>`;
+  modalDiv.innerHTML += printModal;
+  modalDiv.style.display = 'none'; 
+  console.log(modalDiv);
+
+  firebase.auth().onAuthStateChanged((user) => {
+    const uid = user.uid;
+    // Leer documentos
+    db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
+      containerPostDiv.innerHTML = '';
+      querySnapshot.forEach((doc) => {
+        const printPost = `<div class= 'post_history' data-postid='${doc.id}'>
+      <h1 id=userName>${doc.data().useremail}</h1> 
+      <div id='p_texts'> ${doc.data().first}</div>  
+      <div class= actions> 
+      <button id = "btn_like" class= "btn_like" title = "Me gusta">❤️Like</button> 
+      ${doc.data().idUser === uid ? '<button id = "btn_edit" class= "btn_edit" title = "Editar"> 🖊️Editar </button>' : '<p></p>'}
+      ${doc.data().idUser === uid ? '<button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️Borrar</button>' : '<p></p>'}
+      <br>
+      </div></div> `;
+        containerPostDiv.innerHTML += printPost;
+        console.log(`${doc.id}  =>  ${doc.data().first}`);
+      });
+
+      containerPostDiv.querySelectorAll('.btn_delete').forEach((button) => {
+        button.addEventListener('click', (e) => {
+          alert('¿Eliminar publicación?');
+          const currElem = e.target; // referencia a un objeto que lanzo el evento
+          const postId = currElem.closest('.post_history').dataset.postid; //
+          deletePost(postId);
         });
-    }
-    containerPostDiv.querySelectorAll('.btn_delete').forEach((button) => {
-      button.addEventListener('click', (e) => {
-        alert('¿Eliminar publicación?');
-        const currElem = e.target; // referencia a un objeto que lanzo el evento
-        const postId = currElem.closest('.post_history').dataset.postid; //
-        deletePost(postId);
+      });
+
+      containerPostDiv.querySelectorAll('.btn_edit').forEach((button) => {
+        button.addEventListener('click', (e) => {
+        //   console.log('llamada de boton editar');
+        // console.log(modalDiv.innerHTML += printModal);
+          modalDiv.style.display = 'block';
+          const currElem = e.target;
+          const postId = currElem.closest('.post_history').dataset.postid;
+          editPost(postId, post);
+          // modalDiv.style.visibility = 'visible';
+          // const modal = document.getElementById('Modal');
+          // const span = document.getElementsByClassName('close')[0];
+          // const body = document.getElementsByTagName('body')[0];
+          // const btnPublish = document.getElementById('publish');
+          // modal.style.display = 'block';
+
+          // const currElem = e.target;
+          // const postId = currElem.closest('.post_history').dataset.postid;
+          // editPost(postId, post);
+        });
       });
     });
   });
+
   const buttonLogout = document.createElement('button');
   buttonLogout.textContent = 'Cerrar Sesión';
   buttonLogout.id = 'buttonLogout';
@@ -143,13 +175,8 @@ export const Feed = () => {
   selectOption.appendChild(eventos);
   feedDiv.appendChild(post);
   feedDiv.appendChild(publish);
+  feedDiv.appendChild(modalDiv);
   feedDiv.appendChild(containerPostDiv);
-
   feedDiv.appendChild(buttonLogout);
   return feedDiv;
 };
-// export const containerPost = () => {
-//   const containerPostDiv = document.createElement('div');
-//   containerPostDiv.id = ('containerPostDiv');
-//   return containerPost;
-// };
