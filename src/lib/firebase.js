@@ -94,15 +94,17 @@ export function deletePost(postid) {
 }
 
 // Editar Post
-export function editPost(postid, rewritePost) {
-  document.getElementById('post').value = rewritePost;
-
+export function editPost(postid, post) {
   const edition = db.collection('allPost').doc(postid);
-  // const editText = document.getElementById('post').value;
+  document.getElementById('changePost').innerHTML = postid;
 
+  // const editText = document.getElementById('post').value;
+  // console.log(editText);
+  // const editText = document.getElementById('post').value;
+  // const post = document.getElementById('post').value;
   // Set the "capital" field of the city 'DC'
   return edition.update({
-    first: rewritePost,
+    //first: editText,
   })
     .then(() => {
       console.log('Document successfully updated!');

@@ -92,12 +92,12 @@ export const Feed = () => {
   modalDiv.id = 'Modal';
   // alert('¿Editar publicación?');
   const printModal = `<div class= 'modalContent'>
-<h2 class = 'close'> X </h2>
-<textArea class = 'editPost'></textArea>
+<h2 class = 'close'> Edita tu post </h2>
+<div id= "changePost"><textArea id = 'changePost'></textArea></div>
 <button id = 'save' class = 'savePost'> Guardar </button>
 </div>`;
   modalDiv.innerHTML += printModal;
-  modalDiv.style.display = 'none';
+  modalDiv.style.display = 'none'; 
   console.log(modalDiv);
 
   firebase.auth().onAuthStateChanged((user) => {
@@ -133,6 +133,9 @@ export const Feed = () => {
         //   console.log('llamada de boton editar');
         // console.log(modalDiv.innerHTML += printModal);
           modalDiv.style.display = 'block';
+          const currElem = e.target;
+          const postId = currElem.closest('.post_history').dataset.postid;
+          editPost(postId, post);
           // modalDiv.style.visibility = 'visible';
           // const modal = document.getElementById('Modal');
           // const span = document.getElementsByClassName('close')[0];
