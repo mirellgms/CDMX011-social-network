@@ -101,7 +101,7 @@ export const Feed = () => {
 <button id = 'save' class = 'savePost'> Guardar </button>
 </div>`;
   modalDiv.innerHTML += printModal;
-  modalDiv.style.display = 'none'; 
+  modalDiv.style.display = 'none';
   console.log(modalDiv);
 
   firebase.auth().onAuthStateChanged((user) => {
@@ -110,9 +110,9 @@ export const Feed = () => {
     db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
       containerPostDiv.innerHTML = '';
       querySnapshot.forEach((doc) => {
-        const printPost = `<div class= 'post_history' data-postid='${doc.id}'>
+        const printPost = `<div class= 'post_history' data-postid='${doc.id}' data-post='${doc.data().first}'>
       <h1 id=userName>${doc.data().useremail}</h1> 
-      <div id='p_texts'> ${doc.data().first}</div>  
+      <div id='p_texts'> ${doc.data().first}</div>
       <div class= actions> 
       <button id = "btn_like" class= "btn_like" title = "Me gusta">❤️Like</button> 
       ${doc.data().idUser === uid ? '<button id = "btn_edit" class= "btn_edit" title = "Editar"> 🖊️Editar </button>' : '<p></p>'}
@@ -139,7 +139,8 @@ export const Feed = () => {
           modalDiv.style.display = 'block';
           const currElem = e.target;
           const postId = currElem.closest('.post_history').dataset.postid;
-          editPost(postId, post);
+          const Post = currElem.closest('.post_history').dataset.post;
+          editPost(postId, Post);
           // modalDiv.style.visibility = 'visible';
           // const modal = document.getElementById('Modal');
           // const span = document.getElementsByClassName('close')[0];
@@ -148,6 +149,7 @@ export const Feed = () => {
           // modal.style.display = 'block';
 
           // const currElem = e.target;
+
           // const postId = currElem.closest('.post_history').dataset.postid;
           // editPost(postId, post);
         });
