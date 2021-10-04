@@ -74,6 +74,7 @@ export const Feed = () => {
   const publish = document.createElement('button');
   publish.textContent = 'Publicar';
   publish.id = 'publish';
+
   publish.addEventListener('click', (event) => {
     // Cloud Firestore
     post = document.getElementById('post').value;
@@ -85,6 +86,20 @@ export const Feed = () => {
   });
 
   const containerPostDiv = document.createElement('div');
+
+  const modalDiv = document.createElement('div');
+  modalDiv.classList.add('modalContainer');
+  modalDiv.id = 'Modal';
+  // alert('¿Editar publicación?');
+  const printModal = `<div class= 'modalContent'>
+<h2 class = 'close'> X </h2>
+<textArea class = 'editPost'></textArea>
+<button id = 'save' class = 'savePost'> Guardar </button>
+</div>`;
+  modalDiv.innerHTML += printModal;
+  modalDiv.style.display = 'none';
+  console.log(modalDiv);
+
   firebase.auth().onAuthStateChanged((user) => {
     const uid = user.uid;
     // Leer documentos
@@ -112,13 +127,22 @@ export const Feed = () => {
           deletePost(postId);
         });
       });
+
       containerPostDiv.querySelectorAll('.btn_edit').forEach((button) => {
         button.addEventListener('click', (e) => {
-          alert('¿Editar publicación?');
-          const currElem = e.target; // referencia a un objeto que lanzo el evento
-          const postId = currElem.closest('.post_history').dataset.postid; //
-          const rewritePost = currElem.closest('.post_history').dataset.p_texts;
-          editPost(postId, rewritePost);
+        //   console.log('llamada de boton editar');
+        // console.log(modalDiv.innerHTML += printModal);
+          modalDiv.style.display = 'block';
+          // modalDiv.style.visibility = 'visible';
+          // const modal = document.getElementById('Modal');
+          // const span = document.getElementsByClassName('close')[0];
+          // const body = document.getElementsByTagName('body')[0];
+          // const btnPublish = document.getElementById('publish');
+          // modal.style.display = 'block';
+
+          // const currElem = e.target;
+          // const postId = currElem.closest('.post_history').dataset.postid;
+          // editPost(postId, post);
         });
       });
     });
@@ -144,6 +168,7 @@ export const Feed = () => {
   option.appendChild(eventos);
   feedDiv.appendChild(post);
   feedDiv.appendChild(publish);
+  feedDiv.appendChild(modalDiv);
   feedDiv.appendChild(containerPostDiv);
   feedDiv.appendChild(buttonLogout);
   return feedDiv;

@@ -98,11 +98,11 @@ export function editPost(postid, rewritePost) {
   document.getElementById('post').value = rewritePost;
 
   const edition = db.collection('allPost').doc(postid);
-  const editText = document.getElementById('post').value;
+  // const editText = document.getElementById('post').value;
 
   // Set the "capital" field of the city 'DC'
   return edition.update({
-    first: editText,
+    first: rewritePost,
   })
     .then(() => {
       console.log('Document successfully updated!');
