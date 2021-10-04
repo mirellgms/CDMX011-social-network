@@ -96,7 +96,7 @@ export function deletePost(postid) {
 // Editar Post
 export function editPost(postid, post) {
   const edition = db.collection('allPost').doc(postid);
-  document.getElementById('changePost').innerHTML = postid;
+  document.getElementById('changePost').innerHTML = post;
 
   // const editText = document.getElementById('post').value;
   // console.log(editText);
