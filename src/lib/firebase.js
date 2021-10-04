@@ -67,8 +67,6 @@ export function postFeed(post) {
   const uid = user.uid;
 
   db.collection('allPost').add({
-  // displayName:
-  // user: user,
     useremail: user.email,
     first: post,
     dateP: datePost,

@@ -95,7 +95,7 @@ img {
 }
 #line1{
     width: 44%;
-    border-top: 2px solid #0976B2;
+    border-top: 2px solid #0976B2; 
     margin-left: 166px;
     margin-top: 21px;
 }
@@ -180,7 +180,6 @@ select{
     }
 
 #userName {
-    text-align: left;
     font-weight: bold;
 }
 
