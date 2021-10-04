@@ -36,7 +36,9 @@ export const Feed = () => {
   iconProfile.id = 'iconProfile';
   iconProfile.classList.add('icon');
 
-  const option = document.createElement('select');
+  const selectOption = document.createElement('select');
+  selectOption.id = 'selectOption';
+  // const categoryOption = document.getElementById('selectOption').value;
 
   const category = document.createElement('option');
   category.setAttribute('value', 'Select');
@@ -47,6 +49,7 @@ export const Feed = () => {
   const devocional = document.createElement('option');
   devocional.setAttribute('value', 'devocional');
   devocional.id = 'devocional';
+
   const devocionalText = document.createTextNode('Devocional 🙏');
   devocional.appendChild(devocionalText);
 
@@ -165,12 +168,12 @@ export const Feed = () => {
   barraDiv.appendChild(iconHome);
   barraDiv.appendChild(iconLight);
   barraDiv.appendChild(iconProfile);
-  feedDiv.appendChild(option);
-  option.appendChild(category);
-  option.appendChild(devocional);
-  option.appendChild(estudioBiblico);
-  option.appendChild(musica);
-  option.appendChild(eventos);
+  feedDiv.appendChild(selectOption);
+  selectOption.appendChild(category);
+  selectOption.appendChild(devocional);
+  selectOption.appendChild(estudioBiblico);
+  selectOption.appendChild(musica);
+  selectOption.appendChild(eventos);
   feedDiv.appendChild(post);
   feedDiv.appendChild(publish);
   feedDiv.appendChild(modalDiv);

@@ -95,7 +95,7 @@ img {
 }
 #line1{
     width: 44%;
-    border-top: 2px solid #0976B2;
+    border-top: 2px solid #0976B2; 
     margin-left: 166px;
     margin-top: 21px;
 }
@@ -180,7 +180,6 @@ select{
     }
 
 #userName {
-    text-align: left;
     font-weight: bold;
 }
 
@@ -224,14 +223,14 @@ select{
 }
 
 .post_history, .containerPostDiv .modalContainer{
-    background-color: hsl(0deg 0% 0% / 2%);
+    background-color: hsl(0deg 0% 0% / 0%);
     border: 1px solid black;
     padding: 15px;
     border-radius: 10px;
     /* background-color: white; */
     /* height: 70px;
     align-items: center; */
-    width: 300px;
+    //width: 300px;
     flex-direction: column;
 
 }
