@@ -97,7 +97,7 @@ export const Feed = () => {
 <button id = 'save' class = 'savePost'> Guardar </button>
 </div>`;
   modalDiv.innerHTML += printModal;
-  modalDiv.style.display = 'none'; 
+  modalDiv.style.display = 'none';
   console.log(modalDiv);
 
   firebase.auth().onAuthStateChanged((user) => {
@@ -145,7 +145,7 @@ export const Feed = () => {
           // modal.style.display = 'block';
 
           // const currElem = e.target;
-          
+
           // const postId = currElem.closest('.post_history').dataset.postid;
           // editPost(postId, post);
         });
