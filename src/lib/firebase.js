@@ -100,6 +100,7 @@ export function editPost(postid, Post) {
   newElement.value = Post;
   document.getElementById('changePost').appendChild(newElement);
 
+
   const btnSave = document.getElementById('save');
   btnSave.addEventListener('click', (e) => {
     const modalDiv = document.getElementById('Modal');
@@ -108,6 +109,7 @@ export function editPost(postid, Post) {
     // first: "hola",
     edition.update({
       first: postNew,
+
     })
       .then(() => {
         console.log('Document successfully updated!');

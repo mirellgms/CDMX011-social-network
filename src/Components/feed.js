@@ -124,10 +124,15 @@ export const Feed = () => {
 
       containerPostDiv.querySelectorAll('.btn_delete').forEach((button) => {
         button.addEventListener('click', (e) => {
-          alert('¿Eliminar publicación?');
-          const currElem = e.target; // referencia a un objeto que lanzo el evento
-          const postId = currElem.closest('.post_history').dataset.postid; //
-          deletePost(postId);
+          const answer = confirm('¿Eliminar publicación?');
+          if (answer == true) {
+            const currElem = e.target; // referencia a un objeto que lanzo el evento
+            const postId = currElem.closest('.post_history').dataset.postid; //
+            deletePost(postId);
+          }
+          else {
+            return false;
+          }
         });
       });
 
