@@ -94,18 +94,29 @@ export function deletePost(postid) {
 // Editar Post
 export function editPost(postid, Post) {
   const edition = db.collection('allPost').doc(postid);
+  const changePost = document.getElementById('changePost');
+  changePost.innerHTML = '';
   const newElement = document.createElement('textarea');
   newElement.value = Post;
   document.getElementById('changePost').appendChild(newElement);
 
-  return edition.update({
-    first: Post,
-  })
-    .then(() => {
-      console.log('Document successfully updated!');
+
+  const btnSave = document.getElementById('save');
+  btnSave.addEventListener('click', (e) => {
+    const modalDiv = document.getElementById('Modal');
+    modalDiv.style.display = 'none';
+    const postNew = newElement.value;
+    // first: "hola",
+    edition.update({
+      first: postNew,
+
     })
-    .catch((error) => {
-    // The document probably doesn't exist.
-      console.error('Error updating document: ', error);
-    });
+      .then(() => {
+        console.log('Document successfully updated!');
+      })
+      .catch((error) => {
+        // The document probably doesn't exist.
+        console.error('Error updating document: ', error);
+      });
+  });
 }

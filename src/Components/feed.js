@@ -138,8 +138,6 @@ export const Feed = () => {
 
       containerPostDiv.querySelectorAll('.btn_edit').forEach((button) => {
         button.addEventListener('click', (e) => {
-        //   console.log('llamada de boton editar');
-        // console.log(modalDiv.innerHTML += printModal);
           modalDiv.style.display = 'block';
           const currElem = e.target;
           const postId = currElem.closest('.post_history').dataset.postid;
