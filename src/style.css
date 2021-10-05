@@ -254,7 +254,7 @@ select{
     cursor: pointer;
     position: absolute;
     left: 71%;
-    margin-top: -2%;
+    margin-top: -1%;
 }
 
 #btn_edit{
@@ -269,7 +269,7 @@ select{
     cursor: pointer;
     position: absolute;
     right: 43%;
-    margin-top: -5%;
+    margin-top: -1%;
     
     
 }
@@ -283,7 +283,7 @@ select{
     cursor: pointer;
     position: absolute;
     left: 16%;
-    margin-top: -15px;
+    margin-top: -1px;
 
 }
 
