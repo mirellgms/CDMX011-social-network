@@ -96,7 +96,7 @@ export const Feed = () => {
   // alert('¿Editar publicación?');
   const printModal = `<div class= 'modalContent'>
 <h2 class = 'close'> Edita tu post </h2>
-<div id= "changePost"><textArea id = 'changePost'></textArea></div>
+<div id= "changePost"></div>
 <button id = 'save' class = 'savePost'> Guardar </button>
 </div>`;
   modalDiv.innerHTML += printModal;
@@ -136,12 +136,15 @@ export const Feed = () => {
         //   console.log('llamada de boton editar');
         // console.log(modalDiv.innerHTML += printModal);
           modalDiv.style.display = 'block';
-          const currElem = e.target;
-          const postId = currElem.closest('.post_history').dataset.postid;
+           const currElem = e.target;
+           const postId = currElem.closest('.post_history').dataset.postid;
           const Post = currElem.closest('.post_history').dataset.post;
           editPost(postId, Post);
+          //const Post = document.getElementById('p_texts').value;
+          // const changePost = document.getElementById('changePost');
+          // changePost.innerHTML = editPost(postId, post);
           // modalDiv.style.visibility = 'visible';
-          // const modal = document.getElementById('Modal');
+          // const modal = document.getElementById('Modal');x
           // const span = document.getElementsByClassName('close')[0];
           // const body = document.getElementsByTagName('body')[0];
           // const btnPublish = document.getElementById('publish');
@@ -150,7 +153,7 @@ export const Feed = () => {
           // const currElem = e.target;
 
           // const postId = currElem.closest('.post_history').dataset.postid;
-          // editPost(postId, post);
+          // editPost(postId, Post);
         });
       });
     });

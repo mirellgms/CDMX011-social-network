@@ -92,9 +92,11 @@ export function deletePost(postid) {
 }
 
 // Editar Post
-export function editPost(postid, post) {
+export function editPost(postid, Post) {
   const edition = db.collection('allPost').doc(postid);
-  document.getElementById('changePost').innerHTML = post;
+  const newElement = document.createElement('textarea');
+  newElement.value = Post;
+  document.getElementById('changePost').appendChild(newElement);
 
   // const editText = document.getElementById('post').value;
   // console.log(editText);
@@ -102,7 +104,7 @@ export function editPost(postid, post) {
   // const post = document.getElementById('post').value;
   // Set the "capital" field of the city 'DC'
   return edition.update({
-    //first: editText,
+    // first: post,
   })
     .then(() => {
       console.log('Document successfully updated!');
