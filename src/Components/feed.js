@@ -88,7 +88,6 @@ export const Feed = () => {
     }
   });
 
-
   const containerPostDiv = document.createElement('div');
 
   const modalDiv = document.createElement('div');
@@ -125,10 +124,15 @@ export const Feed = () => {
 
       containerPostDiv.querySelectorAll('.btn_delete').forEach((button) => {
         button.addEventListener('click', (e) => {
-          alert('¿Eliminar publicación?');
-          const currElem = e.target; // referencia a un objeto que lanzo el evento
-          const postId = currElem.closest('.post_history').dataset.postid; //
-          deletePost(postId);
+          const answer = confirm('¿Eliminar publicación?');
+          if (answer == true) {
+            const currElem = e.target; // referencia a un objeto que lanzo el evento
+            const postId = currElem.closest('.post_history').dataset.postid; //
+            deletePost(postId);
+          }
+          else {
+            return false;
+          }
         });
       });
 
@@ -137,24 +141,10 @@ export const Feed = () => {
         //   console.log('llamada de boton editar');
         // console.log(modalDiv.innerHTML += printModal);
           modalDiv.style.display = 'block';
-           const currElem = e.target;
-           const postId = currElem.closest('.post_history').dataset.postid;
+          const currElem = e.target;
+          const postId = currElem.closest('.post_history').dataset.postid;
           const Post = currElem.closest('.post_history').dataset.post;
           editPost(postId, Post);
-          //const Post = document.getElementById('p_texts').value;
-          // const changePost = document.getElementById('changePost');
-          // changePost.innerHTML = editPost(postId, post);
-          // modalDiv.style.visibility = 'visible';
-          // const modal = document.getElementById('Modal');x
-          // const span = document.getElementsByClassName('close')[0];
-          // const body = document.getElementsByTagName('body')[0];
-          // const btnPublish = document.getElementById('publish');
-          // modal.style.display = 'block';
-
-          // const currElem = e.target;
-
-          // const postId = currElem.closest('.post_history').dataset.postid;
-          // editPost(postId, Post);
         });
       });
     });

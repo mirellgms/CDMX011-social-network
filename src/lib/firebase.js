@@ -98,13 +98,8 @@ export function editPost(postid, Post) {
   newElement.value = Post;
   document.getElementById('changePost').appendChild(newElement);
 
-  // const editText = document.getElementById('post').value;
-  // console.log(editText);
-  // const editText = document.getElementById('post').value;
-  // const post = document.getElementById('post').value;
-  // Set the "capital" field of the city 'DC'
   return edition.update({
-    // first: post,
+    first: Post,
   })
     .then(() => {
       console.log('Document successfully updated!');
