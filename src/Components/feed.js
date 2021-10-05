@@ -133,27 +133,11 @@ export const Feed = () => {
 
       containerPostDiv.querySelectorAll('.btn_edit').forEach((button) => {
         button.addEventListener('click', (e) => {
-        //   console.log('llamada de boton editar');
-        // console.log(modalDiv.innerHTML += printModal);
           modalDiv.style.display = 'block';
-           const currElem = e.target;
-           const postId = currElem.closest('.post_history').dataset.postid;
+          const currElem = e.target;
+          const postId = currElem.closest('.post_history').dataset.postid;
           const Post = currElem.closest('.post_history').dataset.post;
           editPost(postId, Post);
-          //const Post = document.getElementById('p_texts').value;
-          // const changePost = document.getElementById('changePost');
-          // changePost.innerHTML = editPost(postId, post);
-          // modalDiv.style.visibility = 'visible';
-          // const modal = document.getElementById('Modal');x
-          // const span = document.getElementsByClassName('close')[0];
-          // const body = document.getElementsByTagName('body')[0];
-          // const btnPublish = document.getElementById('publish');
-          // modal.style.display = 'block';
-
-          // const currElem = e.target;
-
-          // const postId = currElem.closest('.post_history').dataset.postid;
-          // editPost(postId, Post);
         });
       });
     });
