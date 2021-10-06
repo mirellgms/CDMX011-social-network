@@ -124,7 +124,7 @@ export const Feed = () => {
 
       containerPostDiv.querySelectorAll('.btn_delete').forEach((button) => {
         button.addEventListener('click', (e) => {
-          const answer = confirm('¿Eliminar publicación?');
+          const answer = confirm ('¿Eliminar publicación?');
           if (answer == true) {
             const currElem = e.target; // referencia a un objeto que lanzo el evento
             const postId = currElem.closest('.post_history').dataset.postid; //
@@ -138,6 +138,8 @@ export const Feed = () => {
 
       containerPostDiv.querySelectorAll('.btn_edit').forEach((button) => {
         button.addEventListener('click', (e) => {
+        //   console.log('llamada de boton editar');
+        // console.log(modalDiv.innerHTML += printModal);
           modalDiv.style.display = 'block';
           const currElem = e.target;
           const postId = currElem.closest('.post_history').dataset.postid;
