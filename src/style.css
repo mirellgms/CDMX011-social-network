@@ -112,13 +112,14 @@ img {
 
 
 .icon {
-    width: 30px;
+    width: 24px;
     border: 0px;
     position: relative;
-    bottom: 40px;
-    left: 130px;
-
-
+    bottom: 34px;
+    left: 132px;
+}
+#iconLight{
+    width: 20%;
 }
 
 #openEye, #closeEye {
@@ -147,17 +148,7 @@ img {
     margin-left: 5%;
     margin-top: 6%;
 }
-@media only screen and (max-width: 600px) {
-    div#header {
-        margin-left: 15px;
-    }
-    #imgHeader{
-        margin-left: 65px;
-    }
-    #homeDiv{
-        margin-top: 5px;
-    }
-  }
+
 #menu{
     width: 23px;
 }
@@ -194,7 +185,7 @@ select{
     border-radius: 5px;
     padding-top: 10px;
     margin-top: 10px;
-    width: 78%;
+    width: 55%;
     height: 25px;
 }
 
@@ -336,3 +327,50 @@ select{
     cursor: pointer;
 } 
 
+@media only screen and (max-width: 600px) {
+    #imgHeader{
+        margin-left: 17%;
+        width: 53%;
+    }
+    h1{
+        font-size: 95%;
+        text-align: center;
+        margin-inline-end: 15%;
+        margin-inline-start: 15%;  
+    }
+    #homeDiv{
+        margin-top: 5px;
+    margin-left: 0%;
+    }
+    #registerDiv{
+        margin-top: 0%;
+    }
+    #title{
+        width: 46%;
+    }
+    #iconLight{
+        width: 20%;
+        margin-top: -4%;
+    }
+    #btn_edit{
+        position: absolute;
+        left: 46%;
+        margin-top: 2%;
+    }
+    #btn_delete{
+        position: absolute;
+        left: 71%;
+        margin-top: 4%;
+    }
+    #btn_like{
+        position: absolute;
+        left: 21%;
+        margin-top: 4%;
+    }
+    .post_history{
+        max-width: 200%;
+        width: 111%;
+        padding: 8%;
+        margin-left: -10%;
+    }
+  }

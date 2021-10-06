@@ -17,60 +17,10 @@ export const Feed = () => {
   const barraDiv = document.createElement('div');
   barraDiv.id = 'barraDiv';
 
-  // feedDiv.appendChild(title);
-  // const barraDiv = document.createElement('div');
-  // barraDiv.id = 'barraDiv';
-/*
-  const iconHome = document.createElement('img');
-  iconHome.setAttribute('src', '../img/iconHome.png');
-  iconHome.id = 'iconHome';
-  iconHome.classList.add('icon');
-
   const iconLight = document.createElement('img');
   iconLight.setAttribute('src', '../img/iconosinfondo.png');
   iconLight.id = 'iconLight';
   iconLight.classList.add('icon');
-
-  const iconProfile = document.createElement('img');
-  iconProfile.setAttribute('src', '../img/iconUserBlack.png');
-  iconProfile.id = 'iconProfile';
-  iconProfile.classList.add('icon');
-
-  const selectOption = document.createElement('select');
-  selectOption.id = 'selectOption';
-  // const categoryOption = document.getElementById('selectOption').value;
-
-  const category = document.createElement('option');
-  category.setAttribute('value', 'Select');
-  category.id = 'category';
-  const categoryText = document.createTextNode('Selecciona una categoría');
-  category.appendChild(categoryText);
-
-  const devocional = document.createElement('option');
-  devocional.setAttribute('value', 'devocional');
-  devocional.id = 'devocional';
-
-  const devocionalText = document.createTextNode('Devocional 🙏');
-  devocional.appendChild(devocionalText);
-
-  const estudioBiblico = document.createElement('option');
-  estudioBiblico.setAttribute('value', 'estudioBiblico');
-  estudioBiblico.id = 'estudioBiblico';
-  const estudioBiblicoText = document.createTextNode('Estudio Bíblico 📖');
-  estudioBiblico.appendChild(estudioBiblicoText);
-
-  const musica = document.createElement('option');
-  musica.setAttribute('value', 'musica');
-  musica.id = 'musica';
-  const musicaText = document.createTextNode('Música 🎵');
-  musica.appendChild(musicaText);
-
-  const eventos = document.createElement('option');
-  eventos.setAttribute('value', 'eventos');
-  eventos.id = 'eventos';
-  const eventosText = document.createTextNode('Eventos 🎤🔥');
-  eventos.appendChild(eventosText);
-*/
   let post = document.createElement('textArea');
   post.placeholder = '¿Qué estas pensando?';
   post.id = 'post';
@@ -159,16 +109,7 @@ export const Feed = () => {
 
   feedDiv.appendChild(title);
   feedDiv.appendChild(barraDiv);
- /* barraDiv.appendChild(iconHome);
   barraDiv.appendChild(iconLight);
-  barraDiv.appendChild(iconProfile);
-  feedDiv.appendChild(selectOption);
-  selectOption.appendChild(category);
-  selectOption.appendChild(devocional);
-  selectOption.appendChild(estudioBiblico);
-  selectOption.appendChild(musica);
-  selectOption.appendChild(eventos);
-  */
   feedDiv.appendChild(post);
   feedDiv.appendChild(publish);
   feedDiv.appendChild(modalDiv);
