@@ -8,17 +8,17 @@ div {
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
-    margin-top: 5px;
+    margin-top: 10px;
 
 }
 h1{
     max-width: 360px;
     font-weight: 100;
-    font-size: 15px;
+    font-size: 129%;
     text-align: center;
     font-family: 'Poppins', sans-serif;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 11%;
+  
 }
 button{
     background-color : #0976B2;
@@ -72,7 +72,7 @@ input{
     font-size: 94%;
 }
 img {
-    width: 175px;
+    width: 20%;
 
 }
 
@@ -81,6 +81,8 @@ img {
     border: 3px solid black;
     padding: 21px;
     border-radius: 10px;
+    margin-top: -25%;
+    margin-left: 50%;
 }
 
 #registerDiv{
@@ -88,6 +90,7 @@ img {
     border: 3px solid black;
     padding: 21px;
     border-radius: 10px;
+    margin-top: -30%;
 }
 
 #or{
@@ -134,14 +137,15 @@ img {
     display: flex;
     margin-right: 60px;
     margin-left: 60px;
-   /* margin-top: 36px; */
-    width: 189px;
+    margin-top: 35px;
+    width: 230px;
 }
 #imgHeader{
     margin-left: 122px;
 }
 #header {
-    margin-left: 385px;
+    margin-left: 5%;
+    margin-top: 6%;
 }
 @media only screen and (max-width: 600px) {
     div#header {
@@ -188,11 +192,10 @@ select{
     font-weight: bold;
     font-size: 94%;
     border-radius: 5px;
-/* text-align: center; */
     padding-top: 10px;
     margin-top: 10px;
-    width: 300px;
-    height: 70px;
+    width: 78%;
+    height: 25px;
 }
 
 #publish{
@@ -231,7 +234,7 @@ select{
     /* background-color: white; */
     /* height: 70px;
     align-items: center; */
-    width: 300px;
+    width: 100%;
     flex-direction: column;
 
 }
@@ -253,8 +256,8 @@ select{
     color: black;
     cursor: pointer;
     position: absolute;
-    left: 71%;
-    margin-top: -1%;
+    left: 57%;
+    margin-top: 0%;
 }
 
 #btn_edit{
@@ -268,8 +271,8 @@ select{
     margin-top: -14px;
     cursor: pointer;
     position: absolute;
-    right: 43%;
-    margin-top: -1%;
+    right: 48%;
+    margin-top: -6px;
     
     
 }
@@ -282,7 +285,7 @@ select{
     color: black;
     cursor: pointer;
     position: absolute;
-    left: 16%;
+    left: 42%;
     margin-top: -1px;
 
 }

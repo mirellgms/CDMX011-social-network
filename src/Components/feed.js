@@ -20,7 +20,7 @@ export const Feed = () => {
   // feedDiv.appendChild(title);
   // const barraDiv = document.createElement('div');
   // barraDiv.id = 'barraDiv';
-
+/*
   const iconHome = document.createElement('img');
   iconHome.setAttribute('src', '../img/iconHome.png');
   iconHome.id = 'iconHome';
@@ -70,7 +70,7 @@ export const Feed = () => {
   eventos.id = 'eventos';
   const eventosText = document.createTextNode('Eventos 🎤🔥');
   eventos.appendChild(eventosText);
-
+*/
   let post = document.createElement('textArea');
   post.placeholder = '¿Qué estas pensando?';
   post.id = 'post';
@@ -124,7 +124,7 @@ export const Feed = () => {
 
       containerPostDiv.querySelectorAll('.btn_delete').forEach((button) => {
         button.addEventListener('click', (e) => {
-          const answer = confirm('¿Eliminar publicación?');
+          const answer = confirm ('¿Eliminar publicación?');
           if (answer == true) {
             const currElem = e.target; // referencia a un objeto que lanzo el evento
             const postId = currElem.closest('.post_history').dataset.postid; //
@@ -138,6 +138,8 @@ export const Feed = () => {
 
       containerPostDiv.querySelectorAll('.btn_edit').forEach((button) => {
         button.addEventListener('click', (e) => {
+        //   console.log('llamada de boton editar');
+        // console.log(modalDiv.innerHTML += printModal);
           modalDiv.style.display = 'block';
           const currElem = e.target;
           const postId = currElem.closest('.post_history').dataset.postid;
@@ -157,7 +159,7 @@ export const Feed = () => {
 
   feedDiv.appendChild(title);
   feedDiv.appendChild(barraDiv);
-  barraDiv.appendChild(iconHome);
+ /* barraDiv.appendChild(iconHome);
   barraDiv.appendChild(iconLight);
   barraDiv.appendChild(iconProfile);
   feedDiv.appendChild(selectOption);
@@ -166,6 +168,7 @@ export const Feed = () => {
   selectOption.appendChild(estudioBiblico);
   selectOption.appendChild(musica);
   selectOption.appendChild(eventos);
+  */
   feedDiv.appendChild(post);
   feedDiv.appendChild(publish);
   feedDiv.appendChild(modalDiv);
