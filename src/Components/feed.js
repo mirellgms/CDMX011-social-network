@@ -20,7 +20,7 @@ export const Feed = () => {
   // feedDiv.appendChild(title);
   // const barraDiv = document.createElement('div');
   // barraDiv.id = 'barraDiv';
-
+/*
   const iconHome = document.createElement('img');
   iconHome.setAttribute('src', '../img/iconHome.png');
   iconHome.id = 'iconHome';
@@ -70,7 +70,7 @@ export const Feed = () => {
   eventos.id = 'eventos';
   const eventosText = document.createTextNode('Eventos 🎤🔥');
   eventos.appendChild(eventosText);
-
+*/
   let post = document.createElement('textArea');
   post.placeholder = '¿Qué estas pensando?';
   post.id = 'post';
@@ -159,7 +159,7 @@ export const Feed = () => {
 
   feedDiv.appendChild(title);
   feedDiv.appendChild(barraDiv);
-  barraDiv.appendChild(iconHome);
+ /* barraDiv.appendChild(iconHome);
   barraDiv.appendChild(iconLight);
   barraDiv.appendChild(iconProfile);
   feedDiv.appendChild(selectOption);
@@ -168,6 +168,7 @@ export const Feed = () => {
   selectOption.appendChild(estudioBiblico);
   selectOption.appendChild(musica);
   selectOption.appendChild(eventos);
+  */
   feedDiv.appendChild(post);
   feedDiv.appendChild(publish);
   feedDiv.appendChild(modalDiv);
