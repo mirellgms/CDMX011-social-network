@@ -17,7 +17,7 @@ export const Home = () => {
   iconEmail.classList.add('icon');
 
   let inputPassword = document.createElement('input');
-  inputPassword.placeholder = 'Contraseña (mínimo 6 carácteres)🔑';
+  inputPassword.placeholder = 'Contraseña (mínimo 6 carácteres)';
   inputPassword.type = 'password';
   inputPassword.id = ('inputPassword');
 
