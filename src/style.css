@@ -326,7 +326,11 @@ select{
     text-decoration: none;
     cursor: pointer;
 } 
-
+#contador{
+    margin-right: 725%;
+    margin-top: -82%;
+    font-weight: bold;
+}
 @media only screen and (max-width: 600px) {
     #imgHeader{
         margin-left: 17%;
@@ -372,5 +376,11 @@ select{
         width: 111%;
         padding: 8%;
         margin-left: -10%;
+    }
+    #contador{
+        margin-right: 545%;
+        margin-top: -70%;
+        font-weight: bold;
+
     }
   }

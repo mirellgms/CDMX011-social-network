@@ -63,9 +63,10 @@ export const Feed = () => {
       <h1 id=userName>${doc.data().useremail}</h1> 
       <div id='p_texts'> ${doc.data().first}</div>
       <div class= actions> 
-      <button id = "btn_like" class= "btn_like" title = "Me gusta">❤️Like</button> 
-      ${doc.data().idUser === uid ? '<button id = "btn_edit" class= "btn_edit" title = "Editar"> 🖊️Editar </button>' : '<p></p>'}
-      ${doc.data().idUser === uid ? '<button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️Borrar</button>' : '<p></p>'}
+      <p id=contador> # Me gusta </p>
+      <button id = "btn_like" class= "btn_like" title = "Me gusta" value ="false" >🤍</button> 
+      ${doc.data().idUser === uid ? '<button id = "btn_edit" class= "btn_edit" title = "Editar"> 🖊️ </button>' : '<p></p>'}
+      ${doc.data().idUser === uid ? '<button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️</button>' : '<p></p>'}
       <br>
       </div></div> `;
         containerPostDiv.innerHTML += printPost;
@@ -74,13 +75,12 @@ export const Feed = () => {
 
       containerPostDiv.querySelectorAll('.btn_delete').forEach((button) => {
         button.addEventListener('click', (e) => {
-          const answer = confirm ('¿Eliminar publicación?');
+          const answer = confirm('¿Eliminar publicación?');
           if (answer == true) {
             const currElem = e.target; // referencia a un objeto que lanzo el evento
             const postId = currElem.closest('.post_history').dataset.postid; //
             deletePost(postId);
-          }
-          else {
+          } else {
             return false;
           }
         });
@@ -95,6 +95,28 @@ export const Feed = () => {
           const postId = currElem.closest('.post_history').dataset.postid;
           const Post = currElem.closest('.post_history').dataset.post;
           editPost(postId, Post);
+        });
+      });
+      // ❤️
+      containerPostDiv.querySelectorAll('.btn_like').forEach((button) => {
+        button.addEventListener('click', (e) => {
+          // const currElem = e.target;
+          // const postId = currElem.closest('.post_history').dataset.postid;
+          // function likes(postId) {
+          const like = document.getElementById('btn_like').value;
+          if (like === 'false') {
+            const redHeart = '❤️';
+            document.getElementById('btn_like').innerHTML = '❤️';
+            document.getElementById('btn_like').innerHTML = (redHeart);
+            document.getElementById('btn_like').value = 'true';
+            const arrayContador = [uid];
+            console.log (arrayContador);
+          } else {
+            const whiteHeart = '🤍';
+            document.getElementById('btn_like').innerHTML = (whiteHeart);
+            document.getElementById('btn_like').value = 'false';
+            document.getElementById('btn_like').innerHTML = '🤍';
+          }
         });
       });
     });

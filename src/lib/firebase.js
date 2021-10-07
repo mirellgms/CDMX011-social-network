@@ -72,6 +72,8 @@ export function postFeed(post) {
     dateP: datePost,
     dateHour: date,
     idUser: uid,
+    like: true,
+    unlike: false,
   })
     .then((docRef) => {
       document.getElementById('post').value = '';
@@ -99,8 +101,6 @@ export function editPost(postid, Post) {
   const newElement = document.createElement('textarea');
   newElement.value = Post;
   document.getElementById('changePost').appendChild(newElement);
-
-
   const btnSave = document.getElementById('save');
   btnSave.addEventListener('click', (e) => {
     const modalDiv = document.getElementById('Modal');
@@ -120,3 +120,17 @@ export function editPost(postid, Post) {
       });
   });
 }
+
+// [START get_count]
+function getCount(ref) {
+  // Sum the count of each shard in the subcollection
+  return ref.collection('shards').get().then((snapshot) => {
+    let total_count = 0;
+    snapshot.forEach((doc) => {
+      total_count += doc.data().count;
+    });
+
+    return total_count;
+  });
+}
+// [END get_count]
