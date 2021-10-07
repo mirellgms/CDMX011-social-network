@@ -8,17 +8,17 @@ div {
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
-    margin-top: 5px;
+    margin-top: 10px;
 
 }
 h1{
     max-width: 360px;
     font-weight: 100;
-    font-size: 15px;
+    font-size: 129%;
     text-align: center;
     font-family: 'Poppins', sans-serif;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 11%;
+  
 }
 button{
     background-color : #0976B2;
@@ -72,7 +72,7 @@ input{
     font-size: 94%;
 }
 img {
-    width: 175px;
+    width: 20%;
 
 }
 
@@ -81,6 +81,8 @@ img {
     border: 3px solid black;
     padding: 21px;
     border-radius: 10px;
+    margin-top: -25%;
+    margin-left: 50%;
 }
 
 #registerDiv{
@@ -88,6 +90,7 @@ img {
     border: 3px solid black;
     padding: 21px;
     border-radius: 10px;
+    margin-top: -30%;
 }
 
 #or{
@@ -95,7 +98,7 @@ img {
 }
 #line1{
     width: 44%;
-    border-top: 2px solid #0976B2;
+    border-top: 2px solid #0976B2; 
     margin-left: 166px;
     margin-top: 21px;
 }
@@ -109,13 +112,14 @@ img {
 
 
 .icon {
-    width: 30px;
+    width: 24px;
     border: 0px;
     position: relative;
-    bottom: 40px;
-    left: 130px;
-
-
+    bottom: 34px;
+    left: 132px;
+}
+#iconLight{
+    width: 20%;
 }
 
 #openEye, #closeEye {
@@ -134,26 +138,17 @@ img {
     display: flex;
     margin-right: 60px;
     margin-left: 60px;
-   /* margin-top: 36px; */
-    width: 189px;
+    margin-top: 35px;
+    width: 230px;
 }
 #imgHeader{
     margin-left: 122px;
 }
 #header {
-    margin-left: 385px;
+    margin-left: 5%;
+    margin-top: 6%;
 }
-@media only screen and (max-width: 600px) {
-    div#header {
-        margin-left: 15px;
-    }
-    #imgHeader{
-        margin-left: 65px;
-    }
-    #homeDiv{
-        margin-top: 5px;
-    }
-  }
+
 #menu{
     width: 23px;
 }
@@ -188,11 +183,10 @@ select{
     font-weight: bold;
     font-size: 94%;
     border-radius: 5px;
-/* text-align: center; */
     padding-top: 10px;
     margin-top: 10px;
-    width: 300px;
-    height: 70px;
+    width: 55%;
+    height: 25px;
 }
 
 #publish{
@@ -223,15 +217,15 @@ select{
 
 }
 
-.post_history, .containerPostDiv{
-    background-color: hsl(0deg 0% 0% / 2%);
+.post_history, .containerPostDiv {
+    background-color: hsl(0deg 0% 0% / 0%);
     border: 1px solid black;
     padding: 15px;
     border-radius: 10px;
     /* background-color: white; */
     /* height: 70px;
     align-items: center; */
-    width: 300px;
+    width: 100%;
     flex-direction: column;
 
 }
@@ -239,7 +233,7 @@ select{
 .actions{
     flex-direction: row;
    margin-left: auto;
-
+   
 }
 
 
@@ -253,8 +247,8 @@ select{
     color: black;
     cursor: pointer;
     position: absolute;
-    left: 71%;
-    margin-top: -2%;
+    left: 57%;
+    margin-top: 0%;
 }
 
 #btn_edit{
@@ -268,8 +262,8 @@ select{
     margin-top: -14px;
     cursor: pointer;
     position: absolute;
-    right: 43%;
-    margin-top: -5%;
+    right: 48%;
+    margin-top: -6px;
     
     
 }
@@ -282,8 +276,8 @@ select{
     color: black;
     cursor: pointer;
     position: absolute;
-    left: 16%;
-    margin-top: -15px;
+    left: 42%;
+    margin-top: -1px;
 
 }
 
@@ -305,4 +299,88 @@ select{
 #btn_delete.screen-reader-text:hover{
     background-color:#B5DEFF;
 }
+.modalContainer{
+    margin-left: -20px;
+    display: none; 
+    position: fixed; 
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
 
+.modalContent {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid lightgray;
+ 
+    /* border-top: 10px solid #58abb7; */
+    width: 60%;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+} 
+#contador{
+    margin-right: 725%;
+    margin-top: -82%;
+    font-weight: bold;
+}
+@media only screen and (max-width: 600px) {
+    #imgHeader{
+        margin-left: 17%;
+        width: 53%;
+    }
+    h1{
+        font-size: 95%;
+        text-align: center;
+        margin-inline-end: 15%;
+        margin-inline-start: 15%;  
+    }
+    #homeDiv{
+        margin-top: 5px;
+    margin-left: 0%;
+    }
+    #registerDiv{
+        margin-top: 0%;
+    }
+    #title{
+        width: 46%;
+    }
+    #iconLight{
+        width: 20%;
+        margin-top: -4%;
+    }
+    #btn_edit{
+        position: absolute;
+        left: 46%;
+        margin-top: 2%;
+    }
+    #btn_delete{
+        position: absolute;
+        left: 71%;
+        margin-top: 4%;
+    }
+    #btn_like{
+        position: absolute;
+        left: 21%;
+        margin-top: 4%;
+    }
+    .post_history{
+        max-width: 200%;
+        width: 111%;
+        padding: 8%;
+        margin-left: -10%;
+    }
+    #contador{
+        margin-right: 545%;
+        margin-top: -70%;
+        font-weight: bold;
+
+    }
+  }

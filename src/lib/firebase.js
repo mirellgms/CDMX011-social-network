@@ -67,13 +67,13 @@ export function postFeed(post) {
   const uid = user.uid;
 
   db.collection('allPost').add({
-  // displayName:
-  // user: user,
     useremail: user.email,
     first: post,
     dateP: datePost,
     dateHour: date,
     idUser: uid,
+    like: true,
+    unlike: false,
   })
     .then((docRef) => {
       document.getElementById('post').value = '';
@@ -94,18 +94,43 @@ export function deletePost(postid) {
 }
 
 // Editar Post
-// var washingtonRef = db.collection("cities").doc("DC");
+export function editPost(postid, Post) {
+  const edition = db.collection('allPost').doc(postid);
+  const changePost = document.getElementById('changePost');
+  changePost.innerHTML = '';
+  const newElement = document.createElement('textarea');
+  newElement.value = Post;
+  document.getElementById('changePost').appendChild(newElement);
+  const btnSave = document.getElementById('save');
+  btnSave.addEventListener('click', (e) => {
+    const modalDiv = document.getElementById('Modal');
+    modalDiv.style.display = 'none';
+    const postNew = newElement.value;
+    // first: "hola",
+    edition.update({
+      first: postNew,
 
-// // Set the "capital" field of the city 'DC'
-// return washingtonRef.update({
-//     capital: true
-// })
-// .then(() => {
-//     console.log("Document successfully updated!");
-// })
-// .catch((error) => {
-//     // The document probably doesn't exist.
-//     console.error("Error updating document: ", error);
-// });
+    })
+      .then(() => {
+        console.log('Document successfully updated!');
+      })
+      .catch((error) => {
+        // The document probably doesn't exist.
+        console.error('Error updating document: ', error);
+      });
+  });
+}
 
-// https://firebase.google.com/docs/firestore/manage-data/add-data?hl=es
+// [START get_count]
+function getCount(ref) {
+  // Sum the count of each shard in the subcollection
+  return ref.collection('shards').get().then((snapshot) => {
+    let total_count = 0;
+    snapshot.forEach((doc) => {
+      total_count += doc.data().count;
+    });
+
+    return total_count;
+  });
+}
+// [END get_count]

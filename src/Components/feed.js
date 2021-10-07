@@ -1,7 +1,9 @@
 /* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-cycle
 // import { onNavigate } from '../main.js';
-import { logout, postFeed, db, deletePost } from '../lib/firebase.js';
+import {
+  logout, postFeed, db, deletePost, editPost,
+} from '../lib/firebase.js';
 // import db from './secret.js';
 
 export const Feed = () => {
@@ -15,63 +17,17 @@ export const Feed = () => {
   const barraDiv = document.createElement('div');
   barraDiv.id = 'barraDiv';
 
-  // feedDiv.appendChild(title);
-  // const barraDiv = document.createElement('div');
-  // barraDiv.id = 'barraDiv';
-
-  const iconHome = document.createElement('img');
-  iconHome.setAttribute('src', '../img/iconHome.png');
-  iconHome.id = 'iconHome';
-  iconHome.classList.add('icon');
-
   const iconLight = document.createElement('img');
   iconLight.setAttribute('src', '../img/iconosinfondo.png');
   iconLight.id = 'iconLight';
   iconLight.classList.add('icon');
-
-  const iconProfile = document.createElement('img');
-  iconProfile.setAttribute('src', '../img/iconUserBlack.png');
-  iconProfile.id = 'iconProfile';
-  iconProfile.classList.add('icon');
-
-  const option = document.createElement('select');
-
-  const category = document.createElement('option');
-  category.setAttribute('value', 'Select');
-  category.id = 'category';
-  const categoryText = document.createTextNode('Selecciona una categoría');
-  category.appendChild(categoryText);
-
-  const devocional = document.createElement('option');
-  devocional.setAttribute('value', 'devocional');
-  devocional.id = 'devocional';
-  const devocionalText = document.createTextNode('Devocional 🙏');
-  devocional.appendChild(devocionalText);
-
-  const estudioBiblico = document.createElement('option');
-  estudioBiblico.setAttribute('value', 'estudioBiblico');
-  estudioBiblico.id = 'estudioBiblico';
-  const estudioBiblicoText = document.createTextNode('Estudio Bíblico 📖');
-  estudioBiblico.appendChild(estudioBiblicoText);
-
-  const musica = document.createElement('option');
-  musica.setAttribute('value', 'musica');
-  musica.id = 'musica';
-  const musicaText = document.createTextNode('Música 🎵');
-  musica.appendChild(musicaText);
-
-  const eventos = document.createElement('option');
-  eventos.setAttribute('value', 'eventos');
-  eventos.id = 'eventos';
-  const eventosText = document.createTextNode('Eventos 🎤🔥');
-  eventos.appendChild(eventosText);
-
   let post = document.createElement('textArea');
   post.placeholder = '¿Qué estas pensando?';
   post.id = 'post';
   const publish = document.createElement('button');
   publish.textContent = 'Publicar';
   publish.id = 'publish';
+
   publish.addEventListener('click', (event) => {
     // Cloud Firestore
     post = document.getElementById('post').value;
@@ -83,19 +39,34 @@ export const Feed = () => {
   });
 
   const containerPostDiv = document.createElement('div');
+
+  const modalDiv = document.createElement('div');
+  modalDiv.classList.add('modalContainer');
+  modalDiv.id = 'Modal';
+  // alert('¿Editar publicación?');
+  const printModal = `<div class= 'modalContent'>
+<h2 class = 'close'> Edita tu post </h2>
+<div id= "changePost"></div>
+<button id = 'save' class = 'savePost'> Guardar </button>
+</div>`;
+  modalDiv.innerHTML += printModal;
+  modalDiv.style.display = 'none';
+  console.log(modalDiv);
+
   firebase.auth().onAuthStateChanged((user) => {
     const uid = user.uid;
     // Leer documentos
     db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
       containerPostDiv.innerHTML = '';
       querySnapshot.forEach((doc) => {
-        const printPost = `<div class= 'post_history' data-postid='${doc.id}'>
+        const printPost = `<div class= 'post_history' data-postid='${doc.id}' data-post='${doc.data().first}'>
       <h1 id=userName>${doc.data().useremail}</h1> 
-      <p class='p_texts'> ${doc.data().first}</p>  
+      <div id='p_texts'> ${doc.data().first}</div>
       <div class= actions> 
-      <button id = "btn_like" class= "btn_like" title = "Me gusta">❤️Like</button> 
-      ${doc.data().idUser === uid ? '<button id = "btn_edit" class= "btn_edit" title = "Editar"> 🖊️Editar </button>' : '<p></p>'}
-      ${doc.data().idUser === uid ? '<button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️Borrar</button>' : '<p></p>'}
+      <p id=contador> # Me gusta </p>
+      <button id = "btn_like" class= "btn_like" title = "Me gusta" value ="false" >🤍</button> 
+      ${doc.data().idUser === uid ? '<button id = "btn_edit" class= "btn_edit" title = "Editar"> 🖊️ </button>' : '<p></p>'}
+      ${doc.data().idUser === uid ? '<button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️</button>' : '<p></p>'}
       <br>
       </div></div> `;
         containerPostDiv.innerHTML += printPost;
@@ -104,10 +75,48 @@ export const Feed = () => {
 
       containerPostDiv.querySelectorAll('.btn_delete').forEach((button) => {
         button.addEventListener('click', (e) => {
-          alert('¿Eliminar publicación?');
-          const currElem = e.target; // referencia a un objeto que lanzo el evento
-          const postId = currElem.closest('.post_history').dataset.postid; //
-          deletePost(postId);
+          const answer = confirm('¿Eliminar publicación?');
+          if (answer == true) {
+            const currElem = e.target; // referencia a un objeto que lanzo el evento
+            const postId = currElem.closest('.post_history').dataset.postid; //
+            deletePost(postId);
+          } else {
+            return false;
+          }
+        });
+      });
+
+      containerPostDiv.querySelectorAll('.btn_edit').forEach((button) => {
+        button.addEventListener('click', (e) => {
+        //   console.log('llamada de boton editar');
+        // console.log(modalDiv.innerHTML += printModal);
+          modalDiv.style.display = 'block';
+          const currElem = e.target;
+          const postId = currElem.closest('.post_history').dataset.postid;
+          const Post = currElem.closest('.post_history').dataset.post;
+          editPost(postId, Post);
+        });
+      });
+      // ❤️
+      containerPostDiv.querySelectorAll('.btn_like').forEach((button) => {
+        button.addEventListener('click', (e) => {
+          // const currElem = e.target;
+          // const postId = currElem.closest('.post_history').dataset.postid;
+          // function likes(postId) {
+          const like = document.getElementById('btn_like').value;
+          if (like === 'false') {
+            const redHeart = '❤️';
+            document.getElementById('btn_like').innerHTML = '❤️';
+            document.getElementById('btn_like').innerHTML = (redHeart);
+            document.getElementById('btn_like').value = 'true';
+            const arrayContador = [uid];
+            console.log (arrayContador);
+          } else {
+            const whiteHeart = '🤍';
+            document.getElementById('btn_like').innerHTML = (whiteHeart);
+            document.getElementById('btn_like').value = 'false';
+            document.getElementById('btn_like').innerHTML = '🤍';
+          }
         });
       });
     });
@@ -122,23 +131,11 @@ export const Feed = () => {
 
   feedDiv.appendChild(title);
   feedDiv.appendChild(barraDiv);
-  barraDiv.appendChild(iconHome);
   barraDiv.appendChild(iconLight);
-  barraDiv.appendChild(iconProfile);
-  feedDiv.appendChild(option);
-  option.appendChild(category);
-  option.appendChild(devocional);
-  option.appendChild(estudioBiblico);
-  option.appendChild(musica);
-  option.appendChild(eventos);
   feedDiv.appendChild(post);
   feedDiv.appendChild(publish);
+  feedDiv.appendChild(modalDiv);
   feedDiv.appendChild(containerPostDiv);
   feedDiv.appendChild(buttonLogout);
   return feedDiv;
 };
-// export const containerPost = () => {
-//   const containerPostDiv = document.createElement('div');
-//   containerPostDiv.id = ('containerPostDiv');
-//   return containerPost;
-// };
