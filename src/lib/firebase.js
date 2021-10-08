@@ -1,6 +1,7 @@
 /* eslint-disable import/no-cycle */
 import firebase from './secret.js';
 
+
 export const registerUser = (email, password) => {
   firebase
     .auth()
@@ -72,8 +73,7 @@ export function postFeed(post) {
     dateP: datePost,
     dateHour: date,
     idUser: uid,
-    like: true,
-    unlike: false,
+    likes: [],
   })
     .then((docRef) => {
       document.getElementById('post').value = '';
@@ -120,17 +120,32 @@ export function editPost(postid, Post) {
       });
   });
 }
+/*
+//export function likeAdd(postid, Likes) {
+  //const edition = db.collection('allPost').doc(likes);
+  //const countLikes = document.getElementById('contador');
+ // contador.innerHTML = '';
+  // const newElement = document.createElement('textarea');
+  // newElement.value = Post;
+  //document.getElementById('contador').appendChild(newElement);
+  // const btnSave = document.getElementById('save');
+  // btnSave.addEventListener('click', (e) => {
+  //   const modalDiv = document.getElementById('Modal');
+  //   modalDiv.style.display = 'none';
+  //   const postNew = newElement.value;
+    // first: "hola",
+    edition.update({
+     // first: postNew,
+     Like: contador,
 
-// [START get_count]
-function getCount(ref) {
-  // Sum the count of each shard in the subcollection
-  return ref.collection('shards').get().then((snapshot) => {
-    let total_count = 0;
-    snapshot.forEach((doc) => {
-      total_count += doc.data().count;
-    });
-
-    return total_count;
+    })
+      .then(() => {
+        console.log('Document successfully updated!');
+      })
+      .catch((error) => {
+        // The document probably doesn't exist.
+        console.error('Error updating document: ', error);
+      });
   });
 }
-// [END get_count]
+*/
