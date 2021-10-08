@@ -59,12 +59,12 @@ export const Feed = () => {
     db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
       containerPostDiv.innerHTML = '';
       querySnapshot.forEach((doc) => {
-        const printPost = `<div class= 'post_history' data-postid='${doc.id}' data-post='${doc.data().first}'>
+        const printPost = `<div class= 'post_history' data-postid='${doc.id}' data-post='${doc.data().first}' data-likes='${doc.data().likes}'  > 
       <h1 id=userName>${doc.data().useremail}</h1> 
       <div id='p_texts'> ${doc.data().first}</div>
       <div class= actions> 
       <p id=contador> # Me gusta </p>
-      <button id = "btn_like" class= "btn_like" title = "Me gusta" value ="false" >🤍</button> 
+      <button id = "btn_like" class= "btn_like" title = "Me gusta" value ="false" >🤍</button>
       ${doc.data().idUser === uid ? '<button id = "btn_edit" class= "btn_edit" title = "Editar"> 🖊️ </button>' : '<p></p>'}
       ${doc.data().idUser === uid ? '<button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️</button>' : '<p></p>'}
       <br>
@@ -100,9 +100,10 @@ export const Feed = () => {
       // ❤️
       containerPostDiv.querySelectorAll('.btn_like').forEach((button) => {
         button.addEventListener('click', (e) => {
-          // const currElem = e.target;
-          // const postId = currElem.closest('.post_history').dataset.postid;
-          // function likes(postId) {
+          const currElem = e.target;
+          const postId = currElem.closest('.post_history').dataset.postid;
+          const Likes = [currElem.closest('.post_history').dataset.likes];
+          console.log(likes);
           const like = document.getElementById('btn_like').value;
           if (like === 'false') {
             const redHeart = '❤️';
@@ -110,7 +111,9 @@ export const Feed = () => {
             document.getElementById('btn_like').innerHTML = (redHeart);
             document.getElementById('btn_like').value = 'true';
             const arrayContador = [uid];
-            console.log (arrayContador);
+            // console.log(arrayContador);
+            export let contador = likes.push(arrayContador);
+            console.log(contador);
           } else {
             const whiteHeart = '🤍';
             document.getElementById('btn_like').innerHTML = (whiteHeart);
