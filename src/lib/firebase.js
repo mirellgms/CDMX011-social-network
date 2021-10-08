@@ -72,6 +72,8 @@ export function postFeed(post) {
     dateP: datePost,
     dateHour: date,
     idUser: uid,
+    like: true,
+    unlike: false,
   })
     .then((docRef) => {
       document.getElementById('post').value = '';
@@ -99,8 +101,6 @@ export function editPost(postid, Post) {
   const newElement = document.createElement('textarea');
   newElement.value = Post;
   document.getElementById('changePost').appendChild(newElement);
-
-
   const btnSave = document.getElementById('save');
   btnSave.addEventListener('click', (e) => {
     const modalDiv = document.getElementById('Modal');
@@ -120,3 +120,18 @@ export function editPost(postid, Post) {
       });
   });
 }
+// export function Like(postid) {
+//   const increment = db.FieldValue.increment(1);
+//   console.log(increment);
+//   //const decrement= db.FieldValue.increment(-1);
+//   const storyRef = db.collection('allPost').doc(postid);
+
+//   // Atomically increment the population of the city by 50.
+//   storyRef.update({
+//     count: increment,
+//   });
+//   // storyRef.update({
+//   //   count: decrement,
+//   // });
+//   console.log(storyRef);
+// }

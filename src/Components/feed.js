@@ -63,11 +63,14 @@ export const Feed = () => {
       <h1 id=userName>${doc.data().useremail}</h1> 
       <div id='p_texts'> ${doc.data().first}</div>
       <div class= actions> 
+      <p id=contador> # Me gusta </p>
+      <button id = "btn_dislike" class= "btn_dislike" title = "No Me gusta">❤️Like</button>
       <button id = "btn_like" class= "btn_like" title = "Me gusta">🤍Like</button> 
-      ${doc.data().idUser === uid ? '<button id = "btn_edit" class= "btn_edit" title = "Editar"> 🖊️Editar </button>' : '<p></p>'}
-      ${doc.data().idUser === uid ? '<button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️Borrar</button>' : '<p></p>'}
+      ${doc.data().idUser === uid ? '<button id = "btn_edit" class= "btn_edit" title = "Editar"> 🖊️ </button>' : '<p></p>'}
+      ${doc.data().idUser === uid ? '<button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️</button>' : '<p></p>'}
       <br>
       </div></div> `;
+        //  btn_dislikecontainerPostDiv.querySelectorAll('.btn_dislike');
         containerPostDiv.innerHTML += printPost;
         console.log(`${doc.id}  =>  ${doc.data().first}`);
       });
@@ -97,24 +100,50 @@ export const Feed = () => {
         });
       });
 
+      containerPostDiv.querySelectorAll('.btn_dislike').forEach((button) => {
+        button.addEventListener('click', (e) => {
+          const currElem = e.target;
+          //const postId = currElem.closest('.post_history').dataset.postid;
+          const btn_like = containerPostDiv.querySelector('#btn_like');
+          //console.log(btn_like);
+          btn_like.style.display = 'block';
+          //Like(postId);
+        });
+      });
 
-      
+      containerPostDiv.querySelectorAll('.btn_like').forEach((button) => {
+        button.addEventListener('click', (e) => {
+          const btn_like = containerPostDiv.querySelector('#btn_like');
+          console.log(btn_like);
+          btn_like.style.display = 'none';
 
-      const contador = function likes() {
-        const like = document.getElementById('btn_like').value;
-
-        if (like === 'false') {
-          const redHeart = '❤️ Me gusta ';
-          document.getElementById('btn_like').innerHTML = '❤️';
-          document.getElementById('btn_like').innerHTML = (redHeart);
-          document.getElementById('btn_like').value = 'true';
-        } else {
-          const whiteHeart = '🤍';
-          document.getElementById('btn_like').innerHTML = (whiteHeart);
-          document.getElementById('btn_like').value = 'false';
-          document.getElementById('btn_like').innerHTML = '';
-        }
-      };
+          // const like = document.getElementById('btn_like').value;
+          // if (like === 'false') {
+          //   const redHeart = '❤️';
+          //   document.getElementById('btn_like').innerHTML = '❤️';
+          //   document.getElementById('btn_like').innerHTML = (redHeart);
+          //   document.getElementById('btn_like').value = 'true';
+          //   const arrayContador = [uid];
+          //   console.log(arrayContador);
+          // } else {
+          //   const whiteHeart = '🤍';
+          //   document.getElementById('btn_like').innerHTML = (whiteHeart);
+          //   document.getElementById('btn_like').value = 'false';
+          //   document.getElementById('btn_like').innerHTML = '🤍';
+          // }
+          //  const currElem = e.target;
+          //  const postId = currElem.closest('.post_history').dataset.postid;
+          //  console.log (postId);
+          // likes(postId);
+          // const currElem = e.target;
+          // const postId = currElem.closest('.post_history').dataset.postid;
+          // getThePost(postId)
+          //   .then((doc) => {
+          //     console.log('holas');
+          //     // function likes() {
+          //   });
+        });
+      });
     });
   });
 
