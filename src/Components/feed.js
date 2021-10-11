@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-cycle
 import {
-  logout, postFeed, db, deletePost, editPost, likeAdd,
+  logout, postFeed, db, deletePost, editPost, likeAdd, likeRemove
 } from '../lib/firebase.js';
 
 export const Feed = () => {
@@ -56,6 +56,9 @@ export const Feed = () => {
     // Leer documentos
     db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
       containerPostDiv.innerHTML = '';
+      /* ${doc.data().likes.includes(uid) ? 
+        '<button id = "btn_like" class= "btn_like" title = "Me gusta">❤️</button>' 
+        : '<button class= "btn_like">🤍</button>'} */
       querySnapshot.forEach((doc) => {
         const Likes = doc.data().likes;
         const printPost = `<div class= 'post_history'
@@ -67,8 +70,7 @@ export const Feed = () => {
       <div id='p_texts'> ${doc.data().first}</div>
       <div class= actions>
       <p id=contador> ${doc.data().likes.length} Me gusta </p>
-      <button id = "btn_dislike" class= "btn_dislike" title = "No Me gusta">❤️Like</button>
-      <button id = "btn_like" class= "btn_like" title = "Me gusta">🤍Like</button>
+      <button id = "btn_like" class= "btn_like" title = "Me gusta">❤️</button>
       ${doc.data().idUser === uid ? '<button id = "btn_edit" class= "btn_edit" title = "Editar"> 🖊️ </button>' : '<p></p>'}
       ${doc.data().idUser === uid ? '<button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️</button>' : '<p></p>'}
       <br>
@@ -76,8 +78,26 @@ export const Feed = () => {
         //  btn_dislikecontainerPostDiv.querySelectorAll('.btn_dislike');
         containerPostDiv.innerHTML += printPost;
         console.log(`${doc.id}  =>  ${doc.data().first}`);
-        
-
+        // containerPostDiv.getElementById('btn_like');
+        containerPostDiv.querySelectorAll('.btn_like').forEach((button) => {
+          // refactorizar el queryselector y el for each
+          button.addEventListener('click', (e) => {
+            const userId = firebase.auth().currentUser.uid;
+            const currElem = e.target;
+            const postId = currElem.closest('.post_history').dataset.postid;
+            if (Likes.includes(userId)) {
+              likeRemove(postId, userId);
+              const whiteHeart = '🤍';
+              document.getElementById('btn_like').innerHTML = (whiteHeart);
+              document.getElementById('btn_like').innerHTML = '🤍';
+            } else {
+              likeAdd(postId, userId);
+              const redHeart = '❤️';
+              document.getElementById('btn_like').innerHTML = '❤️';
+              document.getElementById('btn_like').innerHTML = (redHeart);
+            }
+          });
+        });
       });
 
       containerPostDiv.querySelectorAll('.btn_delete').forEach((button) => {
@@ -105,70 +125,6 @@ export const Feed = () => {
           editPost(postId, Post);
         });
       });
-
-      containerPostDiv.querySelectorAll('.btn_like').forEach((button) => {
-        button.addEventListener('click', (e) => {
-          const userId = firebase.auth().currentUser.uid;
-          // const likesUser = userId();
-          console.log(userId.uid);
-
-          const currElem = e.target;
-          console.log(currElem);
-          const postId = currElem.closest('.post_history').dataset.postid;
-          // console.log(idUser);
-         
-          //console.log(Likes); // muestra el correo de quien hace el post
-          // const arrayContador = idUser;
-          // console.log(arrayContador); // muestra el id de quien da like
-
-          // Likes.push(arrayContador);
-          // console.log(Likes);
-          likeAdd(postId, userId);
-          // if (userID)
-        });
-      });
-      // containerPostDiv.querySelectorAll('.btn_dislike').forEach((button) => {
-      //   button.addEventListener('click', (e) => {
-      //     const currElem = e.target;
-      //     //const postId = currElem.closest('.post_history').dataset.postid;
-      //     const btn_like = containerPostDiv.querySelector('#btn_like');
-      //     //console.log(btn_like);
-      //     btn_like.style.display = 'block';
-      //     //Like(postId);
-      //   });
-      // });
-
-      // containerPostDiv.querySelectorAll('.btn_like').forEach((button) => {
-      //   button.addEventListener('click', (e) => {
-      //     const btn_like = containerPostDiv.querySelector('#btn_like');
-      //     console.log(btn_like);
-      //     btn_like.style.display = 'none';
-
-      // const like = document.getElementById('btn_like').value;
-      // if (like === 'false')
-      //   const redHeart = '❤️';
-      //   document.getElementById('btn_like').innerHTML = '❤️';
-      //   document.getElementById('btn_like').innerHTML = (redHeart);
-      //   document.getElementById('btn_like').value = 'true';
-      //   const arrayContador = [uid];
-      //   console.log(arrayContador);
-      // } else {
-      //   const whiteHeart = '🤍';
-      //   document.getElementById('btn_like').innerHTML = (whiteHeart);
-      //   document.getElementById('btn_like').value = 'false';
-      //   document.getElementById('btn_like').innerHTML = '🤍';
-      // }
-      //  const currElem = e.target;
-      //  const postId = currElem.closest('.post_history').dataset.postid;
-      //  console.log (postId);
-      // likes(postId);
-      // const currElem = e.target;
-      // const postId = currElem.closest('.post_history').dataset.postid;
-      // getThePost(postId)
-      //   .then((doc) => {
-      //     console.log('holas');
-      //     // function likes() {
-      //   });
     });
   });
 

@@ -125,24 +125,10 @@ export function likeAdd(postid, uid) {
   return db.collection('allPost').doc(postid).update({
     likes: firebase.firestore.FieldValue.arrayUnion(uid),
   });
-  // const countLikes = document.getElementById('arrayContador');
+}
 
-  // //countLikes.innerHTML = '';
-  //  const newElement = document.createElement('array');
-  //  newElement.value = Likes;
-  // document.getElementById('arrayContador').appendChild(newElement);
-  // console.log(newElement);
-  // const likesTotal = newElement.value;
-  // edition.update({
-  //   // first: postNew,
-  //   likes: likesTotal,
-
-  // })
-  //   .then(() => {
-  //     console.log('Document successfully updated!');
-  //   })
-  //   .catch((error) => {
-  //     // The document probably doesn't exist.
-  //     console.error('Error updating document: ', error);
-  //   });
+export function likeRemove(postid, uid) {
+  return db.collection('allPost').doc(postid).update({
+    likes: firebase.firestore.FieldValue.arrayRemove(uid),
+  });
 }
