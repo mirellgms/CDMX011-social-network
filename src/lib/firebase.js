@@ -65,6 +65,7 @@ export function postFeed(post) {
   const date = new Date();
   const datePost = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
   const uid = user.uid;
+  console.log(uid);
 
   db.collection('allPost').add({
     useremail: user.email,
@@ -72,8 +73,7 @@ export function postFeed(post) {
     dateP: datePost,
     dateHour: date,
     idUser: uid,
-    like: true,
-    unlike: false,
+    likes: [],
   })
     .then((docRef) => {
       document.getElementById('post').value = '';
@@ -120,18 +120,29 @@ export function editPost(postid, Post) {
       });
   });
 }
-// export function Like(postid) {
-//   const increment = db.FieldValue.increment(1);
-//   console.log(increment);
-//   //const decrement= db.FieldValue.increment(-1);
-//   const storyRef = db.collection('allPost').doc(postid);
 
-//   // Atomically increment the population of the city by 50.
-//   storyRef.update({
-//     count: increment,
-//   });
-//   // storyRef.update({
-//   //   count: decrement,
-//   // });
-//   console.log(storyRef);
-// }
+export function likeAdd(postid, uid) {
+  return db.collection('allPost').doc(postid).update({
+    likes: firebase.firestore.FieldValue.arrayUnion(uid),
+  });
+  // const countLikes = document.getElementById('arrayContador');
+
+  // //countLikes.innerHTML = '';
+  //  const newElement = document.createElement('array');
+  //  newElement.value = Likes;
+  // document.getElementById('arrayContador').appendChild(newElement);
+  // console.log(newElement);
+  // const likesTotal = newElement.value;
+  // edition.update({
+  //   // first: postNew,
+  //   likes: likesTotal,
+
+  // })
+  //   .then(() => {
+  //     console.log('Document successfully updated!');
+  //   })
+  //   .catch((error) => {
+  //     // The document probably doesn't exist.
+  //     console.error('Error updating document: ', error);
+  //   });
+}

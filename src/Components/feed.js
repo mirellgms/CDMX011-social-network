@@ -1,10 +1,8 @@
 /* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-cycle
-// import { onNavigate } from '../main.js';
 import {
-  logout, postFeed, db, deletePost, editPost,
+  logout, postFeed, db, deletePost, editPost, likeAdd,
 } from '../lib/firebase.js';
-// import db from './secret.js';
 
 export const Feed = () => {
   const feedDiv = document.createElement('div');
@@ -59,13 +57,18 @@ export const Feed = () => {
     db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
       containerPostDiv.innerHTML = '';
       querySnapshot.forEach((doc) => {
-        const printPost = `<div class= 'post_history' data-postid='${doc.id}' data-post='${doc.data().first}'>
-      <h1 id=userName>${doc.data().useremail}</h1> 
+        const Likes = doc.data().likes;
+        const printPost = `<div class= 'post_history'
+         data-postid='${doc.id}' 
+         data-post='${doc.data().first}'  
+         data-likes='${doc.data().likes}' 
+         data-idUser='${doc.data().idUser}'>
+      <h1 id=userName>${doc.data().useremail}</h1>
       <div id='p_texts'> ${doc.data().first}</div>
-      <div class= actions> 
-      <p id=contador> # Me gusta </p>
+      <div class= actions>
+      <p id=contador> ${doc.data().likes.length} Me gusta </p>
       <button id = "btn_dislike" class= "btn_dislike" title = "No Me gusta">❤️Like</button>
-      <button id = "btn_like" class= "btn_like" title = "Me gusta">🤍Like</button> 
+      <button id = "btn_like" class= "btn_like" title = "Me gusta">🤍Like</button>
       ${doc.data().idUser === uid ? '<button id = "btn_edit" class= "btn_edit" title = "Editar"> 🖊️ </button>' : '<p></p>'}
       ${doc.data().idUser === uid ? '<button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️</button>' : '<p></p>'}
       <br>
@@ -73,6 +76,8 @@ export const Feed = () => {
         //  btn_dislikecontainerPostDiv.querySelectorAll('.btn_dislike');
         containerPostDiv.innerHTML += printPost;
         console.log(`${doc.id}  =>  ${doc.data().first}`);
+        
+
       });
 
       containerPostDiv.querySelectorAll('.btn_delete').forEach((button) => {
@@ -94,56 +99,76 @@ export const Feed = () => {
         // console.log(modalDiv.innerHTML += printModal);
           modalDiv.style.display = 'block';
           const currElem = e.target;
+          console.log(currElem);
           const postId = currElem.closest('.post_history').dataset.postid;
           const Post = currElem.closest('.post_history').dataset.post;
           editPost(postId, Post);
         });
       });
 
-      containerPostDiv.querySelectorAll('.btn_dislike').forEach((button) => {
-        button.addEventListener('click', (e) => {
-          const currElem = e.target;
-          //const postId = currElem.closest('.post_history').dataset.postid;
-          const btn_like = containerPostDiv.querySelector('#btn_like');
-          //console.log(btn_like);
-          btn_like.style.display = 'block';
-          //Like(postId);
-        });
-      });
-
       containerPostDiv.querySelectorAll('.btn_like').forEach((button) => {
         button.addEventListener('click', (e) => {
-          const btn_like = containerPostDiv.querySelector('#btn_like');
-          console.log(btn_like);
-          btn_like.style.display = 'none';
+          const userId = firebase.auth().currentUser.uid;
+          // const likesUser = userId();
+          console.log(userId.uid);
 
-          // const like = document.getElementById('btn_like').value;
-          // if (like === 'false') {
-          //   const redHeart = '❤️';
-          //   document.getElementById('btn_like').innerHTML = '❤️';
-          //   document.getElementById('btn_like').innerHTML = (redHeart);
-          //   document.getElementById('btn_like').value = 'true';
-          //   const arrayContador = [uid];
-          //   console.log(arrayContador);
-          // } else {
-          //   const whiteHeart = '🤍';
-          //   document.getElementById('btn_like').innerHTML = (whiteHeart);
-          //   document.getElementById('btn_like').value = 'false';
-          //   document.getElementById('btn_like').innerHTML = '🤍';
-          // }
-          //  const currElem = e.target;
-          //  const postId = currElem.closest('.post_history').dataset.postid;
-          //  console.log (postId);
-          // likes(postId);
-          // const currElem = e.target;
-          // const postId = currElem.closest('.post_history').dataset.postid;
-          // getThePost(postId)
-          //   .then((doc) => {
-          //     console.log('holas');
-          //     // function likes() {
-          //   });
+          const currElem = e.target;
+          console.log(currElem);
+          const postId = currElem.closest('.post_history').dataset.postid;
+          // console.log(idUser);
+         
+          //console.log(Likes); // muestra el correo de quien hace el post
+          // const arrayContador = idUser;
+          // console.log(arrayContador); // muestra el id de quien da like
+
+          // Likes.push(arrayContador);
+          // console.log(Likes);
+          likeAdd(postId, userId);
+          // if (userID)
         });
       });
+      // containerPostDiv.querySelectorAll('.btn_dislike').forEach((button) => {
+      //   button.addEventListener('click', (e) => {
+      //     const currElem = e.target;
+      //     //const postId = currElem.closest('.post_history').dataset.postid;
+      //     const btn_like = containerPostDiv.querySelector('#btn_like');
+      //     //console.log(btn_like);
+      //     btn_like.style.display = 'block';
+      //     //Like(postId);
+      //   });
+      // });
+
+      // containerPostDiv.querySelectorAll('.btn_like').forEach((button) => {
+      //   button.addEventListener('click', (e) => {
+      //     const btn_like = containerPostDiv.querySelector('#btn_like');
+      //     console.log(btn_like);
+      //     btn_like.style.display = 'none';
+
+      // const like = document.getElementById('btn_like').value;
+      // if (like === 'false')
+      //   const redHeart = '❤️';
+      //   document.getElementById('btn_like').innerHTML = '❤️';
+      //   document.getElementById('btn_like').innerHTML = (redHeart);
+      //   document.getElementById('btn_like').value = 'true';
+      //   const arrayContador = [uid];
+      //   console.log(arrayContador);
+      // } else {
+      //   const whiteHeart = '🤍';
+      //   document.getElementById('btn_like').innerHTML = (whiteHeart);
+      //   document.getElementById('btn_like').value = 'false';
+      //   document.getElementById('btn_like').innerHTML = '🤍';
+      // }
+      //  const currElem = e.target;
+      //  const postId = currElem.closest('.post_history').dataset.postid;
+      //  console.log (postId);
+      // likes(postId);
+      // const currElem = e.target;
+      // const postId = currElem.closest('.post_history').dataset.postid;
+      // getThePost(postId)
+      //   .then((doc) => {
+      //     console.log('holas');
+      //     // function likes() {
+      //   });
     });
   });
 

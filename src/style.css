@@ -326,16 +326,14 @@ Display:none}  */
     margin: auto;
     padding: 20px;
     border: 1px solid lightgray;
- 
-    /* border-top: 10px solid #58abb7; */
     width: 60%;
     color: #000;
     text-decoration: none;
     cursor: pointer;
 } 
 #contador{
-    margin-right: 725%;
-    margin-top: -82%;
+    margin-right: 794%;
+    margin-top: -59%;
     font-weight: bold;
 }
 @media only screen and (max-width: 600px) {
@@ -384,9 +382,19 @@ Display:none}  */
         padding: 8%;
         margin-left: -10%;
     }
+    .modalContent {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid lightgray;
+        width: 60%;
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    } 
     #contador{
-        margin-right: 545%;
-        margin-top: -70%;
+        margin-right: 563%;
+        margin-top: -50%;
         font-weight: bold;
 
     }
