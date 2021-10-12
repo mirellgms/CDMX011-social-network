@@ -1,10 +1,8 @@
 /* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-cycle
-// import { onNavigate } from '../main.js';
 import {
-  logout, postFeed, db, deletePost, editPost,
+  logout, postFeed, db, deletePost, editPost, likeAdd, likeRemove
 } from '../lib/firebase.js';
-// import db from './secret.js';
 
 export const Feed = () => {
   const feedDiv = document.createElement('div');
@@ -58,19 +56,48 @@ export const Feed = () => {
     // Leer documentos
     db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
       containerPostDiv.innerHTML = '';
+      /* ${doc.data().likes.includes(uid) ? 
+        '<button id = "btn_like" class= "btn_like" title = "Me gusta">❤️</button>' 
+        : '<button class= "btn_like">🤍</button>'} */
       querySnapshot.forEach((doc) => {
-        const printPost = `<div class= 'post_history' data-postid='${doc.id}' data-post='${doc.data().first}' data-likes='${doc.data().likes}'  > 
-      <h1 id=userName>${doc.data().useremail}</h1> 
+        const Likes = doc.data().likes;
+        const printPost = `<div class= 'post_history'
+         data-postid='${doc.id}' 
+         data-post='${doc.data().first}'  
+         data-likes='${doc.data().likes}' 
+         data-idUser='${doc.data().idUser}'>
+      <h1 id=userName>${doc.data().useremail}</h1>
       <div id='p_texts'> ${doc.data().first}</div>
-      <div class= actions> 
-      <p id=contador> # Me gusta </p>
-      <button id = "btn_like" class= "btn_like" title = "Me gusta" value ="false" >🤍</button>
+      <div class= actions>
+      <p id=contador> ${doc.data().likes.length} Me gusta </p>
+      <button id = "btn_like" class= "btn_like" title = "Me gusta">❤️</button>
       ${doc.data().idUser === uid ? '<button id = "btn_edit" class= "btn_edit" title = "Editar"> 🖊️ </button>' : '<p></p>'}
       ${doc.data().idUser === uid ? '<button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️</button>' : '<p></p>'}
       <br>
       </div></div> `;
+        //  btn_dislikecontainerPostDiv.querySelectorAll('.btn_dislike');
         containerPostDiv.innerHTML += printPost;
         console.log(`${doc.id}  =>  ${doc.data().first}`);
+        // containerPostDiv.getElementById('btn_like');
+        containerPostDiv.querySelectorAll('.btn_like').forEach((button) => {
+          // refactorizar el queryselector y el for each
+          button.addEventListener('click', (e) => {
+            const userId = firebase.auth().currentUser.uid;
+            const currElem = e.target;
+            const postId = currElem.closest('.post_history').dataset.postid;
+            if (Likes.includes(userId)) {
+              likeRemove(postId, userId);
+              const whiteHeart = '🤍';
+              document.getElementById('btn_like').innerHTML = (whiteHeart);
+              document.getElementById('btn_like').innerHTML = '🤍';
+            } else {
+              likeAdd(postId, userId);
+              const redHeart = '❤️';
+              document.getElementById('btn_like').innerHTML = '❤️';
+              document.getElementById('btn_like').innerHTML = (redHeart);
+            }
+          });
+        });
       });
 
       containerPostDiv.querySelectorAll('.btn_delete').forEach((button) => {
@@ -92,34 +119,10 @@ export const Feed = () => {
         // console.log(modalDiv.innerHTML += printModal);
           modalDiv.style.display = 'block';
           const currElem = e.target;
+          console.log(currElem);
           const postId = currElem.closest('.post_history').dataset.postid;
           const Post = currElem.closest('.post_history').dataset.post;
           editPost(postId, Post);
-        });
-      });
-      // ❤️
-      containerPostDiv.querySelectorAll('.btn_like').forEach((button) => {
-        button.addEventListener('click', (e) => {
-          const currElem = e.target;
-          const postId = currElem.closest('.post_history').dataset.postid;
-          const Likes = [currElem.closest('.post_history').dataset.likes];
-          console.log(likes);
-          const like = document.getElementById('btn_like').value;
-          if (like === 'false') {
-            const redHeart = '❤️';
-            document.getElementById('btn_like').innerHTML = '❤️';
-            document.getElementById('btn_like').innerHTML = (redHeart);
-            document.getElementById('btn_like').value = 'true';
-            const arrayContador = [uid];
-            // console.log(arrayContador);
-            export let contador = likes.push(arrayContador);
-            console.log(contador);
-          } else {
-            const whiteHeart = '🤍';
-            document.getElementById('btn_like').innerHTML = (whiteHeart);
-            document.getElementById('btn_like').value = 'false';
-            document.getElementById('btn_like').innerHTML = '🤍';
-          }
         });
       });
     });
