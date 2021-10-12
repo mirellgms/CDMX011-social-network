@@ -1,30 +1,42 @@
 /* eslint-disable import/no-cycle */
 // eslint-disable-next-line import/no-cycle
 import {
-  logout, postFeed, db, deletePost, editPost, likeAdd, likeRemove
+  logout, postFeed, db, deletePost, editPost, likeAdd, likeRemove,
 } from '../lib/firebase.js';
 
 export const Feed = () => {
   const feedDiv = document.createElement('div');
   document.getElementById('header').style.display = 'none';
 
+  // Title
   const title = document.createElement('img');
   title.setAttribute('src', '../img/be-the-light.png');
   title.id = 'title';
+  feedDiv.appendChild(title);
 
+  // Barra div
   const barraDiv = document.createElement('div');
   barraDiv.id = 'barraDiv';
+  feedDiv.appendChild(barraDiv);
 
+  // Iconos
   const iconLight = document.createElement('img');
   iconLight.setAttribute('src', '../img/iconosinfondo.png');
   iconLight.id = 'iconLight';
   iconLight.classList.add('icon');
+  barraDiv.appendChild(iconLight);
+
+  // Post
   let post = document.createElement('textArea');
   post.placeholder = '¿Qué estas pensando?';
   post.id = 'post';
+  feedDiv.appendChild(post);
+
+  // Publish
   const publish = document.createElement('button');
   publish.textContent = 'Publicar';
   publish.id = 'publish';
+  feedDiv.appendChild(publish);
 
   publish.addEventListener('click', (event) => {
     // Cloud Firestore
@@ -35,12 +47,16 @@ export const Feed = () => {
       postFeed(post);
     }
   });
-
-  const containerPostDiv = document.createElement('div');
-
+  // Modal
   const modalDiv = document.createElement('div');
   modalDiv.classList.add('modalContainer');
   modalDiv.id = 'Modal';
+  feedDiv.appendChild(modalDiv);
+
+  // Container Post
+  const containerPostDiv = document.createElement('div');
+  feedDiv.appendChild(containerPostDiv);
+
   // alert('¿Editar publicación?');
   const printModal = `<div class= 'modalContent'>
 <h2 class = 'close'> Edita tu post </h2>
@@ -56,9 +72,9 @@ export const Feed = () => {
     // Leer documentos
     db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
       containerPostDiv.innerHTML = '';
-      /* ${doc.data().likes.includes(uid) ? 
-        '<button id = "btn_like" class= "btn_like" title = "Me gusta">❤️</button>' 
-        : '<button class= "btn_like">🤍</button>'} */
+      /* ${doc.data().likes.includes(uid) ?
+        '<button id = "btn_like" class= "btn_like" title = "Me gusta">❤️</button>'
+        : '<button class= "btn_like">🤍</button>'} ❤️ */
       querySnapshot.forEach((doc) => {
         const Likes = doc.data().likes;
         const printPost = `<div class= 'post_history'
@@ -70,31 +86,31 @@ export const Feed = () => {
       <div id='p_texts'> ${doc.data().first}</div>
       <div class= actions>
       <p id=contador> ${doc.data().likes.length} Me gusta </p>
-      <button id = "btn_like" class= "btn_like" title = "Me gusta">❤️</button>
+      ${Likes.indexOf(uid) === -1 ? '<button class= "btn_like" title = "Me gusta">🤍</button>'
+    : '<button  class= "btn_like" title = "Me gusta">❤️</button>'} 
       ${doc.data().idUser === uid ? '<button id = "btn_edit" class= "btn_edit" title = "Editar"> 🖊️ </button>' : '<p></p>'}
       ${doc.data().idUser === uid ? '<button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️</button>' : '<p></p>'}
       <br>
       </div></div> `;
         //  btn_dislikecontainerPostDiv.querySelectorAll('.btn_dislike');
         containerPostDiv.innerHTML += printPost;
-        console.log(`${doc.id}  =>  ${doc.data().first}`);
+
         // containerPostDiv.getElementById('btn_like');
         containerPostDiv.querySelectorAll('.btn_like').forEach((button) => {
+          // console.log('hay va de nuevo todos los botones');
           // refactorizar el queryselector y el for each
           button.addEventListener('click', (e) => {
-            const userId = firebase.auth().currentUser.uid;
-            const currElem = e.target;
-            const postId = currElem.closest('.post_history').dataset.postid;
-            if (Likes.includes(userId)) {
-              likeRemove(postId, userId);
-              const whiteHeart = '🤍';
-              document.getElementById('btn_like').innerHTML = (whiteHeart);
-              document.getElementById('btn_like').innerHTML = '🤍';
-            } else {
-              likeAdd(postId, userId);
-              const redHeart = '❤️';
-              document.getElementById('btn_like').innerHTML = '❤️';
-              document.getElementById('btn_like').innerHTML = (redHeart);
+            // const userId = firebase.auth().currentUser.uid;
+            const postId = e.target.closest('.post_history').dataset.postid;
+            console.log(postId);
+            if (Likes.indexOf(uid) === -1) {
+              console.log(Likes.indexOf(uid));
+              likeAdd(postId, uid);
+              console.log('like');
+            } else if (Likes.indexOf(uid) >= 0) {
+              console.log(Likes.indexOf(uid));
+              likeRemove(postId, uid);
+              console.log('dislike');
             }
           });
         });
@@ -131,10 +147,11 @@ export const Feed = () => {
   const buttonLogout = document.createElement('button');
   buttonLogout.textContent = 'Cerrar Sesión';
   buttonLogout.id = 'buttonLogout';
+  feedDiv.appendChild(buttonLogout);
   buttonLogout.addEventListener('click', () => {
     logout();
   });
-
+  /*
   feedDiv.appendChild(title);
   feedDiv.appendChild(barraDiv);
   barraDiv.appendChild(iconLight);
@@ -143,5 +160,6 @@ export const Feed = () => {
   feedDiv.appendChild(modalDiv);
   feedDiv.appendChild(containerPostDiv);
   feedDiv.appendChild(buttonLogout);
+  */
   return feedDiv;
 };
