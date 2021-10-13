@@ -91,6 +91,7 @@ img {
     padding: 21px;
     border-radius: 10px;
     margin-top: -30%;
+    margin-left: 50%;
 }
 
 #or{
@@ -222,10 +223,8 @@ select{
     border: 1px solid black;
     padding: 15px;
     border-radius: 10px;
-    /* background-color: white; */
-    /* height: 70px;
-    align-items: center; */
-    width: 100%;
+    width: 125%;
+    margin-left: -16%;
     flex-direction: column;
 
 }
@@ -247,7 +246,7 @@ select{
     color: black;
     cursor: pointer;
     position: absolute;
-    left: 57%;
+    left: 56%;
     margin-top: 0%;
 }
 
@@ -262,8 +261,8 @@ select{
     margin-top: -14px;
     cursor: pointer;
     position: absolute;
-    right: 48%;
-    margin-top: -6px;
+    right: 49%;
+    margin-top: -1px;
     
     
 }
@@ -278,16 +277,7 @@ select{
     position: absolute;
     left: 42%;
     margin-top: -1px;
-
 }
-
-
-/* 
- .btn_dislike{
-Display:none}  */
-/* .btn_dislike{
-    z-index: -21;
-} */
 
 .btn_like:hover{
     background-color:#B5DEFF;
@@ -332,7 +322,7 @@ Display:none}  */
     cursor: pointer;
 } 
 #contador{
-    margin-right: 794%;
+    margin-right: 650%;
     margin-top: -59%;
     font-weight: bold;
 }
@@ -349,10 +339,11 @@ Display:none}  */
     }
     #homeDiv{
         margin-top: 5px;
-    margin-left: 0%;
+        margin-left: 0%;
     }
     #registerDiv{
         margin-top: 0%;
+        margin-left: 0%;
     }
     #title{
         width: 46%;
@@ -364,7 +355,7 @@ Display:none}  */
     #btn_edit{
         position: absolute;
         left: 46%;
-        margin-top: 2%;
+        margin-top: 3%;
     }
     #btn_delete{
         position: absolute;
@@ -377,10 +368,10 @@ Display:none}  */
         margin-top: 4%;
     }
     .post_history{
-        max-width: 200%;
-        width: 111%;
+        max-width: 600%;
+        width: 188%;
         padding: 8%;
-        margin-left: -10%;
+        margin-left: -50%;
     }
     .modalContent {
         background-color: #fefefe;
