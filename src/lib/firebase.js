@@ -1,6 +1,7 @@
 /* eslint-disable import/no-cycle */
 import firebase from './secret.js';
 
+// Función de registro
 export const registerUser = (email, password) => {
   firebase
     .auth()
@@ -121,12 +122,13 @@ export function editPost(postid, Post) {
   });
 }
 
+// Función Like
 export function likeAdd(postid, uid) {
   return db.collection('allPost').doc(postid).update({
     likes: firebase.firestore.FieldValue.arrayUnion(uid),
   });
 }
-
+// Función dislike
 export function likeRemove(postid, uid) {
   return db.collection('allPost').doc(postid).update({
     likes: firebase.firestore.FieldValue.arrayRemove(uid),

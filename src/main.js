@@ -12,8 +12,6 @@ const routes = {
   '/': Home,
   '/register': Register,
   '/feed': Feed,
-  // '/profile': ProfilePost,
-
 };
 export const onNavigate = (pathname) => {
   window.history.pushState(

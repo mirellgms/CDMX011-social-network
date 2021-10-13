@@ -57,7 +57,6 @@ export const Feed = () => {
   const containerPostDiv = document.createElement('div');
   feedDiv.appendChild(containerPostDiv);
 
-  // alert('¿Editar publicación?');
   const printModal = `<div class= 'modalContent'>
 <h2 class = 'close'> Edita tu post </h2>
 <div id= "changePost"></div>
@@ -67,14 +66,12 @@ export const Feed = () => {
   modalDiv.style.display = 'none';
   console.log(modalDiv);
 
+  // Estructura Post
   firebase.auth().onAuthStateChanged((user) => {
     const uid = user.uid;
     // Leer documentos
     db.collection('allPost').orderBy('dateHour', 'desc').onSnapshot((querySnapshot) => {
       containerPostDiv.innerHTML = '';
-      /* ${doc.data().likes.includes(uid) ?
-        '<button id = "btn_like" class= "btn_like" title = "Me gusta">❤️</button>'
-        : '<button class= "btn_like">🤍</button>'} ❤️ */
       querySnapshot.forEach((doc) => {
         const Likes = doc.data().likes;
         const printPost = `<div class= 'post_history'
@@ -92,12 +89,10 @@ export const Feed = () => {
       ${doc.data().idUser === uid ? '<button id = "btn_delete" class= "btn_delete" title = "Eliminar"> 🗑️</button>' : '<p></p>'}
       <br>
       </div></div> `;
-        //  btn_dislikecontainerPostDiv.querySelectorAll('.btn_dislike');
         containerPostDiv.innerHTML += printPost;
-
-        // containerPostDiv.getElementById('btn_like');
       });
 
+      // Like - Dislike
       containerPostDiv.querySelectorAll('.btn_like').forEach((button) => {
         button.addEventListener('click', (e) => {
           const Likes = e.target.closest('.post_history').dataset.likes;
@@ -114,7 +109,7 @@ export const Feed = () => {
           }
         });
       });
-
+      // Eliminar Post
       containerPostDiv.querySelectorAll('.btn_delete').forEach((button) => {
         button.addEventListener('click', (e) => {
           const answer = confirm('¿Eliminar publicación?');
@@ -127,11 +122,9 @@ export const Feed = () => {
           }
         });
       });
-
+      // Editar Post
       containerPostDiv.querySelectorAll('.btn_edit').forEach((button) => {
         button.addEventListener('click', (e) => {
-        //   console.log('llamada de boton editar');
-        // console.log(modalDiv.innerHTML += printModal);
           modalDiv.style.display = 'block';
           const currElem = e.target;
           console.log(currElem);
@@ -143,6 +136,7 @@ export const Feed = () => {
     });
   });
 
+  // Cerrar sesión
   const buttonLogout = document.createElement('button');
   buttonLogout.textContent = 'Cerrar Sesión';
   buttonLogout.id = 'buttonLogout';
@@ -150,15 +144,5 @@ export const Feed = () => {
   buttonLogout.addEventListener('click', () => {
     logout();
   });
-  /*
-  feedDiv.appendChild(title);
-  feedDiv.appendChild(barraDiv);
-  barraDiv.appendChild(iconLight);
-  feedDiv.appendChild(post);
-  feedDiv.appendChild(publish);
-  feedDiv.appendChild(modalDiv);
-  feedDiv.appendChild(containerPostDiv);
-  feedDiv.appendChild(buttonLogout);
-  */
   return feedDiv;
 };
