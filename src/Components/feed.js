@@ -96,23 +96,22 @@ export const Feed = () => {
         containerPostDiv.innerHTML += printPost;
 
         // containerPostDiv.getElementById('btn_like');
-        containerPostDiv.querySelectorAll('.btn_like').forEach((button) => {
-          // console.log('hay va de nuevo todos los botones');
-          // refactorizar el queryselector y el for each
-          button.addEventListener('click', (e) => {
-            // const userId = firebase.auth().currentUser.uid;
-            const postId = e.target.closest('.post_history').dataset.postid;
-            console.log(postId);
-            if (Likes.indexOf(uid) === -1) {
-              console.log(Likes.indexOf(uid));
-              likeAdd(postId, uid);
-              console.log('like');
-            } else if (Likes.indexOf(uid) >= 0) {
-              console.log(Likes.indexOf(uid));
-              likeRemove(postId, uid);
-              console.log('dislike');
-            }
-          });
+      });
+
+      containerPostDiv.querySelectorAll('.btn_like').forEach((button) => {
+        button.addEventListener('click', (e) => {
+          const Likes = e.target.closest('.post_history').dataset.likes;
+          const postId = e.target.closest('.post_history').dataset.postid;
+          console.log(postId);
+          if (Likes.indexOf(uid) === -1) {
+            console.log(Likes.indexOf(uid));
+            likeAdd(postId, uid);
+            console.log('like');
+          } else if (Likes.indexOf(uid) >= 0) {
+            console.log(Likes.indexOf(uid));
+            likeRemove(postId, uid);
+            console.log('dislike');
+          }
         });
       });
 
